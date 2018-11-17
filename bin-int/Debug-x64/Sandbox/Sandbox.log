@@ -1,4 +1,0 @@
-﻿  sandboxApp.cpp
-c:\swallow\swallow\src\swallow.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\swallow\swallow\src\swallow.h(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  Sandbox.vcxproj -> C:\Swallow\bin\Debug-x64\Sandbox\Sandbox.exe
