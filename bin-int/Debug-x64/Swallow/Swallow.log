@@ -1,5 +1,2 @@
-﻿  Test.cpp
-c:\swallow\swallow\src\test.cpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\swallow\swallow\src\test.cpp(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-     Creating library C:\Swallow\bin\Debug-x64\Swallow\Swallow.lib and object C:\Swallow\bin\Debug-x64\Swallow\Swallow.exp
+﻿  Application.cpp
   Swallow.vcxproj -> C:\Swallow\bin\Debug-x64\Swallow\Swallow.dll
