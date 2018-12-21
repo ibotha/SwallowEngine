@@ -10,3 +10,5 @@
 	#error Swallow Only Supports Windows!
 #endif // SW_PLATFORM_WINDOWS
 
+#define BIT(x) (1 << x)
+
