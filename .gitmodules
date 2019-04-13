@@ -1,3 +1,6 @@
 [submodule "Swallow/vendor/spdlog"]
 	path = Swallow/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "Swallow/vendor/glfw"]
+	path = Swallow/vendor/glfw
+	url = https://github.com/TheCherno/glfw.git

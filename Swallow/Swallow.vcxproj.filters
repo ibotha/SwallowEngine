@@ -34,6 +34,9 @@
     <ClInclude Include="src\Swallow\Log.h">
       <Filter>Swallow</Filter>
     </ClInclude>
+    <ClInclude Include="src\swpch.h" />
+    <ClInclude Include="src\Swallow\Window.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Swallow\Application.cpp">
@@ -42,5 +45,7 @@
     <ClCompile Include="src\Swallow\Log.cpp">
       <Filter>Swallow</Filter>
     </ClCompile>
+    <ClCompile Include="src\swpch.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
   </ItemGroup>
 </Project>

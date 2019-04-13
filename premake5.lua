@@ -10,6 +10,13 @@ workspace "Swallow"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directoies relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Swallow/vendor/glfw/include"
+
+include "Swallow/vendor/glfw"
+
+
 project "Swallow"
 	location "Swallow"
 	kind "SharedLib"
@@ -17,6 +24,9 @@ project "Swallow"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "swpch.h"
+	pchsource "Swallow/src/swpch.cpp"
 
 	files
 	{
@@ -27,7 +37,14 @@ project "Swallow"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"

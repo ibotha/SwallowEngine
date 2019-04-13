@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Swallow
 {
 	class SWALLOW_API MouseMovedEvent : public Event
@@ -32,7 +30,7 @@ namespace Swallow
 	class SWALLOW_API MouseScrolledEvent : public Event
 	{
 	public:
-		MouseScrolledEvent(int Xoff, int Yoff)
+		MouseScrolledEvent(float Xoff, float Yoff)
 			: m_XOffset(Xoff), m_YOffset(Yoff) {}
 
 		inline float GetXOffset() const { return m_XOffset; }

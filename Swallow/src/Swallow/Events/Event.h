@@ -2,10 +2,6 @@
 
 #include "Swallow/Core.h"
 
-#include <string>
-#include <functional>
-#include <iostream>
-
 namespace Swallow
 {
 	enum class EventType {
@@ -71,7 +67,7 @@ namespace Swallow
 		Event& m_Event;
 	};
 
-	inline std::ostream& operator<<(std::ostream os, const Event& e)
+	inline std::ostream& operator<<(std::ostream &os, const Event& e)
 	{
 		return os << e.ToString();
 	}

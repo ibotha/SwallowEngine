@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Swallow {
 
 	class SWALLOW_API WindowResizeEvent : public Event

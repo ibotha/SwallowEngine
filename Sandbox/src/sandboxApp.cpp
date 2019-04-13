@@ -1,3 +1,4 @@
+#include "swpch.h"
 #include <Swallow.h>
 
 class Sandbox : public Swallow::Application
