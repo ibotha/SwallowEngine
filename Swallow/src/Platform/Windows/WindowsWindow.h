@@ -2,11 +2,6 @@
 
 #include "Swallow/Window.h"
 
-#include "Swallow/Events/ApplicationEvent.h"
-#include "Swallow/Events/Event.h"
-#include "Swallow/Events/KeyEvent.h"
-#include "Swallow/Events/MouseEvent.h"
-
 #include <GLFW/glfw3.h>
 
 namespace Swallow {

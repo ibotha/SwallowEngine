@@ -1,0 +1,4 @@
+﻿cl : Command line warning D9002: ignoring unknown option '-std=c11'
+cl : Command line warning D9002: ignoring unknown option '-lgdi32'
+  glad.c
+  Glad.vcxproj -> C:\Programming\Swallow\Swallow\vendor\Glad\bin\Debug-windows-x86_64\Glad\Glad.lib

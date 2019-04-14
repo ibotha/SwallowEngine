@@ -1,6 +1,12 @@
 #include "swpch.h"
 #include "WindowsWindow.h"
 
+#include "Swallow/Events/ApplicationEvent.h"
+#include "Swallow/Events/KeyEvent.h"
+#include "Swallow/Events/MouseEvent.h"
+
+#include <glad/glad.h>
+
 namespace Swallow {
 
 	static bool s_GLFWInitialized = false;
@@ -39,6 +45,8 @@ namespace Swallow {
 
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		SW_CORE_ASSERT(status, "Could Not Initialize Glad");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 

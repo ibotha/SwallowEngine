@@ -1,6 +1,5 @@
 #pragma once
 
-#include "swpch.h"
 #include "Application.h"
 
 #ifdef SW_PLATFORM_WINDOWS
