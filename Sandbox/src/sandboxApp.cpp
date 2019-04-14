@@ -7,10 +7,13 @@ public:
 	}
 
 	void OnEvent(Swallow::Event &e) override {
-		SW_INFO("Start Layer received: {0}", e);
+		SW_TRACE("{0}", e);
 	}
 
 	void OnUpdate() {
+		auto[x, y] = Swallow::Input::GetMousePosition();
+		if (Swallow::Input::IsKeyPressed(SW_KEY_LEFT_CONTROL))
+			SW_CORE_TRACE("{0}, {1}", x, y);
 	}
 };
 

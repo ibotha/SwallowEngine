@@ -17,10 +17,13 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Swallow/vendor/GLFW/include"
 IncludeDir["Glad"] = "Swallow/vendor/Glad/include"
 IncludeDir["ImGui"] = "Swallow/vendor/imgui"
+IncludeDir["glm"] = "Swallow/vendor/glm/glm"
 
-include "Swallow/vendor/GLFW"
-include "Swallow/vendor/Glad"
-include "Swallow/vendor/imgui"
+group "Dependencies"
+	include "Swallow/vendor/GLFW"
+	include "Swallow/vendor/Glad"
+	include "Swallow/vendor/imgui"
+group ""
 
 project "Swallow"
 	staticruntime "Off"
@@ -37,7 +40,9 @@ project "Swallow"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -46,6 +51,7 @@ project "Swallow"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
+		"%{IncludeDir.glm}",
 		"%{IncludeDir.ImGui}"
 	}
 
@@ -70,7 +76,7 @@ project "Swallow"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	filter "configurations:Debug"
@@ -106,7 +112,8 @@ project "Sandbox"
 	includedirs
 	{
 		"Swallow/vendor/spdlog/include",
-		"Swallow/src"
+		"Swallow/src",
+		"%{IncludeDir.glm}",
 	}
 
 	links

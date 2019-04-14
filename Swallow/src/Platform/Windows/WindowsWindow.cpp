@@ -158,6 +158,11 @@ namespace Swallow {
 		glfwSwapBuffers(m_Window);
 	}
 
+	inline void * WindowsWindow::GetNativeWindow() const
+	{
+		return m_Window;
+	}
+
 	void Swallow::WindowsWindow::SetVSync(bool enabled)
 	{
 		if (enabled) {

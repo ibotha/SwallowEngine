@@ -7,3 +7,6 @@
 [submodule "Swallow/vendor/imgui"]
 	path = Swallow/vendor/imgui
 	url = https://github.com/TheCherno/imgui
+[submodule "Swallow/vendor/glm"]
+	path = Swallow/vendor/glm
+	url = https://github.com/g-truc/glm
