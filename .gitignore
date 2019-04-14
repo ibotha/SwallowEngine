@@ -1,7 +1,11 @@
 #Directories
 .vs/
-/bin/
-/bin-int/
+bin/
+bin-int/
+!vendor/bin/
+
+#vscode garbage
+
 
 # Files
 *.user
