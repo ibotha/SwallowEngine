@@ -19,6 +19,7 @@ class Sandbox : public Swallow::Application
 public:
 	Sandbox() {
 		PushLayer(new StartLayer());
+		PushOverlay(new Swallow::ImGuiLayer());
 	}
 
 	~Sandbox() {

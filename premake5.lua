@@ -1,4 +1,6 @@
 workspace "Swallow"
+
+	startproject "Sandbox"
 	architecture "x64"
 
 	configurations
@@ -14,12 +16,14 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Swallow/vendor/GLFW/include"
 IncludeDir["Glad"] = "Swallow/vendor/Glad/include"
+IncludeDir["ImGui"] = "Swallow/vendor/imgui"
 
 include "Swallow/vendor/GLFW"
 include "Swallow/vendor/Glad"
-
+include "Swallow/vendor/imgui"
 
 project "Swallow"
+	staticruntime "Off"
 	location "Swallow"
 	kind "SharedLib"
 	language "C++"
@@ -41,19 +45,20 @@ project "Swallow"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -70,21 +75,22 @@ project "Swallow"
 
 	filter "configurations:Debug"
 		defines "SW_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "SW_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "SW_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 project "Sandbox"
 	location "Sandbox"
+	staticruntime "Off"
 	kind "ConsoleApp"
 	language "C++"
 
@@ -110,7 +116,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -120,15 +125,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "SW_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "SW_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "SW_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"

@@ -19,6 +19,10 @@ namespace Swallow {
 
 		// Window attributes
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
+
+		inline const char* GetClipboardText(void* user_data) override { return glfwGetClipboardString((GLFWwindow*)user_data); }
+		inline void SetClipboardText(void* user_data, const char* text) override { glfwSetClipboardString((GLFWwindow*)user_data, text); }
+
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
 
