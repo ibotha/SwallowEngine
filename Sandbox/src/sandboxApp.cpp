@@ -11,9 +11,6 @@ public:
 	}
 
 	virtual void OnImGuiRender() override {
-		static bool open = true;
-		ImGui::Begin("Test", &open, 0);
-		ImGui::End();
 	}
 
 	void OnUpdate() {

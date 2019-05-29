@@ -159,6 +159,7 @@
     <ClInclude Include="src\Swallow\Log.h" />
     <ClInclude Include="src\Swallow\MouseButtonCodes.h" />
     <ClInclude Include="src\Swallow\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Swallow\Renderer\Shader.h" />
     <ClInclude Include="src\Swallow\Window.h" />
     <ClInclude Include="src\swpch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -536,6 +537,7 @@
     <ClCompile Include="src\Swallow\Layer.cpp" />
     <ClCompile Include="src\Swallow\LayerStack.cpp" />
     <ClCompile Include="src\Swallow\Log.cpp" />
+    <ClCompile Include="src\Swallow\Renderer\Shader.cpp" />
     <ClCompile Include="src\swpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
