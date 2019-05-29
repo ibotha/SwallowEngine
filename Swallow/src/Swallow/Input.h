@@ -3,7 +3,7 @@
 #include "Core.h"
 
 namespace Swallow {
-	class SWALLOW_API Input {
+	class Input {
 	public:
 		inline static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
 

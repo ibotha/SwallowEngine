@@ -26,7 +26,7 @@ namespace Swallow
 
 #define EVENT_CLASS_CATAGORY(catagory) virtual int GetCatagoryFlags() const override { return catagory; }
 
-	class SWALLOW_API Event
+	class Event
 	{
 		friend class EventDispatcher;
 	public:

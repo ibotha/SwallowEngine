@@ -2,17 +2,19 @@
 
 #include "Core.h"
 
+#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 #include "Window.h"
 #include "LayerStack.h"
 #include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
 #include "Events/KeyEvent.h"
 #include "Events/MouseEvent.h"
-#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
+
+#include "ImGui/ImGuiLayer.h"
 
 namespace Swallow {
 
-	class SWALLOW_API Application
+	class Application
 	{
 	public:
 		Application();
@@ -31,8 +33,11 @@ namespace Swallow {
 		bool OnWindowClose(WindowCloseEvent &e);
 
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+
+		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
 
 		static Application* s_Instance;
 	};

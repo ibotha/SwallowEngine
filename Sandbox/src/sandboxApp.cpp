@@ -1,4 +1,5 @@
 #include <Swallow.h>
+#include "imgui.h"
 
 class StartLayer : public Swallow::Layer {
 public:
@@ -7,7 +8,12 @@ public:
 	}
 
 	void OnEvent(Swallow::Event &e) override {
-		SW_TRACE("{0}", e);
+	}
+
+	virtual void OnImGuiRender() override {
+		static bool open = true;
+		ImGui::Begin("Test", &open, 0);
+		ImGui::End();
 	}
 
 	void OnUpdate() {
@@ -22,7 +28,6 @@ class Sandbox : public Swallow::Application
 public:
 	Sandbox() {
 		PushLayer(new StartLayer());
-		PushOverlay(new Swallow::ImGuiLayer());
 	}
 
 	~Sandbox() {

@@ -4,7 +4,7 @@
 
 namespace Swallow
 {
-	class SWALLOW_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(float x, float y)
@@ -27,7 +27,7 @@ namespace Swallow
 		float m_MouseX, m_MouseY;
 	};
 
-	class SWALLOW_API MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(float Xoff, float Yoff)
@@ -47,10 +47,10 @@ namespace Swallow
 			EVENT_CLASS_CATAGORY(EventCatagoryMouse | EventCatagoryInput)
 
 	private:
-		int m_XOffset, m_YOffset;
+		float m_XOffset, m_YOffset;
 	};
 
-	class SWALLOW_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 		inline int GetButton() const { return m_Button; }
@@ -62,7 +62,7 @@ namespace Swallow
 		int m_Button;
 	};
 
-	class SWALLOW_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(int button)
@@ -78,7 +78,7 @@ namespace Swallow
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class SWALLOW_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int button)

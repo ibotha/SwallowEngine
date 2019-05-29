@@ -4,7 +4,6 @@
 namespace Swallow {
 	LayerStack::LayerStack()
 	{
-		m_LayerInsert = m_Layers.end();
 	}
 
 	LayerStack::~LayerStack()
@@ -16,7 +15,7 @@ namespace Swallow {
 	void LayerStack::PushLayer(Layer *layer)
 	{
 		layer->OnAttach();
-		m_LayerInsert = m_Layers.emplace(m_LayerInsert, layer);
+		m_Layers.emplace(m_Layers.begin() + m_LayerInsertIndex++, layer);
 	}
 
 	void LayerStack::PushOverlay(Layer *layer)
@@ -32,7 +31,7 @@ namespace Swallow {
 		{
 			layer->OnDetach();
 			m_Layers.erase(it);
-			m_LayerInsert--;
+			m_LayerInsertIndex--;
 		}
 	}
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Swallow/Window.h"
+#include "Swallow/Renderer/GraphicsContext.h"
 
 #include <GLFW/glfw3.h>
 
@@ -33,6 +34,8 @@ namespace Swallow {
 		virtual void Shutdown();
 	
 		GLFWwindow* m_Window;
+
+		GraphicsContext *m_Context;
 
 		struct WindowData {
 			std::string Title;

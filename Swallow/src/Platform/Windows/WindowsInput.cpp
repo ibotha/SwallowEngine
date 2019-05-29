@@ -25,13 +25,13 @@ namespace Swallow {
 	inline float WindowsInput::GetMouseXImpl()
 	{
 		auto[x, y] = GetMousePositionImpl();
-		return (float)x;
+		return x;
 	}
 
 	inline float WindowsInput::GetMouseYImpl()
 	{
 		auto[x, y] = GetMousePositionImpl();
-		return (float)y;
+		return y;
 	}
 
 	inline std::pair<float, float> WindowsInput::GetMousePositionImpl()
@@ -39,7 +39,7 @@ namespace Swallow {
 		GLFWwindow *window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double x, y;
 		glfwGetCursorPos(window, &x, &y);
-		return std::pair<float, float>(x, y);
+		return std::pair<float, float>((float)x, (float)y);
 	}
 
 }

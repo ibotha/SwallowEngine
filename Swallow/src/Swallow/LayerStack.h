@@ -4,7 +4,7 @@
 #include "Swallow/Core.h"
 
 namespace Swallow {
-	class SWALLOW_API LayerStack
+	class LayerStack
 	{
 	public:
 		LayerStack();
@@ -20,7 +20,7 @@ namespace Swallow {
 
 	private:
 		std::vector<Layer*> m_Layers;
-		std::vector<Layer*>::iterator m_LayerInsert;
+		unsigned int m_LayerInsertIndex = 0;
 
 	};
 }

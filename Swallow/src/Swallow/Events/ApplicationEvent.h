@@ -4,7 +4,7 @@
 
 namespace Swallow {
 
-	class SWALLOW_API WindowResizeEvent : public Event
+	class WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height)
@@ -27,7 +27,7 @@ namespace Swallow {
 		unsigned int m_Width, m_Height;
 	};
 
-	class SWALLOW_API WindowCloseEvent : public Event
+	class WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() {}
@@ -36,7 +36,7 @@ namespace Swallow {
 		EVENT_CLASS_CATAGORY(EventCatagoryApplication)
 	};
 
-	class SWALLOW_API AppTickEvent : public Event
+	class AppTickEvent : public Event
 	{
 	public:
 		AppTickEvent() {}
@@ -45,7 +45,7 @@ namespace Swallow {
 			EVENT_CLASS_CATAGORY(EventCatagoryApplication)
 	};
 
-	class SWALLOW_API AppUpdateEvent : public Event
+	class AppUpdateEvent : public Event
 	{
 	public:
 		AppUpdateEvent() {}
@@ -54,7 +54,7 @@ namespace Swallow {
 			EVENT_CLASS_CATAGORY(EventCatagoryApplication)
 	};
 
-	class SWALLOW_API AppRenderEvent : public Event
+	class AppRenderEvent : public Event
 	{
 	public:
 		AppRenderEvent() {}
