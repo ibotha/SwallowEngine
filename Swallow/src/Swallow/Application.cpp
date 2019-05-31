@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Input.h"
 #include "imgui.h"
+#include "glm.hpp"
 
 #include <glad/glad.h>
 
@@ -27,9 +28,9 @@ namespace Swallow {
 		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
 
 		float vertices[3 * 6] = {
-			 0.0f, -0.75f,  0.0f, 1.0f, 0.0f, 1.0f,
-			-0.5f,  0.5f,  0.0f, 1.0f, 1.0f, 0.0f,
-			0.5f,  0.5f,  0.0f, 0.0f, 0.0f, 1.0f
+			 0.0f, 0.75f,  0.0f, 0.5f, 1.0f,
+			-0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f,  0.0f, 1.0f, 0.0f
 		};
 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -37,8 +38,8 @@ namespace Swallow {
 
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (const void*)(3 * sizeof(float)));
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), nullptr);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (const void*)(3 * sizeof(float)));
 
 		glGenBuffers(1, &m_IndexBuffer);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
@@ -54,12 +55,12 @@ namespace Swallow {
 			uniform float u_Scale;
 
 			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec3 a_Color;
+			layout(location = 1) in vec2 a_Tex;
 
-			out vec3 v_Color;
+			out vec2 v_Tex;
 
 			void main() {
-				v_Color = a_Color;
+				v_Tex = a_Tex;
 				gl_Position = vec4(a_Position * u_Scale, 1.0);
 			}
 		)";
@@ -69,11 +70,10 @@ namespace Swallow {
 
 			layout(location = 0) out vec4 color;
 			
-			in vec3 v_Color;
+			in vec2 v_Tex;
 
 			void main() {
-				
-				color = vec4(v_Color, 1.0);
+				color = vec4(v_Tex, 0.0, 1.0);
 			}
 		)";
 
@@ -119,13 +119,6 @@ namespace Swallow {
 			GLint loc = glGetUniformLocation(m_Shader->getRendererID(), "u_Scale");
 			glUniform1f(loc, x);
 
-			float vertices[3 * 6] = {
-				 0.0f,  0.75f,  0.0f, 1.0f, 0.0f, 0.0f,
-				-0.5f,  -0.5f,  0.0f, 0.0f, 1.0f, 0.0f,
-				 0.5f,  -0.5f,  0.0f, 0.0f, 0.0f, 1.0f,
-			};
-
-			glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
