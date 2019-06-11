@@ -10,6 +10,27 @@ namespace Swallow {
 
 	Application* Application::s_Instance = nullptr;
 
+	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
+	{
+		switch (type)
+		{
+		case Swallow::ShaderDataType::Float:	return GL_FLOAT;
+		case Swallow::ShaderDataType::Float2:	return GL_FLOAT;
+		case Swallow::ShaderDataType::Float3:	return GL_FLOAT;
+		case Swallow::ShaderDataType::Float4:	return GL_FLOAT;
+		case Swallow::ShaderDataType::Mat3:		return GL_FLOAT;
+		case Swallow::ShaderDataType::Mat4:		return GL_FLOAT;
+		case Swallow::ShaderDataType::Int:		return GL_INT;
+		case Swallow::ShaderDataType::Int2:		return GL_INT;
+		case Swallow::ShaderDataType::Int3:		return GL_INT;
+		case Swallow::ShaderDataType::Int4:		return GL_INT;
+		case Swallow::ShaderDataType::Bool:		return GL_BOOL;
+		default:
+			break;
+		}
+		return 0;
+	}
+
 	Application::Application()
 	{
 		SW_CORE_ASSERT(s_Instance == nullptr, "Cannot run more than one application");
@@ -24,44 +45,54 @@ namespace Swallow {
 		glGenVertexArrays(1, &m_VertexArray);
 		glBindVertexArray(m_VertexArray);
 
-		glGenBuffers(1, &m_VertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
-
-		float vertices[3 * 6] = {
-			 0.0f, 0.75f,  0.0f, 0.5f, 1.0f,
-			-0.5f, -0.5f,  0.0f, 0.0f, 0.0f,
-			 0.5f, -0.5f,  0.0f, 1.0f, 0.0f
+		float vertices[3 * 7] = {
+			 0.0f, 0.75f,  0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+			-0.5f, -0.5f,  0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+			 0.5f, -0.5f,  0.0f, 0.0f, 0.0f, 1.0f, 1.0f
 		};
 
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 
+		{
+			BufferLayout layout = {
+				{ ShaderDataType::Float3, "a_Position" },
+				{ ShaderDataType::Float4, "a_Color" , true }
+			};
 
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), nullptr);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (const void*)(3 * sizeof(float)));
+			m_VertexBuffer->SetLayout(layout);
+		}
 
-		glGenBuffers(1, &m_IndexBuffer);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
-		unsigned int indexes[3] = {
+		int i = 0;
+		for (const auto &e : m_VertexBuffer->GetLayout())
+		{
+			glEnableVertexAttribArray(i);
+			glVertexAttribPointer(
+				i,
+				e.GetComponentCount(),
+				ShaderDataTypeToOpenGLBaseType(e.Type),
+				e.Normalized ? GL_TRUE :GL_FALSE,
+				m_VertexBuffer->GetLayout().GetStride(),
+				(const void *)e.Offset);
+			i++;
+		}
+
+		uint32_t indices[3] = {
 			0, 1, 2
 		};
 
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
+		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 
 		std::string vertexSrc = R"(
 			#version 330 core
 			
-			uniform float u_Scale;
-
 			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_Tex;
+			layout(location = 1) in vec4 a_Color;
 
-			out vec2 v_Tex;
+			out vec4 v_Color;
 
 			void main() {
-				v_Tex = a_Tex;
-				gl_Position = vec4(a_Position * u_Scale, 1.0);
+				v_Color = a_Color;
+				gl_Position = vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -70,14 +101,14 @@ namespace Swallow {
 
 			layout(location = 0) out vec4 color;
 			
-			in vec2 v_Tex;
+			in vec4 v_Color;
 
 			void main() {
-				color = vec4(v_Tex, 0.0, 1.0);
+				color = v_Color;
 			}
 		)";
 
-		m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(Shader::Create(vertexSrc, fragmentSrc));
 	}
 
 
@@ -115,14 +146,11 @@ namespace Swallow {
 		{
 			m_Shader->Bind();
 			glBindVertexArray(m_VertexArray);
-			glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
-			GLint loc = glGetUniformLocation(m_Shader->getRendererID(), "u_Scale");
-			glUniform1f(loc, x);
 
 			glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
@@ -131,11 +159,6 @@ namespace Swallow {
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
-
-			static bool open = true;
-			ImGui::Begin("Test", &open, 0);
-			ImGui::SliderFloat("Movement", &x, 0.0f, 1.0f);
-			ImGui::End();
 
 			m_ImGuiLayer->End();
 			m_Window->OnUpdate();
