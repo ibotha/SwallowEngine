@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Swallow.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="src\Swallow\Renderer\Renderer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\Swallow\Renderer\Shader.h" />
+    <ClInclude Include="src\Swallow\Renderer\VertexArray.h" />
     <ClInclude Include="src\Swallow\Window.h" />
     <ClInclude Include="src\swpch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -534,6 +536,7 @@
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Swallow\Application.cpp" />
@@ -546,6 +549,7 @@
     <ClCompile Include="src\Swallow\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Swallow\Renderer\Shader.cpp" />
+    <ClCompile Include="src\Swallow\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\swpch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>

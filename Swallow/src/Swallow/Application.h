@@ -14,6 +14,7 @@
 
 #include "Renderer/Shader.h"
 #include "Renderer/Buffer.h"
+#include "Renderer/VertexArray.h"
 
 namespace Swallow {
 
@@ -40,10 +41,11 @@ namespace Swallow {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		uint32_t m_VertexArray;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
-		std::unique_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+		std::shared_ptr<Shader> m_Shader;
+
+		std::shared_ptr<Shader> m_SquareShader;
+		std::shared_ptr<VertexArray> m_SquareVA;
 
 		static Application* s_Instance;
 	};
