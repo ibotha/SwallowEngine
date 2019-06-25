@@ -7,11 +7,11 @@ namespace Swallow {
 
 	Shader * Shader::Create(const std::string & vertexSrc, const std::string & fragmentSrc)
 	{
-		switch (Renderer::getAPI())
+		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			return nullptr;
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLShader(vertexSrc, fragmentSrc);
 		default:
 			break;

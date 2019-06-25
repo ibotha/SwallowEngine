@@ -1,21 +1,19 @@
 #pragma once
-#include "Shader.h"
 #include "Buffer.h"
 
-namespace Swallow {
+#include "RenderCommand.h"
 
-	enum class RendererAPI
-	{
-		None = 0,
-		OpenGL = 1,
-		DirectX = 2
-	};
+namespace Swallow {
 
 	class Renderer
 	{
 	public:
-		inline static RendererAPI getAPI() { return s_RendererAPI; }
+		static void BeginScene(); //TODO: Add scene params
+		static void EndScene();
+
+		static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+
+		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	private:
-		static RendererAPI s_RendererAPI;
 	};
 }

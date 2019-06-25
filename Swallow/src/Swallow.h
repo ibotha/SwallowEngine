@@ -10,6 +10,7 @@
 #include "Swallow/MouseButtonCodes.h"
 
 #include "Swallow/ImGui/ImGuiLayer.h"
+#include "Swallow/Renderer/Renderer.h"
 
 // ----Entry Point---------------
 #include "Swallow/EntryPoint.h"

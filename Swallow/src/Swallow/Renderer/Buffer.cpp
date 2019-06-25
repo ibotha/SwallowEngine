@@ -24,11 +24,11 @@ namespace Swallow {
 
 	VertexBuffer * VertexBuffer::Create(void * vertices, uint32_t size)
 	{
-		switch (Renderer::getAPI())
+		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			return nullptr;
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLVertexBuffer(vertices, size);
 		default:
 			break;
@@ -38,11 +38,11 @@ namespace Swallow {
 
 	IndexBuffer * IndexBuffer::Create(uint32_t * indices, uint32_t count)
 	{
-		switch (Renderer::getAPI())
+		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::None:
+		case RendererAPI::API::None:
 			return nullptr;
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLIndexBuffer(indices, count);
 		default:
 			break;
