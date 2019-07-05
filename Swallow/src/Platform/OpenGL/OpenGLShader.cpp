@@ -108,6 +108,7 @@ namespace Swallow {
 		// Always detach shaders after a successful link.
 		glDetachShader(m_RendererID, vertexShader);
 		glDetachShader(m_RendererID, fragmentShader);
+
 	}
 
 	OpenGLShader::~OpenGLShader()
@@ -124,4 +125,93 @@ namespace Swallow {
 	{
 		glUseProgram(0);
 	}
+	
+	void OpenGLShader::UploadUniform(std::string const &name, glm::vec1 const &v)
+	{
+		Bind();
+		uint32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		if (loc != -1)
+			glUniform1f(loc, v.x);
+	}
+
+	void OpenGLShader::UploadUniform(std::string const &name, glm::vec2 const &v)
+	{
+		Bind();
+		uint32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		if (loc != -1)
+			glUniform2f(loc, v.x, v.y);
+	}
+
+	void OpenGLShader::UploadUniform(std::string const &name, glm::vec3 const &v)
+	{
+		Bind();
+		uint32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		if (loc != -1)
+			glUniform3f(loc, v.x, v.y, v.z);
+	}
+
+	void OpenGLShader::UploadUniform(std::string const &name, glm::vec4 const &v)
+	{
+		Bind();
+		uint32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		if (loc != -1)
+			glUniform4f(loc, v.x, v.y, v.z, v.w);
+	}
+
+	void OpenGLShader::UploadUniform(std::string const &name, glm::ivec1 const &v)
+	{
+		Bind();
+		uint32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		if (loc != -1)
+			glUniform1i(loc, v.x);
+	}
+
+	void OpenGLShader::UploadUniform(std::string const &name, glm::ivec2 const &v)
+	{
+		Bind();
+		uint32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		if (loc != -1)
+			glUniform2i(loc, v.x, v.y);
+	}
+
+	void OpenGLShader::UploadUniform(std::string const &name, glm::ivec3 const &v)
+	{
+		Bind();
+		uint32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		if (loc != -1)
+			glUniform3i(loc, v.x, v.y, v.z);
+	}
+
+	void OpenGLShader::UploadUniform(std::string const &name, glm::ivec4 const &v)
+	{
+		Bind();
+		uint32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		if (loc != -1)
+			glUniform4i(loc, v.x, v.y, v.z, v.w);
+	}
+
+	void OpenGLShader::UploadUniform(std::string const &name, glm::mat2 const &m)
+	{
+		Bind();
+		uint32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		if (loc != -1)
+			glUniformMatrix2fv(loc, 1, false, &m[0][0]);
+	}
+
+	void OpenGLShader::UploadUniform(std::string const &name, glm::mat3 const &m)
+	{
+		Bind();
+		uint32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		if (loc != -1)
+			glUniformMatrix3fv(loc, 1, false, &m[0][0]);
+	}
+
+	void OpenGLShader::UploadUniform(std::string const &name, glm::mat4 const &m)
+	{
+		Bind();
+		uint32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		if (loc != -1)
+			glUniformMatrix4fv(loc, 1, false, &m[0][0]);
+	}
+
 }

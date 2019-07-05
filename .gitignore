@@ -9,4 +9,5 @@ bin-int/
 
 # Files
 *.user
-*.vcxproj*
+*.vcxproj
+Swallow/Swallow.vcxproj

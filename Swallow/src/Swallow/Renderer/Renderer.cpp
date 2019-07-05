@@ -1,12 +1,9 @@
 #include "swpch.h"
 #include "Renderer.h"
 
-
 namespace Swallow {
 
-
-
-	void Renderer::BeginScene()
+	void Renderer::BeginScene(Camera const &c)
 	{
 	}
 
