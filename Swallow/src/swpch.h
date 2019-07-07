@@ -14,7 +14,6 @@
 
 #include "Swallow/Log.h"
 #include "glm.hpp"
-#include "gtx/transform.hpp"
 
 #ifdef SW_PLATFORM_WINDOWS
 	#include <Windows.h>
