@@ -13,10 +13,10 @@ private:
 	bool m_CanJump = true;
 
 
-	Swallow::OrthographicCamera m_Camera;
+	Swallow::PerspectiveCamera m_Camera;
 public:
 	StartLayer()
-		:Layer("Start Layer"), m_Camera(Swallow::Application::Get().GetWindow().GetWidth() / (float)Swallow::Application::Get().GetWindow().GetHeight() * -2.0f, Swallow::Application::Get().GetWindow().GetWidth() / (float)Swallow::Application::Get().GetWindow().GetHeight() * 2.0f, -2, 2, -5, 5)
+		:Layer("Start Layer"), m_Camera(glm::radians(60.0f), Swallow::Application::Get().GetWindow().GetWidth() / (float)Swallow::Application::Get().GetWindow().GetHeight(), 0.0001, 100000)
 	{
 		m_SquareVA.reset(Swallow::VertexArray::Create());
 		
@@ -124,59 +124,74 @@ public:
 	{
 		static glm::vec2 s_OldMouse = glm::vec2(e.GetX(), e.GetY());
 		glm::vec2 newMouse = glm::vec2(e.GetX(), e.GetY());
-		m_Camera.SetRotation(glm::vec3({ glm::radians(s_OldMouse.y - newMouse.y) * 0.5, glm::radians(s_OldMouse.x - newMouse.x) * 0.5, 0 }) + m_Camera.GetRotation());
+		glm::vec3 rot = m_Camera.GetRotation();
+		rot += glm::vec3({ glm::radians(s_OldMouse.y - newMouse.y) * 0.5,glm::radians(s_OldMouse.x - newMouse.x) * 0.5, 0 });
+		rot.x = std::clamp(rot.x, -(glm::half_pi<float>() - 0.01f), glm::half_pi<float>() - 0.01f);
+		m_Camera.SetRotation(rot);
 		s_OldMouse = glm::vec2(e.GetX(), e.GetY());
 		return true;
 	}
 
 	bool OnKeyPressed(Swallow::KeyPressedEvent &e)
 	{
-		if (e.GetKeyCode() == SW_KEY_SPACE && m_CanJump)
-		{
-			m_YVelocity = 0.15f;
-			m_CanJump = false;
-		}
 		return true;
 	}
 
 	virtual void OnImGuiRender() override {
 	}
 
-	void OnUpdate() {
-		m_YVelocity -= 0.005f;
+	void OnUpdate(Swallow::Timestep ts) {
+		float moveSpeed = 5.0f;
 
-		if (m_YVelocity + m_Camera.GetPosition().y < 0)
+		m_YVelocity -= 16.8f * ts.GetSeconds();
+
+		if (m_YVelocity * ts.GetSeconds() + m_Camera.GetPosition().y < 0)
 		{
 			m_YVelocity = 0.0f;
 			m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec3(0, -m_Camera.GetPosition().y, 0));
 			m_CanJump = true;
 		}
 
-		m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec3(0, m_YVelocity, 0));
+		if (Swallow::Input::IsKeyPressed(SW_KEY_LEFT_SHIFT))
+		{
+			moveSpeed = 10.0f;
+		}
 		if (Swallow::Input::IsKeyPressed(SW_KEY_W))
 		{
-			glm::vec4 t(m_Camera.GetPosition(), 1);
-			t += (glm::vec4(0, 0, -0.1, 1) * m_Camera.GetRotationMatrix());
-			m_Camera.SetPosition({ t.x, m_Camera.GetPosition().y, t.z });
+			glm::vec4 t = glm::vec4(0, 0, -1, 1) * m_Camera.GetRotationMatrix();
+			glm::vec3 t2 = glm::normalize(glm::vec3(t.x, 0, t.z));
+			t2 *= ts.GetSeconds() * moveSpeed;
+			m_Camera.SetPosition(t2 + m_Camera.GetPosition());
 		}
 		if (Swallow::Input::IsKeyPressed(SW_KEY_S))
 		{
-			glm::vec4 t(m_Camera.GetPosition(), 1);
-			t += (glm::vec4(0, 0, 0.1, 1) * m_Camera.GetRotationMatrix());
-			m_Camera.SetPosition({ t.x, m_Camera.GetPosition().y, t.z });
+			glm::vec4 t = glm::vec4(0, 0, 1, 1) * m_Camera.GetRotationMatrix();
+			glm::vec3 t2 = glm::normalize(glm::vec3(t.x, 0, t.z));
+			t2 *= ts.GetSeconds() * moveSpeed;
+			m_Camera.SetPosition(t2 + m_Camera.GetPosition());
 		}
 		if (Swallow::Input::IsKeyPressed(SW_KEY_A))
 		{
-			glm::vec4 t(m_Camera.GetPosition(), 1);
-			t += (glm::vec4(-0.1, 0, 0, 1) * m_Camera.GetRotationMatrix());
-			m_Camera.SetPosition({ t.x, m_Camera.GetPosition().y, t.z });
+			glm::vec4 t = glm::vec4(-1, 0, 0, 1) * m_Camera.GetRotationMatrix();
+			glm::vec3 t2 = glm::normalize(glm::vec3(t.x, 0, t.z));
+			t2 *= ts.GetSeconds() * moveSpeed;
+			m_Camera.SetPosition(t2 + m_Camera.GetPosition());
 		}
 		if (Swallow::Input::IsKeyPressed(SW_KEY_D))
 		{
-			glm::vec4 t(m_Camera.GetPosition(), 1);
-			t += (glm::vec4(0.1, 0, 0, 1) * m_Camera.GetRotationMatrix());
-			m_Camera.SetPosition({ t.x, m_Camera.GetPosition().y, t.z });
+			glm::vec4 t = glm::vec4(1 , 0, 0, 1) * m_Camera.GetRotationMatrix();
+			glm::vec3 t2 = glm::normalize(glm::vec3(t.x, 0, t.z));
+			t2 *= ts.GetSeconds() * moveSpeed;
+			m_Camera.SetPosition(t2 + m_Camera.GetPosition());
 		}
+
+		if (Swallow::Input::IsKeyPressed(SW_KEY_SPACE) && m_CanJump)
+		{
+			m_YVelocity = 10.0f;
+			m_CanJump = false;
+		}
+
+		m_Camera.SetPosition(m_Camera.GetPosition() + glm::vec3(0, m_YVelocity * ts.GetSeconds(), 0));
 		m_Camera.Recalculate();
 
 		Swallow::Renderer::BeginScene(m_Camera);

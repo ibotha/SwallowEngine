@@ -16,6 +16,8 @@
 #include "Renderer/Buffer.h"
 #include "Renderer/VertexArray.h"
 
+#include "Swallow/Core/Timestep.h"
+
 namespace Swallow {
 
 	class Application
@@ -42,6 +44,7 @@ namespace Swallow {
 		LayerStack m_LayerStack;
 
 		static Application* s_Instance;
+		float m_LastFrameTime = 0.0f;
 	};
 
 	Application *CreateApplication();
