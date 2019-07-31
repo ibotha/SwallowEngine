@@ -6,6 +6,7 @@
 #include "Swallow/Events/MouseEvent.h"
 
 #include "Platform/OpenGL/OpenGLContext.h"
+#include <glad/glad.h>
 
 namespace Swallow {
 
@@ -59,6 +60,8 @@ namespace Swallow {
 			WindowResizeEvent event(width, height);
 			data.Width = width;
 			data.Height = height;
+			glViewport(0, 0, width, height);
+			glScissor(0, 0, width, height);
 			data.EventCallback(event);
 
 		});

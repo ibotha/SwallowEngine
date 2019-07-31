@@ -10,8 +10,8 @@ namespace Swallow {
 		std::string Title;
 		unsigned int Width, Height;
 		WindowProps(const std::string& title = "Swallow Engine",
-			unsigned int width = 640,
-			unsigned int height = 480)
+			unsigned int width = 1260,
+			unsigned int height = 640)
 			:Title(title), Width(width), Height(height)
 		{
 		}
