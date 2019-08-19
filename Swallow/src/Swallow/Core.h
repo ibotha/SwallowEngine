@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #ifdef SW_PLATFORM_WINDOWS
 #else
 	#error Swallow Only Supports Windows!
@@ -19,4 +21,14 @@
 
 
 #define BIT(x) (1 << x)
+
+namespace Swallow {
+
+	template <typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template <typename T>
+	using Ref = std::shared_ptr<T>;
+
+}
 

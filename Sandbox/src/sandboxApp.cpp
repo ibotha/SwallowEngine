@@ -1,18 +1,21 @@
 #include <Swallow.h>
 #include "imgui.h"
 #include "gtx/transform.hpp"
+#include <gtc/type_ptr.hpp>
+#include "Platform/OpenGL/OpenGLShader.h"
 
 class StartLayer : public Swallow::Layer {
 private:
 
-	std::shared_ptr<Swallow::VertexArray> m_SquareVA;
-	std::shared_ptr<Swallow::Shader> m_SquareShader;
+	Swallow::Ref<Swallow::VertexArray> m_SquareVA;
+	Swallow::Ref<Swallow::OpenGLShader> m_SquareShader;
 
 	float	m_Y = 0.0f;
 	float	m_YVelocity = 0.0f;
 	bool	m_CanJump = true;
 	glm::vec4 pos;
 	glm::vec4 rot;
+	glm::vec4 col = {1, 1, 1, 1};
 
 
 	Swallow::PerspectiveCamera m_Camera;
@@ -35,7 +38,7 @@ public:
 			-1.0f,-1.0f, -1.0f, 0.5f, 0.5f, 0.5f, -1.0f, -1.0f, -1.0f
 		};
 
-		std::shared_ptr<Swallow::VertexBuffer> squareVB;
+		Swallow::Ref<Swallow::VertexBuffer> squareVB;
 		squareVB.reset(Swallow::VertexBuffer::Create(squareBuffer, sizeof(squareBuffer)));
 
 		squareVB->SetLayout({
@@ -67,7 +70,7 @@ public:
 			2, 6, 7
 		};
 
-		std::shared_ptr<Swallow::IndexBuffer> squareIB;
+		Swallow::Ref<Swallow::IndexBuffer> squareIB;
 		squareIB.reset(Swallow::IndexBuffer::Create(squareIndex, sizeof(squareIndex) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -106,7 +109,7 @@ public:
 			}
 		)";
 
-		m_SquareShader.reset(Swallow::Shader::Create(sVertexSrc, sFragmentSrc));
+		m_SquareShader.reset(static_cast<Swallow::OpenGLShader *>(Swallow::Shader::Create(sVertexSrc, sFragmentSrc)));
 
 		Swallow::RenderCommand::SetDepthTest(true);
 	}
@@ -144,6 +147,9 @@ public:
 	}
 
 	virtual void OnImGuiRender() override {
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("CubeColor", glm::value_ptr(col));
+		ImGui::End();
 	}
 
 	void OnUpdate(Swallow::Timestep ts) {
@@ -208,15 +214,15 @@ public:
 		Swallow::Renderer::BeginScene(m_Camera);
 		static float rot = 0.0f;
 		rot += 1.0f * ts.GetSeconds();
-		m_SquareShader->UploadUniform("u_Color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+		m_SquareShader->UploadUniformFloat4("u_Color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 		Swallow::Renderer::Submit(m_SquareShader, m_SquareVA, glm::translate(glm::vec3(4.0, 0.0, 0.0)));
-		m_SquareShader->UploadUniform("u_Color", glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+		m_SquareShader->UploadUniformFloat4("u_Color", col);
 		Swallow::Renderer::Submit(m_SquareShader, m_SquareVA, glm::translate(glm::vec3(0.0, 0.0, 4.0)));
-		m_SquareShader->UploadUniform("u_Color", glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-		m_SquareShader->UploadUniform("u_Rot", glm::rotate(rot, glm::vec3(1, 0, 0)));
+		m_SquareShader->UploadUniformFloat4("u_Color", glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+		m_SquareShader->UploadUniformMat4("u_Rot", glm::rotate(rot, glm::vec3(1, 0, 0)));
 		Swallow::Renderer::Submit(m_SquareShader, m_SquareVA, glm::translate(glm::vec3(-4.0, 0.0, 0.0)) * glm::rotate(rot, glm::vec3(1, 0, 0)));
-		m_SquareShader->UploadUniform("u_Rot", glm::identity<glm::mat4>());
-		m_SquareShader->UploadUniform("u_Color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+		m_SquareShader->UploadUniformMat4("u_Rot", glm::identity<glm::mat4>());
+		m_SquareShader->UploadUniformFloat4("u_Color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 		Swallow::Renderer::Submit(m_SquareShader, m_SquareVA, glm::translate(glm::vec3(0.0, -2.01, -0.0)) * glm::scale(glm::vec3(100, 1, 100)));
 
 		Swallow::Renderer::EndScene();

@@ -20,7 +20,7 @@ namespace Swallow {
 
 		virtual void Clear() override;
 
-		virtual void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray) override;
+		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) override;
 
 	};
 
