@@ -53,6 +53,7 @@ namespace Swallow {
 		int i = 0;
 		for (const auto &e : vertexBuffer->GetLayout())
 		{
+			const void *idea = reinterpret_cast<const void *>(e.Offset);
 			glEnableVertexAttribArray(i);
 			glVertexAttribPointer(
 				i,
@@ -60,7 +61,7 @@ namespace Swallow {
 				ShaderDataTypeToOpenGLBaseType(e.Type),
 				e.Normalized ? GL_TRUE : GL_FALSE,
 				vertexBuffer->GetLayout().GetStride(),
-				(const void *)e.Offset);
+				idea);
 			i++;
 		}
 

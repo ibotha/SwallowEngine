@@ -152,7 +152,7 @@ public:
 		ImGui::End();
 	}
 
-	void OnUpdate(Swallow::Timestep ts) {
+	void OnUpdate(Swallow::Timestep ts) override {
 		
 		m_Camera = Swallow::PerspectiveCamera(glm::radians(60.0f), Swallow::Application::Get().GetWindow().GetWidth() / (float)Swallow::Application::Get().GetWindow().GetHeight(), 0.0001f, 100000.0f);
 		float moveSpeed = 5.0f;
