@@ -2,18 +2,30 @@
 
 #include <memory>
 
-#ifdef SW_PLATFORM_WINDOWS
-#else
-	#error Swallow Only Supports Windows!
-#endif // SW_PLATFORM_WINDOWS
-
 #ifdef SW_DEBUG
 	#define SW_ENABLE_ASSERTS
 #endif
 
+#ifdef SW_PLATFORM_WINDOWS
+#else
+	#ifdef SW_PLATFORM_MACOSX
+	#else
+		#error Swallow Only Supports Windows and Mac!
+	#endif // SW_PLATFORM_MACOSX
+#endif // SW_PLATFORM_WINDOWS
+
 #ifdef SW_ENABLE_ASSERTS
-	#define SW_ASSERT(x, ...) {if (!(x)) {SW_ERROR("Assertion Failed {0}", __VA_ARGS__); __debugbreak(); } }
-	#define SW_CORE_ASSERT(x, ...) {if (!(x)) {SW_CORE_ERROR("Assertion Failed {0}", __VA_ARGS__); __debugbreak(); } }
+	#ifdef SW_PLATFORM_WINDOWS
+		#define SW_ASSERT(x, ...) {if (!(x)) {SW_ERROR("Assertion Failed {0}", __VA_ARGS__); __debugbreak(); } }
+		#define SW_CORE_ASSERT(x, ...) {if (!(x)) {SW_CORE_ERROR("Assertion Failed {0}", __VA_ARGS__); __debugbreak(); } }
+	#else
+		#ifdef SW_PLATFORM_MACOSX
+			#define SW_ASSERT(x, ...) {if (!(x)) {SW_ERROR("Assertion Failed {0}", __VA_ARGS__); exit(0); } }
+			#define SW_CORE_ASSERT(x, ...) {if (!(x)) {SW_CORE_ERROR("Assertion Failed {0}", __VA_ARGS__); exit(0); } }
+		#else
+			#error Swallow Only Supports Windows and Mac!
+		#endif // SW_PLATFORM_MACOSX
+	#endif // SW_PLATFORM_WINDOWS
 #else
 	#define SW_ASSERT(x, ...)
 	#define SW_CORE_ASSERT(x, ...)

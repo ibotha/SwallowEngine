@@ -69,6 +69,15 @@ project "Swallow"
 		"_CRT_SECURE_NO_WARNINGS"
 	}
 
+	filter "system:macosx"
+		systemversion "latest"
+
+		defines
+		{
+			"SW_PLATFORM_MACOSX",
+			"GLFW_INCLUDE_NONE"
+		}
+
 	filter "system:windows"
 		systemversion "latest"
 
@@ -113,14 +122,36 @@ project "Sandbox"
 	{
 		"Swallow/vendor/spdlog/include",
 		"Swallow/src",
-		"Swallow/vendor/imgui",
-		"Swallow/vendor/glm/glm"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"Swallow"
 	}
+
+	filter "system:macosx"
+        systemversion "latest"
+
+        defines
+        {
+            "SW_PLATFORM_MACOSX"
+		}
+		
+		links
+		{
+			"Cocoa.framework",
+			"IOKit.framework",
+			"OpenGL.framework",
+			"GLUT.framework",
+			"CoreVideo.framework",
+			"GLFW",
+			"Glad",
+			"ImGui"
+		}
 
 	filter "system:windows"
 		systemversion "latest"

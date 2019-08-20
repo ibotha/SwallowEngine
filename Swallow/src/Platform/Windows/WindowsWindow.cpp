@@ -38,6 +38,13 @@ namespace Swallow {
 		if (!s_GLFWInitialized) {
 			int success = glfwInit();
 
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+            #ifdef __APPLE__
+                glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
+            #endif
+			
 			SW_CORE_ASSERT(success, "Could Not Initialize GLFW");
 			glfwSetErrorCallback([](int code, const char *message) {SW_CORE_ASSERT(false, "GLFW Error {0}: {1}", code, message)});
 
