@@ -3,6 +3,7 @@
 bin/
 bin-int/
 !vendor/bin/premake/premake5.exe
+!vendor/bin/premake/premake5
 
 #vscode garbage
 

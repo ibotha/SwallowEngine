@@ -2,7 +2,7 @@
 #include "OpenGLShader.h"
 
 #include "glad/glad.h"
-#include "..\..\Swallow\Renderer\Shader.h"
+#include "Swallow/Renderer/Shader.h"
 
 namespace Swallow {
 	OpenGLShader::OpenGLShader(const std::string & vertexSrc, const std::string & fragmentSrc)
