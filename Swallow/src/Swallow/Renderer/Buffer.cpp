@@ -22,28 +22,28 @@ namespace Swallow {
 		}
 	}
 
-	VertexBuffer * VertexBuffer::Create(void * vertices, uint32_t size)
+	Ref<VertexBuffer> VertexBuffer::Create(void * vertices, uint32_t size)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return new OpenGLVertexBuffer(vertices, size);
+			return std::make_shared<OpenGLVertexBuffer>(vertices, size);
 		default:
 			break;
 		}
 		return nullptr;
 	}
 
-	IndexBuffer * IndexBuffer::Create(uint32_t * indices, uint32_t count)
+	Ref<IndexBuffer> IndexBuffer::Create(uint32_t * indices, uint32_t count)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return new OpenGLIndexBuffer(indices, count);
+			return std::make_shared<OpenGLIndexBuffer>(indices, count);
 		default:
 			break;
 		}

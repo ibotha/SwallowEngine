@@ -20,6 +20,7 @@
 
 #include "Swallow/Renderer/Buffer.h"
 #include "Swallow/Renderer/Shader.h"
+#include "Swallow/Renderer/Texture.hpp"
 #include "Swallow/Renderer/VertexArray.h"
 // -------------------------------------------
 

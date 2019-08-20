@@ -96,7 +96,7 @@ namespace Swallow {
 		virtual void SetLayout(const BufferLayout &layout) = 0;
 		virtual BufferLayout const &GetLayout() const = 0;
 
-		static VertexBuffer* Create(void* vertices, uint32_t size);
+		static Ref<VertexBuffer> Create(void* vertices, uint32_t size);
 	};
 
 	class IndexBuffer
@@ -109,6 +109,6 @@ namespace Swallow {
 
 		inline virtual uint32_t GetCount() const = 0;
 
-		static IndexBuffer* Create(uint32_t* indices, uint32_t count);
+		static Ref<IndexBuffer> Create(uint32_t* indices, uint32_t count);
 	};
 }

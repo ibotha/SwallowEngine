@@ -18,6 +18,7 @@ workspace "Swallow"
 	IncludeDir["Glad"] = "Swallow/vendor/Glad/include"
 	IncludeDir["ImGui"] = "Swallow/vendor/imgui"
 	IncludeDir["glm"] = "Swallow/vendor/glm/glm"
+	IncludeDir["stb_image"] = "Swallow/vendor/stb_image"
 
 	group "Dependencies"
 		include "Swallow/vendor/GLFW"
@@ -41,9 +42,11 @@ project "Swallow"
 	files
 	{
 		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.hpp",
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl"
+		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/vendor/stb_image/**",
 	}
 
 	includedirs
@@ -53,7 +56,8 @@ project "Swallow"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links
