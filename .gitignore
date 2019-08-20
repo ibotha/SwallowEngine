@@ -11,3 +11,4 @@ bin-int/
 *.user
 *.vcxproj*
 Makefile
+*.sln
