@@ -16,12 +16,12 @@
 
 #ifdef SW_ENABLE_ASSERTS
 	#ifdef SW_PLATFORM_WINDOWS
-		#define SW_ASSERT(x, ...) {if (!(x)) {SW_ERROR("Assertion Failed {0}", __VA_ARGS__); __debugbreak(); } }
-		#define SW_CORE_ASSERT(x, ...) {if (!(x)) {SW_CORE_ERROR("Assertion Failed {0}", __VA_ARGS__); __debugbreak(); } }
+		#define SW_ASSERT(x, ...) {if (!(x)) {SW_ERROR(__VA_ARGS__); __debugbreak(); } }
+		#define SW_CORE_ASSERT(x, ...) {if (!(x)) {SW_CORE_ERROR(__VA_ARGS__); __debugbreak(); } }
 	#else
 		#ifdef SW_PLATFORM_MACOSX
-			#define SW_ASSERT(x, ...) {if (!(x)) {SW_ERROR("Assertion Failed {0}", __VA_ARGS__); exit(0); } }
-			#define SW_CORE_ASSERT(x, ...) {if (!(x)) {SW_CORE_ERROR("Assertion Failed {0}", __VA_ARGS__); exit(0); } }
+			#define SW_ASSERT(x, ...) {if (!(x)) {SW_ERROR(__VA_ARGS__); exit(0); } }
+			#define SW_CORE_ASSERT(x, ...) {if (!(x)) {SW_CORE_ERROR(__VA_ARGS__); exit(0); } }
 		#else
 			#error Swallow Only Supports Windows and Mac!
 		#endif // SW_PLATFORM_MACOSX
