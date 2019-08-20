@@ -24,7 +24,7 @@ namespace Swallow {
 		inline const char* GetClipboardText(void* user_data) override { return glfwGetClipboardString((GLFWwindow*)user_data); }
 		inline void SetClipboardText(void* user_data, const char* text) override { glfwSetClipboardString((GLFWwindow*)user_data, text); }
 
-		inline void* GetNativeWindow() const;
+		inline void* GetNativeWindow() const override;
 
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;

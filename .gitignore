@@ -2,7 +2,7 @@
 .vs/
 bin/
 bin-int/
-!vendor/bin/premake/premake5.exe
+!vendor/bin/
 
 #vscode garbage
 
@@ -10,3 +10,4 @@ bin-int/
 # Files
 *.user
 *.vcxproj*
+Makefile

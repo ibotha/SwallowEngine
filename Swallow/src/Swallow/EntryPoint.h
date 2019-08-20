@@ -17,3 +17,19 @@ int main(int argc, char **argv)
 }
 
 #endif
+
+#ifdef SW_PLATFORM_MACOSX
+
+extern Swallow::Application* Swallow::CreateApplication();
+
+int main(int argc, char **argv)
+{
+	Swallow::Log::Init();
+
+	SW_CORE_WARN("Initialized Log");
+	auto app = Swallow::CreateApplication();
+	app->Run();
+	delete app;
+}
+
+#endif
