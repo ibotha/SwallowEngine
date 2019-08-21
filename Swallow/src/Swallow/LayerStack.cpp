@@ -1,5 +1,5 @@
-#include "swpch.h"
-#include "LayerStack.h"
+#include "swpch.hpp"
+#include "LayerStack.hpp"
 
 namespace Swallow {
 	LayerStack::LayerStack()

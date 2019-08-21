@@ -1,4 +1,4 @@
-#include "swpch.h"
+#include "swpch.hpp"
 #include "OpenGLTexture.hpp"
 #include <glad/glad.h>
 #include <stb_image.h>

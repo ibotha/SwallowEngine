@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Swallow.h>
+#include <Swallow.hpp>
 #include "imgui.h"
 #include "gtx/transform.hpp"
 #include <gtc/type_ptr.hpp>
-#include "Platform/OpenGL/OpenGLShader.h"
+#include "Platform/OpenGL/OpenGLShader.hpp"
 
 class StartLayer : public Swallow::Layer {
 private:

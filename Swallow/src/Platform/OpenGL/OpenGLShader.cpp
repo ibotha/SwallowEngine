@@ -1,8 +1,8 @@
-#include "swpch.h"
+#include "swpch.hpp"
 #include "OpenGLShader.hpp"
 
 #include "glad/glad.h"
-#include "Swallow/Renderer/Shader.h"
+#include "Swallow/Renderer/Shader.hpp"
 
 namespace Swallow {
 	OpenGLShader::OpenGLShader(const std::string & vertexSrc, const std::string & fragmentSrc)
