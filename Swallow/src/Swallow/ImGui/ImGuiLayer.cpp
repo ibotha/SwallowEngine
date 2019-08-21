@@ -20,6 +20,19 @@ namespace Swallow {
 	{
 	}
 
+	ImGuiLayer::ImGuiLayer(const ImGuiLayer& cpy)
+	{
+		if (this != &cpy)
+			*this = cpy;
+	}
+
+	ImGuiLayer &ImGuiLayer::operator=(const ImGuiLayer& rhs)
+	{
+		if (this != &rhs)
+			*this = rhs;
+		return *this;
+	}
+
 	ImGuiLayer::~ImGuiLayer()
 	{
 	}

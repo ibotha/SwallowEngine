@@ -5,7 +5,20 @@
 namespace Swallow {
 
 	Camera::Camera(){
-		
+
+	}
+
+	Camera::Camera(const Camera& cpy)
+	{
+		if (this != &cpy)
+			*this = cpy;
+	}
+
+	Camera &Camera::operator=(const Camera& rhs)
+	{
+		if (this != &rhs)
+			*this = rhs;
+		return *this;
 	}
 
 	Camera::Camera(const glm::mat4 &projection)
