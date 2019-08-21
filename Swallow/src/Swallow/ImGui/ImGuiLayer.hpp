@@ -10,6 +10,8 @@ namespace Swallow {
 	{
 	public:
 		ImGuiLayer();
+		ImGuiLayer(const ImGuiLayer&);
+		ImGuiLayer &operator=(const ImGuiLayer&);
 		~ImGuiLayer();
 
 		virtual void OnAttach() override;

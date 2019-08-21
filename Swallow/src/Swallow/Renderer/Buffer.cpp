@@ -5,6 +5,10 @@
 
 namespace Swallow {
 
+	BufferElement::BufferElement(ShaderDataType type, const std::string &name, bool normalized)
+	:Name(name), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
+	{}
+
 
 	BufferLayout::BufferLayout(std::initializer_list<BufferElement> const &elements)
 		:m_Elements(elements)
