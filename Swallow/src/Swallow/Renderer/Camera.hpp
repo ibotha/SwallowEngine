@@ -24,7 +24,7 @@ namespace Swallow {
 		const glm::mat4 & GetProjectionMatrix() const { return m_ProjectionMatrix; }
 		const glm::mat4 & GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
 
-		virtual ~Camera() {}
+		virtual ~Camera() = default;
 
 	protected:
 		virtual void SetProjectionMatrix(const glm::mat4 &projectionMatrix) { m_ProjectionMatrix = projectionMatrix; }

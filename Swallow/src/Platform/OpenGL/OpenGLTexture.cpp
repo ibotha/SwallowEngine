@@ -23,9 +23,28 @@ namespace Swallow {
 		glGenTextures(1, &m_RendererID);
 		glActiveTexture(GL_TEXTURE31);
 		glBindTexture(GL_TEXTURE_2D, m_RendererID);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, m_Width, m_Height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, m_Width, m_Height, 0, ChannelType(channels), GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 		stbi_image_free(data);
+	}
+	
+	GLenum OpenGLTexture2D::ChannelType(int channel)
+	{
+		SW_CORE_INFO("Channels in image: {}", channel);
+		switch (channel)
+		{
+		case 3:
+			return (GL_RGB);
+			break;
+		case 4:
+			return (GL_RGBA);
+			break;
+		
+		default:
+			return (GL_RGBA2);
+			break;
+		}
+		return (GL_RGB);
 	}
 
 	OpenGLTexture2D::~OpenGLTexture2D()
