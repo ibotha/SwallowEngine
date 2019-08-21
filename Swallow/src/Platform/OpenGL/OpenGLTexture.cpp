@@ -28,7 +28,7 @@ namespace Swallow {
 		stbi_image_free(data);
 	}
 	
-	uint32_t OpenGLTexture2D::ChannelType(int channel)
+	GLenum OpenGLTexture2D::ChannelType(int channel)
 	{
 		switch (channel)
 		{

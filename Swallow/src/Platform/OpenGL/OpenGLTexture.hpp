@@ -17,7 +17,7 @@ namespace Swallow {
 		virtual void Bind(uint32_t slot = 0) const override;
 	private:
 
-		uint32_t ChannelType(int channel);
+		unsigned int ChannelType(int channel);
 		uint32_t m_Width, m_Height;
 		std::string m_Path;
 
