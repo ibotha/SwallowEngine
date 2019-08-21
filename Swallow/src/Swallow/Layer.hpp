@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Swallow/Core.h"
-#include "Events/Event.h"
-#include "Swallow/Core/Timestep.h"
+#include "Swallow/Core.hpp"
+#include "Events/Event.hpp"
+#include "Swallow/Core/Timestep.hpp"
 
 namespace Swallow {
 	class Layer

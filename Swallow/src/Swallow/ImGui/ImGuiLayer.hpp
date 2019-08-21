@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Swallow/Layer.h"
-#include "Swallow/Events/ApplicationEvent.h"
-#include "Swallow/Events/MouseEvent.h"
-#include "Swallow/Events/KeyEvent.h"
+#include "Swallow/Layer.hpp"
+#include "Swallow/Events/ApplicationEvent.hpp"
+#include "Swallow/Events/MouseEvent.hpp"
+#include "Swallow/Events/KeyEvent.hpp"
 
 namespace Swallow {
 	class ImGuiLayer : public Layer

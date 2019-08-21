@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Swallow/Renderer/GraphicsContext.h"
+#include "Swallow/Renderer/GraphicsContext.hpp"
 
 struct GLFWwindow;
 

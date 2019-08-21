@@ -1,7 +1,7 @@
-#include "swpch.h"
-#include "VertexArray.h"
-#include "Renderer.h"
-#include "Platform/OpenGL/OpenGLVertexArray.h"
+#include "swpch.hpp"
+#include "VertexArray.hpp"
+#include "Renderer.hpp"
+#include "Platform/OpenGL/OpenGLVertexArray.hpp"
 
 namespace Swallow {
 	Ref<VertexArray> VertexArray::Create()

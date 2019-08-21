@@ -1,9 +1,9 @@
-#include "swpch.h"
-#include "Application.h"
-#include "Input.h"
+#include "swpch.hpp"
+#include "Application.hpp"
+#include "Input.hpp"
 #include "imgui.h"
 #include "glm.hpp"
-#include "Renderer/Renderer.h"
+#include "Renderer/Renderer.hpp"
 #include "GLFW/glfw3.h"
 
 namespace Swallow {

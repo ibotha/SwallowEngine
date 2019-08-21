@@ -1,6 +1,6 @@
 #pragma once
 #include "glm.hpp"
-#include "VertexArray.h"
+#include "VertexArray.hpp"
 
 namespace Swallow {
 

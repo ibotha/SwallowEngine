@@ -1,6 +1,8 @@
 #pragma once
 
 #include <memory>
+#include <sstream>
+#include <string>
 
 #ifdef SW_DEBUG
 	#define SW_ENABLE_ASSERTS

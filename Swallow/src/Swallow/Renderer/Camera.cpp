@@ -1,5 +1,5 @@
-#include "swpch.h"
-#include "Camera.h"
+#include "swpch.hpp"
+#include "Camera.hpp"
 #include "gtx/transform.hpp"
 
 namespace Swallow {

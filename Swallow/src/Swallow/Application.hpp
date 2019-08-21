@@ -1,22 +1,22 @@
 #pragma once
 
-#include "Core.h"
+#include "Core.hpp"
 
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
-#include "Window.h"
-#include "LayerStack.h"
-#include "Events/Event.h"
-#include "Events/ApplicationEvent.h"
-#include "Events/KeyEvent.h"
-#include "Events/MouseEvent.h"
+#include "Window.hpp"
+#include "LayerStack.hpp"
+#include "Events/Event.hpp"
+#include "Events/ApplicationEvent.hpp"
+#include "Events/KeyEvent.hpp"
+#include "Events/MouseEvent.hpp"
 
-#include "ImGui/ImGuiLayer.h"
+#include "ImGui/ImGuiLayer.hpp"
 
-#include "Renderer/Shader.h"
-#include "Renderer/Buffer.h"
-#include "Renderer/VertexArray.h"
+#include "Renderer/Shader.hpp"
+#include "Renderer/Buffer.hpp"
+#include "Renderer/VertexArray.hpp"
 
-#include "Swallow/Core/Timestep.h"
+#include "Swallow/Core/Timestep.hpp"
 
 namespace Swallow {
 

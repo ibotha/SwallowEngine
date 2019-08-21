@@ -1,4 +1,4 @@
-#include "swpch.h"
+#include "swpch.hpp"
 #include "OpenGLVertexArray.hpp"
 #include "glad/glad.h"
 

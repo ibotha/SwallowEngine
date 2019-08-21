@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Swallow/Core.h"
+#include "Swallow/Core.hpp"
 
 namespace Swallow
 {

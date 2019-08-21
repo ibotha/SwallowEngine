@@ -1,5 +1,5 @@
 #pragma once
-#include <Swallow.h>
+#include <Swallow.hpp>
 #include "StartLayer.hpp"
 
 class Sandbox : public Swallow::Application

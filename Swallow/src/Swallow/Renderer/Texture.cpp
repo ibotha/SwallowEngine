@@ -1,6 +1,6 @@
-#include "swpch.h"
+#include "swpch.hpp"
 #include "Texture.hpp"
-#include "Renderer.h"
+#include "Renderer.hpp"
 #include "Platform/OpenGL/OpenGLTexture.hpp"
 
 namespace Swallow {

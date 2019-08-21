@@ -1,5 +1,4 @@
 #include "SandboxApp.hpp"
-#include <Swallow/EntryPoint.h>
 
 Sandbox::Sandbox() {
 	PushLayer(new StartLayer());

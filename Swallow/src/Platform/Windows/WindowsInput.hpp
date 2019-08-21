@@ -1,12 +1,14 @@
 #pragma once
 
-#include "Swallow/Core.h"
-#include "Swallow/Input.h"
+#include "Swallow/Core.hpp"
+#include "Swallow/Input.hpp"
 
 namespace Swallow {
 	class WindowsInput : public Input {
-	protected:
+	public:
 		WindowsInput() = default;
+
+	protected:
 		WindowsInput(const WindowsInput &rhs) = default;
 		WindowsInput &operator=(const WindowsInput &rhs) = default;
 		virtual ~WindowsInput() = default;

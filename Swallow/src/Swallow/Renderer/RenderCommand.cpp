@@ -1,6 +1,6 @@
-#include "swpch.h"
-#include "RenderCommand.h"
-#include "Platform/OpenGL/OpenGLRendererAPI.h"
+#include "swpch.hpp"
+#include "RenderCommand.hpp"
+#include "Platform/OpenGL/OpenGLRendererAPI.hpp"
 
 namespace Swallow {
 	RendererAPI* RenderCommand::s_RendererAPI = new OpenGLRendererAPI();
