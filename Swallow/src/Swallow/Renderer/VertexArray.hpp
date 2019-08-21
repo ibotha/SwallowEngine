@@ -7,6 +7,9 @@ namespace Swallow {
 	{
 	public:
 		virtual ~VertexArray() {}
+		VertexArray();
+		VertexArray(const VertexArray&);
+		VertexArray &operator=(const VertexArray&);
 
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;

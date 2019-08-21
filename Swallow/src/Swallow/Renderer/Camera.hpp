@@ -6,6 +6,10 @@ namespace Swallow {
 	{
 	public:
 
+		Camera();
+		Camera(const Camera&);
+		~Camera();
+		Camera &operator=(const Camera&);
 		Camera(const glm::mat4 &projection);
 
 		void Recalculate();

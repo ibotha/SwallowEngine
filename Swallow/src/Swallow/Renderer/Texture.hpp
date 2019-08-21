@@ -15,6 +15,9 @@ namespace Swallow {
 	class Texture2D : public Texture
 	{
 	public:
+		Texture2D();
+		Texture2D(const Texture2D&);
+		Texture2D &operator=(const Texture2D&);
 		virtual ~Texture2D() = default;
 		static Ref<Texture2D> Create(const std::string& path);
 	};

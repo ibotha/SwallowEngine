@@ -5,6 +5,20 @@
 
 namespace Swallow {
 
+	Shader::Shader(){}
+	Shader::Shader(const Shader& cpy)
+	{
+		if (this != &cpy)
+			*this = cpy;
+	}
+
+	Shader &Shader::operator=(const Shader& rhs)
+	{
+		if (this != &rhs)
+			*this = rhs;
+		return *this;
+	}
+
 	Ref<Shader> Shader::Create(const std::string & vertexSrc, const std::string & fragmentSrc)
 	{
 		switch (Renderer::GetAPI())

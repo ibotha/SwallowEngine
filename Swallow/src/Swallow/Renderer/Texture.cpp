@@ -5,7 +5,18 @@
 
 namespace Swallow {
 
-
+	Texture2D::Texture2D(){}
+	Texture2D::Texture2D(const Texture2D& cpy)
+	{
+		if (this != &cpy)
+			*this = cpy;
+	}
+	Texture2D &Texture2D::operator=(const Texture2D& rhs)
+	{
+		if (this != &rhs)
+			*this = rhs;
+		return *this;
+	}
 
 	Ref<Texture2D> Texture2D::Create(const std::string & path)
 	{
