@@ -33,6 +33,9 @@ namespace Swallow {
 		SW_CORE_INFO("Channels in image: {}", channel);
 		switch (channel)
 		{
+		case 2:
+			return (GL_RG);
+			break;
 		case 3:
 			return (GL_RGB);
 			break;
@@ -41,7 +44,7 @@ namespace Swallow {
 			break;
 		
 		default:
-			return (GL_RGBA2);
+			return (GL_RGB);
 			break;
 		}
 		return (GL_RGB);
