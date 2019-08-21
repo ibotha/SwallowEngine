@@ -41,7 +41,7 @@ namespace Swallow {
 			break;
 		
 		default:
-			return (GL_RG);
+			return (GL_RGBA2);
 			break;
 		}
 		return (GL_RGB);
