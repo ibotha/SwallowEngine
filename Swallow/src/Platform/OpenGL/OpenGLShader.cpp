@@ -1,5 +1,5 @@
 #include "swpch.h"
-#include "OpenGLShader.h"
+#include "OpenGLShader.hpp"
 
 #include "glad/glad.h"
 #include "Swallow/Renderer/Shader.h"

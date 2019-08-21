@@ -1,5 +1,5 @@
 #include "swpch.h"
-#include "OpenGLContext.h"
+#include "OpenGLContext.hpp"
 
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>

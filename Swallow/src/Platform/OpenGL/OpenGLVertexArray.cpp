@@ -1,5 +1,5 @@
 #include "swpch.h"
-#include "OpenGLVertexArray.h"
+#include "OpenGLVertexArray.hpp"
 #include "glad/glad.h"
 
 namespace Swallow {

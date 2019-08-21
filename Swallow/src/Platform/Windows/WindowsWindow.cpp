@@ -1,11 +1,11 @@
 #include "swpch.h"
-#include "WindowsWindow.h"
+#include "WindowsWindow.hpp"
 
 #include "Swallow/Events/ApplicationEvent.h"
 #include "Swallow/Events/KeyEvent.h"
 #include "Swallow/Events/MouseEvent.h"
 
-#include "Platform/OpenGL/OpenGLContext.h"
+#include "Platform/OpenGL/OpenGLContext.hpp"
 #include <glad/glad.h>
 
 namespace Swallow {
