@@ -1,4 +1,4 @@
-#include <Swallow.h>
+#include <Swallow.hpp>
 #include "imgui.h"
 #include "gtx/transform.hpp"
 #include <gtc/type_ptr.hpp>

@@ -1,5 +1,5 @@
 #pragma once
-#include "Swallow/Renderer/Shader.h"
+#include "Swallow/Renderer/Shader.hpp"
 
 namespace Swallow {
 	class OpenGLShader : public Shader

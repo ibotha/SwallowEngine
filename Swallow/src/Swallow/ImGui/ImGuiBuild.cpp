@@ -1,4 +1,4 @@
-#include "swpch.h"
+#include "swpch.hpp"
 
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
 

@@ -1,9 +1,9 @@
-#include "swpch.h"
+#include "swpch.hpp"
 #include "WindowsWindow.h"
 
-#include "Swallow/Events/ApplicationEvent.h"
-#include "Swallow/Events/KeyEvent.h"
-#include "Swallow/Events/MouseEvent.h"
+#include "Swallow/Events/ApplicationEvent.hpp"
+#include "Swallow/Events/KeyEvent.hpp"
+#include "Swallow/Events/MouseEvent.hpp"
 
 #include "Platform/OpenGL/OpenGLContext.h"
 #include <glad/glad.h>

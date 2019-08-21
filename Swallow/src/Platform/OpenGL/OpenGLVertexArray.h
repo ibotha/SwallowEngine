@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Swallow/Renderer/VertexArray.h"
+#include "Swallow/Renderer/VertexArray.hpp"
 
 namespace Swallow {
 	class OpenGLVertexArray : public VertexArray

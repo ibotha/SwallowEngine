@@ -1,8 +1,8 @@
 #pragma once
 
-#include "swpch.h"
-#include "Swallow/Core.h"
-#include "Swallow/Events/Event.h"
+#include "swpch.hpp"
+#include "Swallow/Core.hpp"
+#include "Swallow/Events/Event.hpp"
 
 namespace Swallow {
 

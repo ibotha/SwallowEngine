@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Swallow/Renderer/RendererAPI.h"
+#include "Swallow/Renderer/RendererAPI.hpp"
 
 namespace Swallow {
 

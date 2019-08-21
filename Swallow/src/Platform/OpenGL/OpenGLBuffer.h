@@ -1,5 +1,5 @@
 #pragma once
-#include "Swallow/Renderer/Buffer.h"
+#include "Swallow/Renderer/Buffer.hpp"
 
 namespace Swallow {
 

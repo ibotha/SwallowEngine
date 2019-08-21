@@ -1,9 +1,9 @@
 #pragma once
-#include "Camera.h"
-#include "Buffer.h"
-#include "Shader.h"
+#include "Camera.hpp"
+#include "Buffer.hpp"
+#include "Shader.hpp"
 
-#include "RenderCommand.h"
+#include "RenderCommand.hpp"
 // TODO: Remove
 #include "Platform/OpenGL/OpenGLShader.h"
 

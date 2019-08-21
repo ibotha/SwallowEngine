@@ -1,4 +1,4 @@
-#include "swpch.h"
+#include "swpch.hpp"
 #include "OpenGLRendererAPI.h"
 
 #include <glad/glad.h>

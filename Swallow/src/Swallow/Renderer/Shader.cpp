@@ -1,6 +1,6 @@
-#include "swpch.h"
-#include "Shader.h"
-#include "Renderer.h"
+#include "swpch.hpp"
+#include "Shader.hpp"
+#include "Renderer.hpp"
 #include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Swallow {

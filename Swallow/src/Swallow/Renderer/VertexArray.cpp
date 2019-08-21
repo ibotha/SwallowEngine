@@ -1,6 +1,6 @@
-#include "swpch.h"
-#include "VertexArray.h"
-#include "Renderer.h"
+#include "swpch.hpp"
+#include "VertexArray.hpp"
+#include "Renderer.hpp"
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 
 namespace Swallow {

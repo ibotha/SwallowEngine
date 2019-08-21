@@ -36,12 +36,12 @@ project "Swallow"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-	pchheader "swpch.h"
+	pchheader "swpch.hpp"
 	pchsource "Swallow/src/swpch.cpp"
 
 	files
 	{
-		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.hpp",
 		"%{prj.name}/src/**.hpp",
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
@@ -118,7 +118,7 @@ project "Sandbox"
 
 	files
 	{
-		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.hpp",
 		"%{prj.name}/src/**.cpp"
 	}
 

@@ -1,5 +1,5 @@
-#include "swpch.h"
-#include "Renderer.h"
+#include "swpch.hpp"
+#include "Renderer.hpp"
 
 namespace Swallow {
 
