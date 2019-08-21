@@ -30,6 +30,7 @@ namespace Swallow {
 	
 	GLenum OpenGLTexture2D::ChannelType(int channel)
 	{
+		SW_CORE_INFO("Channels in image: {}", channel);
 		switch (channel)
 		{
 		case 3:
@@ -40,7 +41,7 @@ namespace Swallow {
 			break;
 		
 		default:
-			return (GL_RGB);
+			return (GL_RG);
 			break;
 		}
 		return (GL_RGB);
