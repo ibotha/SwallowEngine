@@ -13,3 +13,4 @@ bin-int/
 Makefile
 *.sln
 assets/
+Run.sh

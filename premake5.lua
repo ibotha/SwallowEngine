@@ -157,6 +157,8 @@ project "Sandbox"
 			"ImGui"
 		}
 
+		postbuildcommands { "echo \"cd %{prj.name} && ../bin/" .. outputdir .. "/%{prj.name}/%{prj.name}\" > ../Run.sh" }
+
 	filter "system:windows"
 		systemversion "latest"
 
