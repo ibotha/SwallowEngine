@@ -1,9 +1,11 @@
 #include "swpch.h"
-#include "OpenGLBuffer.h"
+#include "OpenGLBuffer.hpp"
 
 #include <glad/glad.h>
 
 namespace Swallow {
+
+	#pragma region VertexBuffer
 
 	OpenGLVertexBuffer::OpenGLVertexBuffer(void * vertices, uint32_t size)
 	{
@@ -37,6 +39,10 @@ namespace Swallow {
 		return m_Layout;
 	}
 
+	#pragma endregion
+
+	#pragma region IndexBuffer
+
 	OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t * indices, uint32_t count)
 		:m_Count(count)
 	{
@@ -59,4 +65,7 @@ namespace Swallow {
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
+
+	#pragma endregion
+
 }

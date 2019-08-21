@@ -13,6 +13,8 @@ namespace Swallow {
 		virtual void SwapBuffers() override;
 
 	private:
+		OpenGLContext(const OpenGLContext &rhs) = default;
+		OpenGLContext &operator=(const OpenGLContext &rhs) = default;
 		GLFWwindow* m_WindowHandle;
 	};
 }

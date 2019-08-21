@@ -8,7 +8,9 @@ namespace Swallow {
 	{
 	public:
 		OpenGLRendererAPI();
-		~OpenGLRendererAPI();
+		OpenGLRendererAPI(const OpenGLRendererAPI &rhs) = default;
+		OpenGLRendererAPI &operator=(const OpenGLRendererAPI &rhs) = default;
+		virtual ~OpenGLRendererAPI();
 
 	private:
 

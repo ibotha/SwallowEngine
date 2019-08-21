@@ -3,10 +3,14 @@
 
 namespace Swallow {
 
+	#pragma region VertexBuffer
+
 	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	public:
 		OpenGLVertexBuffer(void *vertices, uint32_t size);
+		OpenGLVertexBuffer(const OpenGLVertexBuffer &rhs) = default;
+		OpenGLVertexBuffer &operator=(const OpenGLVertexBuffer &rhs) = default;
 		virtual ~OpenGLVertexBuffer();
 
 		virtual void Bind() const override;
@@ -19,10 +23,16 @@ namespace Swallow {
 		BufferLayout m_Layout;
 	};
 
+	#pragma endregion
+
+	#pragma region IndexBuffer
+
 	class OpenGLIndexBuffer : public IndexBuffer
 	{
 	public:
 		OpenGLIndexBuffer(uint32_t *indeces, uint32_t count);
+		OpenGLIndexBuffer(const OpenGLIndexBuffer &rhs) = default;
+		OpenGLIndexBuffer &operator=(const OpenGLIndexBuffer &rhs) = default;
 		virtual ~OpenGLIndexBuffer();
 
 		virtual void Bind() const override;
@@ -33,4 +43,6 @@ namespace Swallow {
 		uint32_t m_Count;
 	};
 
+	#pragma endregion
+	
 }

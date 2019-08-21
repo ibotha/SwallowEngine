@@ -1,5 +1,5 @@
 #include "swpch.h"
-#include "WindowsInput.h"
+#include "WindowsInput.hpp"
 #include "Swallow/Application.h"
 
 #include <GLFW/glfw3.h>

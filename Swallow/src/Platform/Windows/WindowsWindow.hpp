@@ -11,6 +11,8 @@ namespace Swallow {
 	{
 	public:
 		WindowsWindow(const WindowProps& props);
+		WindowsWindow(const WindowsWindow &rhs) = default;
+		WindowsWindow &operator=(const WindowsWindow &rhs) = default;
 		virtual ~WindowsWindow();
 
 		void OnUpdate() override;

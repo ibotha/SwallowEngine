@@ -6,6 +6,10 @@
 namespace Swallow {
 	class WindowsInput : public Input {
 	protected:
+		WindowsInput() = default;
+		WindowsInput(const WindowsInput &rhs) = default;
+		WindowsInput &operator=(const WindowsInput &rhs) = default;
+		virtual ~WindowsInput() = default;
 		virtual inline bool IsKeyPressedImpl(int keycode) override;
 
 		virtual inline bool IsMouseButtonPressedImpl(int button) override;

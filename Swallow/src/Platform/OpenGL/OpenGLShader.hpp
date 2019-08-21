@@ -6,6 +6,8 @@ namespace Swallow {
 	{
 	public:
 		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+		OpenGLShader(const OpenGLShader &rhs) = default;
+		OpenGLShader &operator=(const OpenGLShader &rhs) = default;
 		virtual ~OpenGLShader();
 
 		virtual void Bind() const override;

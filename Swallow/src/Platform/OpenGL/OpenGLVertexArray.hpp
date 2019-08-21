@@ -7,6 +7,8 @@ namespace Swallow {
 	{
 	public:
 		OpenGLVertexArray();
+		OpenGLVertexArray(const OpenGLVertexArray &rhs) = default;
+		OpenGLVertexArray &operator=(const OpenGLVertexArray &rhs) = default;
 		virtual ~OpenGLVertexArray();
 
 		virtual void Bind() const override;

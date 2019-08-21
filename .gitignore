@@ -14,4 +14,5 @@ Makefile
 *.sln
 assets/
 Run.sh
+imgui.ini
 .vscode
