@@ -7,7 +7,9 @@ namespace Swallow {
 	{
 	public:
 		virtual ~Shader() {}
-
+		Shader();
+		Shader(const Shader&);
+		Shader &operator=(const Shader&);
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
 

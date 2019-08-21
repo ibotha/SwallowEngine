@@ -4,6 +4,20 @@
 #include "Platform/OpenGL/OpenGLVertexArray.hpp"
 
 namespace Swallow {
+
+	VertexArray::VertexArray(){}
+	VertexArray::VertexArray(const VertexArray& cpy)
+	{
+		if (this != &cpy)
+			*this = cpy;
+	}
+	VertexArray &VertexArray::operator=(const VertexArray& rhs)
+	{
+		if (this != &rhs)
+			*this = rhs;
+		return *this;
+	}
+
 	Ref<VertexArray> VertexArray::Create()
 	{
 		switch (Renderer::GetAPI())

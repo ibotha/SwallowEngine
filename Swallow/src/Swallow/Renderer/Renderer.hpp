@@ -12,6 +12,12 @@ namespace Swallow {
 	class Renderer
 	{
 	public:
+
+		Renderer();
+		Renderer(const Renderer&);
+		~Renderer();
+		Renderer &operator=(const Renderer&);
+
 		static void BeginScene(Camera& c);
 		static void EndScene();
 
