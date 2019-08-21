@@ -1,3 +1,4 @@
+#include "swpch.hpp"
 #include "Application.hpp"
 extern Swallow::Application* Swallow::CreateApplication();
 

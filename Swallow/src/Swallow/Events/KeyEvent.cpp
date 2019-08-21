@@ -1,3 +1,4 @@
+#include "swpch.hpp"
 #include "Event.hpp"
 
 namespace Swallow
