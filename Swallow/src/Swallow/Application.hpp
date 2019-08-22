@@ -35,6 +35,7 @@ namespace Swallow {
 
 		static inline Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
+		inline void End() { m_Running = false; }
 	private:
 		bool OnWindowClose(WindowCloseEvent &e);
 
