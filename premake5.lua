@@ -2,9 +2,9 @@ workspace "Sandbox"
 
 startproject "Sandbox"
 
-enginedir = "Swallow"
+enginedir = "Swallow/"
 
-include = enginedir
+include "Swallow"
 
 
 project "Sandbox"

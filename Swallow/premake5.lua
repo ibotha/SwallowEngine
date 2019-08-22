@@ -18,9 +18,9 @@ IncludeDir["glm"] = "vendor/glm/glm"
 IncludeDir["stb_image"] = "vendor/stb_image"
 
 group "Dependencies"
-	include "Swallow/vendor/GLFW"
-	include "Swallow/vendor/Glad"
-	include "Swallow/vendor/imgui"
+	include "vendor/GLFW"
+	include "vendor/Glad"
+	include "vendor/imgui"
 group ""
 
 project "Swallow"
