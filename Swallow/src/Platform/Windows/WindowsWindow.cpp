@@ -38,10 +38,10 @@ namespace Swallow {
 		if (!s_GLFWInitialized) {
 			int success = glfwInit();
 
-			glfwWindowHint(GLFW_SAMPLES, 8);
+			glfwWindowHint(GLFW_SAMPLES, 4);
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
             #ifdef __APPLE__
                 glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
             #endif
@@ -84,6 +84,7 @@ namespace Swallow {
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
+			std::cout << "Hi" << std::endl;
 			WindowsWindow::WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			Event *event;
@@ -121,25 +122,19 @@ namespace Swallow {
 
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
+			std::cout << "hi" << std::endl;
 			WindowsWindow::WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-			Event *event;
-			switch (action)
+			if (action == GLFW_PRESS)
 			{
-				case GLFW_PRESS:
-				{
-					MouseButtonPressedEvent keyevent(button);
-					event = &keyevent;
-					break;
-				}
-				case GLFW_RELEASE:
-				{
-					MouseButtonReleasedEvent keyevent(button);
-					event = &keyevent;
-					break;
-				}
+				MouseButtonPressedEvent keyevent(button);
+				data.EventCallback(keyevent);
 			}
-			data.EventCallback(*event);
+			if (action == GLFW_RELEASE)
+			{
+				MouseButtonReleasedEvent keyevent(button);
+				data.EventCallback(keyevent);
+			}
 		});
 
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)

@@ -33,7 +33,7 @@ project "Swallow"
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
 	pchheader "swpch.hpp"
-	pchsource "Swallow/src/swpch.cpp"
+	pchsource "src/swpch.cpp"
 
 	files
 	{
