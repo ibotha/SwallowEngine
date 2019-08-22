@@ -2,7 +2,9 @@ workspace "Sandbox"
 
 startproject "Sandbox"
 
-include "Swallow"
+enginedir = "Swallow"
+
+include = enginedir
 
 
 project "Sandbox"
@@ -23,12 +25,12 @@ project "Sandbox"
 
 	includedirs
 	{
-		"Swallow/vendor/spdlog/include",
-		"Swallow/src",
-		"Swallow/%{IncludeDir.GLFW}",
-		"Swallow/%{IncludeDir.Glad}",
-		"Swallow/%{IncludeDir.glm}",
-		"Swallow/%{IncludeDir.ImGui}"
+		enginedir .. "vendor/spdlog/include",
+		enginedir .. "src",
+		enginedir .. "%{IncludeDir.GLFW}",
+		enginedir .. "%{IncludeDir.Glad}",
+		enginedir .. "%{IncludeDir.glm}",
+		enginedir .. "%{IncludeDir.ImGui}"
 	}
 
 	links
