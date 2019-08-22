@@ -122,7 +122,6 @@ namespace Swallow {
 
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
-			std::cout << "hi" << std::endl;
 			WindowsWindow::WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			if (action == GLFW_PRESS)
