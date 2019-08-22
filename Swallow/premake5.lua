@@ -1,4 +1,5 @@
 
+architecture "x64"
 
 configurations
 {
