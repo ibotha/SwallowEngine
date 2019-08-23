@@ -84,7 +84,6 @@ namespace Swallow {
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
-			std::cout << "Hi" << std::endl;
 			WindowsWindow::WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			Event *event;
