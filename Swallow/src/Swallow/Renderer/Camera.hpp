@@ -41,11 +41,11 @@ namespace Swallow {
 	class OrthographicCamera : public Camera
 	{
 	public:
-		OrthographicCamera(float left, float right, float top, float bottom);
-		OrthographicCamera(float left, float right, float top, float bottom, float n, float f);
+		OrthographicCamera(float left, float right, float bottom, float top);
+		OrthographicCamera(float left, float right, float bottom, float top, float n, float f);
 
-		void SetProjectionMatrix(float left, float right, float top, float bottom);
-		void SetProjectionMatrix(float left, float right, float top, float bottom, float n, float f);
+		void SetProjectionMatrix(float left, float right, float bottom, float top);
+		void SetProjectionMatrix(float left, float right, float bottom, float top, float n, float f);
 	};
 
 	class PerspectiveCamera : public Camera

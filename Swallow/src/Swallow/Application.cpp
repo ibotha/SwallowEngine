@@ -63,7 +63,10 @@ namespace Swallow {
 			RenderCommand::Clear();
 
 			for (Layer* layer : m_LayerStack)
+			{
+				RenderCommand::ClearDepth();
 				layer->OnUpdate(timestep);
+			}
 
 			m_ImGuiLayer->Begin();
 
@@ -71,6 +74,7 @@ namespace Swallow {
 				layer->OnImGuiRender();
 
 			m_ImGuiLayer->End();
+			
 			m_Window->OnUpdate();
 		}
 	}

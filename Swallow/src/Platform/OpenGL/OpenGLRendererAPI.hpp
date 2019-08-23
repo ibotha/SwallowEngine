@@ -21,6 +21,8 @@ namespace Swallow {
 		virtual void SetDepthTest(bool val) override;
 
 		virtual void Clear() override;
+		virtual void ClearColour() override;
+		virtual void ClearDepth() override;
 
 		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) override;
 
