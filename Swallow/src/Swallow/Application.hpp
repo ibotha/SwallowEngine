@@ -30,8 +30,10 @@ namespace Swallow {
 
 		void OnEvent(Event &e);
 
-		void PushLayer(Layer *layer);
-		void PushOverlay(Layer *layer);
+		void PushLayer(Ref<Layer> layer);
+		void PushOverlay(Ref<Layer> layer);
+		void PopLayer(Ref<Layer> layer);
+		void PopOverlay(Ref<Layer> layer);
 
 		static inline Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
@@ -40,7 +42,7 @@ namespace Swallow {
 		bool OnWindowClose(WindowCloseEvent &e);
 
 		Scope<Window> m_Window;
-		ImGuiLayer* m_ImGuiLayer;
+		Ref<ImGuiLayer> m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
