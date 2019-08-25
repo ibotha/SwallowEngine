@@ -14,17 +14,29 @@ namespace Swallow {
 		m_Width = width;
 		m_Height = height;
 
+#ifdef MODERN_GL
+		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
+		glTextureStorage2D(m_RendererID, 1, GL_RGB8, m_Width, m_Height);
+#else
+		glActiveTexture(GL_TEXTURE31);
+		glGenTextures(1, &m_RendererID);
+		glBindTexture(GL_TEXTURE_2D, m_RendererID);
+#endif
+
 		float borderColor[] = { 1.0f, 1.0f, 0.0f, 1.0f };
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 		glTexParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
-		glGenTextures(1, &m_RendererID);
-		glActiveTexture(GL_TEXTURE31);
-		glBindTexture(GL_TEXTURE_2D, m_RendererID);
+
+#ifdef MODERN_GL
+		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, ChannelType(channels), GL_UNSIGNED_BYTE, data);
+#else
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, m_Width, m_Height, 0, ChannelType(channels), GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
+#endif
+
 		stbi_image_free(data);
 	}
 	
@@ -67,7 +79,7 @@ namespace Swallow {
 
 	void OpenGLTexture2D::Bind(uint32_t slot) const
 	{
-		glad_glActiveTexture(GL_TEXTURE0 + slot);
+		glActiveTexture(GL_TEXTURE0 + slot);
 		glBindTexture(GL_TEXTURE_2D, m_RendererID);
 	}
 

@@ -27,7 +27,11 @@ namespace Swallow {
 
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
+#ifdef MODERN_GL
+		glCreateVertexArrays(1, &m_RendererID);
+#else
 		glGenVertexArrays(1, &m_RendererID);
+#endif
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()

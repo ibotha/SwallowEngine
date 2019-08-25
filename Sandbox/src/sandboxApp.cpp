@@ -1,7 +1,8 @@
 #include "SandboxApp.hpp"
 
 Sandbox::Sandbox() {
-	PushLayer(new StartLayer());
+	m_StartLayer = std::make_shared<StartLayer>();
+	PushLayer(m_StartLayer);
 }
 
 Sandbox::~Sandbox() {
