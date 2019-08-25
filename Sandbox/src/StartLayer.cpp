@@ -129,7 +129,6 @@ StartLayer::StartLayer()
 
 	m_TextureShader = Swallow::Shader::Create(textureVertexSrc, textureFragmentSrc);
 
-	Swallow::RenderCommand::SetDepthTest(true);
 	m_CheckerBoardTexture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
 }
 
