@@ -1,11 +1,49 @@
-#include "swpch.h"
-#include "OpenGLShader.h"
+#include "swpch.hpp"
+#include "OpenGLShader.hpp"
 
 #include "glad/glad.h"
-#include "Swallow/Renderer/Shader.h"
+#include "Swallow/Renderer/Shader.hpp"
 
 namespace Swallow {
 	OpenGLShader::OpenGLShader(const std::string & vertexSrc, const std::string & fragmentSrc)
+	{
+		initialise(vertexSrc, fragmentSrc);
+	}
+
+	OpenGLShader::OpenGLShader(const char *vertexPath, const char *fragmentPath)
+	{
+		std::string vertexCode;
+		std::string fragmentCode;
+		std::ifstream vShaderFile;
+		std::ifstream fShaderFile;
+		std::stringstream vShaderStream;
+		std::stringstream fShaderStream;
+		
+		vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		try {
+			vShaderFile.open(vertexPath);
+			fShaderFile.open(fragmentPath);
+			vShaderStream << vShaderFile.rdbuf();
+			fShaderStream << fShaderFile.rdbuf();
+			vShaderFile.close();
+			fShaderFile.close();
+			vertexCode = vShaderStream.str();
+			fragmentCode = fShaderStream.str();
+			initialise(vertexCode, fragmentCode);
+		}
+		catch (std::ifstream::failure &e) {
+			std::cout << "File read exception: " << e.what() << std::endl;
+			// TODO Add correct error assertion and logging
+		}
+	}
+
+	OpenGLShader::~OpenGLShader()
+	{
+		glDeleteProgram(m_RendererID);
+	}
+
+	void OpenGLShader::initialise(const std::string &vertexSrc, const std::string &fragmentSrc)
 	{
 		// Create an empty vertex shader handle
 		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -109,11 +147,6 @@ namespace Swallow {
 		glDetachShader(m_RendererID, vertexShader);
 		glDetachShader(m_RendererID, fragmentShader);
 
-	}
-
-	OpenGLShader::~OpenGLShader()
-	{
-		glDeleteProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Bind() const

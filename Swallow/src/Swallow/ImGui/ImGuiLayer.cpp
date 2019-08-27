@@ -1,5 +1,5 @@
-#include "swpch.h"
-#include "ImGuiLayer.h"
+#include "swpch.hpp"
+#include "ImGuiLayer.hpp"
 
 #include "imgui.h"
 
@@ -7,7 +7,7 @@
 #include "examples/imgui_impl_glfw.h"
 #include "examples/imgui_impl_opengl3.h"
 
-#include "Swallow/Application.h"
+#include "Swallow/Application.hpp"
 
 //TODO: Remove
 #include "GLFW/glfw3.h"
@@ -18,6 +18,19 @@ namespace Swallow {
 	ImGuiLayer::ImGuiLayer()
 		:Layer("ImGuiLayer")
 	{
+	}
+
+	ImGuiLayer::ImGuiLayer(const ImGuiLayer& cpy)
+	{
+		if (this != &cpy)
+			*this = cpy;
+	}
+
+	ImGuiLayer &ImGuiLayer::operator=(const ImGuiLayer& rhs)
+	{
+		if (this != &rhs)
+			*this = rhs;
+		return *this;
 	}
 
 	ImGuiLayer::~ImGuiLayer()

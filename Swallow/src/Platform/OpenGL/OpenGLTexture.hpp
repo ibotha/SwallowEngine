@@ -7,6 +7,8 @@ namespace Swallow {
 	{
 	public:
 		OpenGLTexture2D(const std::string& path);
+		OpenGLTexture2D(const OpenGLTexture2D &rhs) = default;
+		OpenGLTexture2D &operator=(const OpenGLTexture2D &rhs) = default;
 		virtual ~OpenGLTexture2D();
 
 		// Inherited via Texture2D
@@ -14,6 +16,9 @@ namespace Swallow {
 		virtual uint32_t GetHeight() const override;
 		virtual void Bind(uint32_t slot = 0) const override;
 	private:
+
+		unsigned int ChannelType(int channel);
+		unsigned int InternalChannelType(int channel);
 		uint32_t m_Width, m_Height;
 		std::string m_Path;
 

@@ -1,9 +1,13 @@
-#include "swpch.h"
-#include "Buffer.h"
-#include "Renderer.h"
-#include "Platform/OpenGL/OpenGLBuffer.h"
+#include "swpch.hpp"
+#include "Buffer.hpp"
+#include "Renderer.hpp"
+#include "Platform/OpenGL/OpenGLBuffer.hpp"
 
 namespace Swallow {
+
+	BufferElement::BufferElement(ShaderDataType type, const std::string &name, bool normalized)
+	:Name(name), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
+	{}
 
 
 	BufferLayout::BufferLayout(std::initializer_list<BufferElement> const &elements)

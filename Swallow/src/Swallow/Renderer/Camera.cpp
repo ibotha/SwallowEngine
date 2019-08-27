@@ -1,8 +1,9 @@
-#include "swpch.h"
-#include "Camera.h"
+#include "swpch.hpp"
+#include "Camera.hpp"
 #include "gtx/transform.hpp"
 
 namespace Swallow {
+
 	Camera::Camera(const glm::mat4 &projection)
 		:m_Position({ 0, 0, 0 }), m_Rotation({0, 0, 0}), m_ProjectionMatrix(projection)
 	{
@@ -22,22 +23,22 @@ namespace Swallow {
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
-	OrthographicCamera::OrthographicCamera(float left, float right, float top, float bottom)
-		:Camera(glm::ortho(left, right, top, bottom)) {}
+	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
+		:Camera(glm::ortho(left, right, bottom, top)) {}
 
-	OrthographicCamera::OrthographicCamera(float left, float right, float top, float bottom, float n, float f)
-		: Camera(glm::ortho(left, right, top, bottom, n, f)) {
-		SW_CORE_TRACE("{}, {}, {}, {}", left, right, top, bottom);
+	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top, float n, float f)
+		: Camera(glm::ortho(left, right, bottom, top, n, f)) {
+		SW_CORE_TRACE("{}, {}, {}, {}", left, right, bottom, top);
 	}
 
-	void OrthographicCamera::SetProjectionMatrix(float left, float right, float top, float bottom)
+	void OrthographicCamera::SetProjectionMatrix(float left, float right, float bottom, float top)
 	{
-		Camera::SetProjectionMatrix(glm::ortho(left, right, top, bottom, -1.0f, 1.0f));
+		Camera::SetProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f));
 	}
 
-	void OrthographicCamera::SetProjectionMatrix(float left, float right, float top, float bottom, float n, float f)
+	void OrthographicCamera::SetProjectionMatrix(float left, float right, float bottom, float top, float n, float f)
 	{
-		Camera::SetProjectionMatrix(glm::ortho(left, right, top, bottom, n, f));
+		Camera::SetProjectionMatrix(glm::ortho(left, right, bottom, top, n, f));
 	}
 
 	PerspectiveCamera::PerspectiveCamera(float fov, float ar, float n, float f)

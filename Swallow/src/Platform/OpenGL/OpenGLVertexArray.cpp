@@ -1,5 +1,5 @@
-#include "swpch.h"
-#include "OpenGLVertexArray.h"
+#include "swpch.hpp"
+#include "OpenGLVertexArray.hpp"
 #include "glad/glad.h"
 
 namespace Swallow {
@@ -27,7 +27,11 @@ namespace Swallow {
 
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
+#ifdef MODERN_GL
+		glCreateVertexArrays(1, &m_RendererID);
+#else
 		glGenVertexArrays(1, &m_RendererID);
+#endif
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
