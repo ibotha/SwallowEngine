@@ -28,7 +28,6 @@ namespace Swallow {
 
 	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top, float n, float f)
 		: Camera(glm::ortho(left, right, bottom, top, n, f)) {
-		SW_CORE_TRACE("{}, {}, {}, {}", left, right, bottom, top);
 	}
 
 	void OrthographicCamera::SetProjectionMatrix(float left, float right, float bottom, float top)
