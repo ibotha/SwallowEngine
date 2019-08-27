@@ -40,7 +40,8 @@ void AssestManager::addResource(ResourceType type, std::string name, bool value)
 	}
 }
 
-void* AssestManager::findResource(ResourceType type, std::string name, bool value)
+template<typename T>
+T* AssestManager::findResource<T>(ResourceType type, std::string name)
 {
 	return nullptr;
 	switch (type)
@@ -49,12 +50,12 @@ void* AssestManager::findResource(ResourceType type, std::string name, bool valu
 	default:
 		return nullptr;
 	case ResourceType::TEXTURES:
-		return (void*)m_Textures->get<std::string, bool>(name);
+		return (void*)m_Textures->get<std::string, T>(name);
 	case ResourceType::MODELS:
-		return (void*)m_Models->get<std::string, bool>(name);
+		return (void*)m_Models->get<std::string, T>(name);
 	case ResourceType::SOUNDS:
-		return (void*)m_Sounds->get<std::string, bool>(name);
+		return (void*)m_Sounds->get<std::string, T>(name);
 	case ResourceType::MISC:
-		return (void*)m_Misc->get<std::string, bool>(name);
+		return (void*)m_Misc->get<std::string, T>(name);
 	}
 }

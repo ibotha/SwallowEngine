@@ -20,7 +20,8 @@ public:
 	AssestManager &operator=(const AssestManager&) = default;
 	~AssestManager();
 
-	void* findResource(ResourceType, std::string, bool);
+	template<typename T>
+	T* findResource(ResourceType, std::string);
 	void	addResource(ResourceType, std::string, bool);
 
 private:
