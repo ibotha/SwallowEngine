@@ -2,6 +2,11 @@
 
 // for external use by swallow applications
 
+
+
+
+
+
 #include "Swallow/Application.hpp"
 #include "Swallow/Layer.hpp"
 #include "Swallow/Log.hpp"
@@ -13,6 +18,8 @@
 #include "Swallow/MouseButtonCodes.hpp"
 
 #include "Swallow/ImGui/ImGuiLayer.hpp"
+
+#include "Swallow/AssestManager/AssestManager.hpp"
 
 // ---------------Renderer--------------------
 #include "Swallow/Renderer/Renderer.hpp"
