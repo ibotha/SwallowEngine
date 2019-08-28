@@ -2,7 +2,7 @@
 #include "Swallow/Renderer/material/FlatColourMaterial.hpp"
 
 Sandbox::Sandbox() {
-	Swallow::FlatColourMaterial::Init("assets/shaders/flatColour.vs", "assets/shaders/flatColour.fs");
+	Swallow::FlatColourMaterial::Init();
 	m_StartLayer = std::make_shared<StartLayer>();
 	PushLayer(m_StartLayer);
 }

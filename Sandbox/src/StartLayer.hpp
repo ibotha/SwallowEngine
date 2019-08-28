@@ -10,9 +10,8 @@
 class StartLayer : public Swallow::Layer {
 private:
 
-	Swallow::Ref<Swallow::VertexArray> m_SquareVA;
-	Swallow::Ref<Swallow::Shader> m_FlatColorShader;
-	Swallow::Ref<Swallow::Shader> m_TextureShader;
+	Swallow::Ref<Swallow::GameObject> m_Floor;
+	Swallow::Ref<Swallow::GameObject> m_Cube;
 	Swallow::Ref<Swallow::Texture2D> m_CheckerBoardTexture;
 	
 	//Pieter test

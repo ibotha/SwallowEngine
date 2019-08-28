@@ -1,5 +1,6 @@
 #include "swpch.hpp"
 #include "Renderer.hpp"
+#include "gtx/transform.hpp"
 
 namespace Swallow {
 
@@ -34,11 +35,12 @@ namespace Swallow {
 	{
 	}
 
-	void Renderer::Submit(const Ref<OpenGLShader>& shader, Ref<GameObject>& object)
+	void Renderer::Submit(Ref<GameObject>& object)
 	{
-		shader->Bind();
-		shader->UploadUniformMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
-		shader->UploadUniformMat4("u_Model", object->GetTransform()->GetModelMatrix());
+		object->GetMaterial()->Bind();
+		std::dynamic_pointer_cast<OpenGLShader>(object->GetMaterial()->GetShader())->UploadUniformMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
+		std::dynamic_pointer_cast<OpenGLShader>(object->GetMaterial()->GetShader())->UploadUniformMat4("u_Rot", glm::identity<glm::mat4>());
+		std::dynamic_pointer_cast<OpenGLShader>(object->GetMaterial()->GetShader())->UploadUniformMat4("u_Model", object->GetTransform()->GetModelMatrix());
 		object->GetVertexArray()->Bind();
 		RenderCommand::DrawIndexed(object->GetVertexArray());
 	}

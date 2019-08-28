@@ -1,6 +1,7 @@
 #pragma once
 #include "Transform.hpp"
 #include "VertexArray.hpp"
+#include "material/MaterialInstance.hpp"
 
 namespace Swallow {
 
@@ -12,13 +13,13 @@ namespace Swallow {
         GameObject &operator=(const GameObject&) = default;
         GameObject(const GameObject&) = default;
 
-        void SetTransform(Ref<Transform> transform) { m_Transform = transform; }
-        void SetVertexArray(Ref<VertexArray> VA) { m_VertexArray = VA; }
-        //void SetMaterial(Ref<Material> &material) { m_Material = material; }
+        inline void SetTransform(Ref<Transform> transform) { m_Transform = transform; }
+        inline void SetVertexArray(Ref<VertexArray> VA) { m_VertexArray = VA; }
+        inline void SetMaterial(Ref<MaterialInstance> material) { m_Material = material; }
 
 		inline Ref<Transform> GetTransform() { return m_Transform; }
-		inline  Ref<VertexArray> &GetVertexArray() { return m_VertexArray; }
-        //const Material &GetMaterial() const { return m_Material; }
+		inline Ref<VertexArray> GetVertexArray() { return m_VertexArray; }
+        inline Ref<MaterialInstance> GetMaterial() { return m_Material; }
 
         virtual ~GameObject() = default;
         
@@ -27,6 +28,7 @@ namespace Swallow {
     private:
         Ref<Transform> m_Transform;
         Ref<VertexArray> m_VertexArray;
+        Ref<MaterialInstance> m_Material;
         //Material m_Material;
     };
 }
