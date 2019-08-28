@@ -27,7 +27,7 @@ namespace Swallow {
 		virtual ~Camera() = default;
 
 	protected:
-		virtual void SetProjectionMatrix(const glm::mat4 &projectionMatrix) { m_ProjectionMatrix = projectionMatrix; }
+		void SetProjectionMatrix(const glm::mat4 &projectionMatrix) { m_ProjectionMatrix = projectionMatrix; }
 	private:
 		glm::mat4 m_ViewProjectionMatrix;
 		glm::mat4 m_ProjectionMatrix;
