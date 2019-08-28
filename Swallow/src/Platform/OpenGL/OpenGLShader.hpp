@@ -6,6 +6,7 @@ namespace Swallow {
 	{
 	public:
 		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+		OpenGLShader(const char *vertexPath, const char *fragmentPath);
 		OpenGLShader(const OpenGLShader &rhs) = default;
 		OpenGLShader &operator=(const OpenGLShader &rhs) = default;
 		virtual ~OpenGLShader();
@@ -27,5 +28,6 @@ namespace Swallow {
 
 	private:
 		uint32_t m_RendererID;
+		void initialise(const std::string &vertexSrc, const std::string &fragmentPath);
 	};
 }

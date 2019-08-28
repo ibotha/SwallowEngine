@@ -1,5 +1,6 @@
 #Directories
 .vs/
+.vscode/
 bin/
 bin-int/
 !vendor/bin/

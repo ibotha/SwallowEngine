@@ -127,6 +127,8 @@ StartLayer::StartLayer()
 		}
 	)";
 
+	std::string path("assets/shaders/");
+	m_FlatColour = Swallow::FlatColourMaterial::Create(path, path);
 	m_TextureShader = Swallow::Shader::Create(textureVertexSrc, textureFragmentSrc);
 
 	m_CheckerBoardTexture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
@@ -232,8 +234,23 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 	Swallow::Renderer::BeginScene(m_Camera);
 	static float rot = 0.0f;
 	rot += 1.0f * ts.GetSeconds();
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader), m_SquareVA, glm::translate(glm::vec3(4.0, 0.0, 0.0)));
+	// std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+	// Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader), m_SquareVA, glm::translate(glm::vec3(4.0, 0.0, 0.0)));
+	// std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_TextureShader)->Bind();
+	// m_CheckerBoardTexture->Bind(1);
+	// std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_TextureShader)->UploadUniformInt1("u_Texture", glm::ivec1(1));
+	// std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_TextureShader)->UploadUniformMat4("u_Rot", glm::rotate(0.0f, glm::vec3(1, 0, 0)));
+	// Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_TextureShader), m_SquareVA, glm::translate(glm::vec3(0.0, 0.0, 4.0)));
+	// std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_TextureShader)->UploadUniformMat4("u_Rot", glm::rotate(rot, glm::vec3(1, 0, 0)));
+	// Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_TextureShader), m_SquareVA, glm::translate(glm::vec3(-4.0, 0.0, 0.0)) * glm::rotate(rot, glm::vec3(1, 0, 0)));
+	// std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader)->Bind();
+	// std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader)->UploadUniformMat4("u_Rot", glm::identity<glm::mat4>());
+	// std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+	// Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader), m_SquareVA, glm::translate(glm::vec3(0.0, -2.01, -0.0)) * glm::scale(glm::vec3(100, 1, 100)));
+
+	m_FlatColour->Bind();
+	m_FlatColour->SetUniform("u_Color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+	Swallow::Renderer::Submit(m_FlatColour->GetFlatColourShader(), m_SquareVA, glm::translate(glm::vec3(4.0, 0.0, 0.0)));
 	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_TextureShader)->Bind();
 	m_CheckerBoardTexture->Bind(1);
 	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_TextureShader)->UploadUniformInt1("u_Texture", glm::ivec1(1));
@@ -241,10 +258,11 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_TextureShader), m_SquareVA, glm::translate(glm::vec3(0.0, 0.0, 4.0)));
 	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_TextureShader)->UploadUniformMat4("u_Rot", glm::rotate(rot, glm::vec3(1, 0, 0)));
 	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_TextureShader), m_SquareVA, glm::translate(glm::vec3(-4.0, 0.0, 0.0)) * glm::rotate(rot, glm::vec3(1, 0, 0)));
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader)->Bind();
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader)->UploadUniformMat4("u_Rot", glm::identity<glm::mat4>());
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader), m_SquareVA, glm::translate(glm::vec3(0.0, -2.01, -0.0)) * glm::scale(glm::vec3(100, 1, 100)));
+	m_FlatColour->Bind();
+	m_FlatColour->SetUniform("u_Rot", glm::identity<glm::mat4>());
+	m_FlatColour->SetUniform("u_Color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+	Swallow::Renderer::Submit(m_FlatColour->GetFlatColourShader(), m_SquareVA, glm::translate(glm::vec3(0.0, -2.01, -0.0)) * glm::scale(glm::vec3(100, 1, 100)));
+
 
 	Swallow::Renderer::EndScene();
 }

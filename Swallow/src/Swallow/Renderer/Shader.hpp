@@ -14,5 +14,6 @@ namespace Swallow {
 		virtual void Unbind() const = 0;
 
 		static Ref<Shader> Create(const std::string & vertexSrc, const std::string & fragmentSrc);
+		static Ref<Shader> CreateFromPath(const char *vertexPath, const char *fragmentPath);
 	};
 }

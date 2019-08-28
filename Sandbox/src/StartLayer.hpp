@@ -5,6 +5,7 @@
 #include "gtx/transform.hpp"
 #include <gtc/type_ptr.hpp>
 #include "Platform/OpenGL/OpenGLShader.hpp"
+#include "Swallow/Renderer/material/FlatColourMaterial.hpp"
 
 class StartLayer : public Swallow::Layer {
 private:
@@ -13,6 +14,9 @@ private:
 	Swallow::Ref<Swallow::Shader> m_FlatColorShader;
 	Swallow::Ref<Swallow::Shader> m_TextureShader;
 	Swallow::Ref<Swallow::Texture2D> m_CheckerBoardTexture;
+	
+	//Pieter test
+	Swallow::Ref<Swallow::FlatColourMaterialInstance> m_FlatColour;
 
 	float	m_Y = 0.0f;
 	float	m_YVelocity = 0.0f;
