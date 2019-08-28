@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MaterialInstance.hpp                               :+:      :+:    :+:   */
+/*   TextureInstance.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppreez <ppreez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/23 14:09:25 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/28 16:41:00 by ppreez           ###   ########.fr       */
+/*   Created: 2019/08/28 15:37:24 by ppreez            #+#    #+#             */
+/*   Updated: 2019/08/28 16:54:00 by ppreez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 #include "Platform/OpenGL/OpenGLTexture.hpp"
 
 namespace Swallow {
-    class MaterialInstance
+    class TextureInstance
     {
         public:
-            MaterialInstance();
-            MaterialInstance(MaterialInstance const &rhs);
-            MaterialInstance &operator=(MaterialInstance const &rhs);
-            virtual ~MaterialInstance();
+            TextureInstance();
+            TextureInstance(TextureInstance const &rhs);
+            TextureInstance &operator=(TextureInstance const &rhs);
+            virtual ~TextureInstance();
             
-            inline Ref<Shader> GetShader() { return m_Shader; }
+            inline Ref<Shader> GetTexture() { return m_Texture;}
+            inline Ref<Texture2D> GetTextureImage() { return m_TextureImage;}
             virtual void Bind() = 0;
             virtual void Unbind() = 0;
-
         protected:
-            Ref<Shader> m_Shader;
-
+            Ref<Shader> m_Texture;
+            Ref<Texture2D> m_TextureImage;
     };
 }

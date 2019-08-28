@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FlatColourMaterialInstance.hpp                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibotha <ibotha@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ppreez <ppreez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 13:35:54 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/28 13:32:57 by ibotha           ###   ########.fr       */
+/*   Updated: 2019/08/28 16:51:01 by ppreez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ namespace Swallow {
             void Bind();
             void Unbind();
             inline void SetColour(const glm::vec4 &colour) {m_Colour = colour;}
-
             inline glm::vec4 GetColour() const { return m_Colour; }
         private:
             FlatColourMaterialInstance();
