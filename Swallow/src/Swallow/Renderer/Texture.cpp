@@ -31,5 +31,4 @@ namespace Swallow {
 		}
 		return nullptr;
 	}
-
 }
