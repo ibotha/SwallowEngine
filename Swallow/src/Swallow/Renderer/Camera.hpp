@@ -41,11 +41,11 @@ namespace Swallow {
 	class OrthographicCamera : public Camera
 	{
 	public:
-		OrthographicCamera(float left, float right, float bottom, float top);
-		OrthographicCamera(float left, float right, float bottom, float top, float n, float f);
+		OrthographicCamera(float left, float right, float top, float bottom);
+		OrthographicCamera(float left, float right, float top, float bottom, float n, float f);
 
-		void SetProjectionMatrix(float left, float right, float bottom, float top);
-		void SetProjectionMatrix(float left, float right, float bottom, float top, float n, float f);
+		void SetProjectionMatrix(float left, float right, float top, float bottom);
+		void SetProjectionMatrix(float left, float right, float top, float bottom, float n, float f);
 	};
 
 	class PerspectiveCamera : public Camera
@@ -56,3 +56,55 @@ namespace Swallow {
 		void SetProjectionMatrix(float fov, float ar, float n, float f);
 	};
 }
+
+/*
+namespace Swallow {
+
+	class Camera
+	{
+	public:
+
+		Camera() = default;
+		Camera(const Camera&) = default;
+		Camera &operator=(const Camera&) = default;
+		Camera(const glm::mat4 &projection);
+
+		void Recalculate();
+		//void SetRotation(const glm::vec3 &rotation) { m_Rotation = rotation; }
+		//void SetPosition(const glm::vec3 &position) { m_Position = position; }
+
+		Transform & GetTransform() { return m_Transform; }
+		const glm::mat4 & GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
+		const glm::mat4 & GetProjectionMatrix() const { return m_ProjectionMatrix; }
+		const glm::mat4 & GetViewMatrix() const { return m_ViewMatrix; }
+
+		virtual ~Camera() = default;
+
+	protected:
+		virtual void SetProjectionMatrix(const glm::mat4 &projectionMatrix) { m_ProjectionMatrix = projectionMatrix; }
+	private:
+		Transform m_Transform;
+		glm::mat4 m_ViewProjectionMatrix;
+		glm::mat4 m_ProjectionMatrix;
+		glm::mat4 m_ViewMatrix;
+	};
+
+	class OrthographicCamera : public Camera
+	{
+	public:
+		OrthographicCamera(float left, float right, float top, float bottom);
+		OrthographicCamera(float left, float right, float top, float bottom, float n, float f);
+
+		void SetProjectionMatrix(float left, float right, float top, float bottom);
+		void SetProjectionMatrix(float left, float right, float top, float bottom, float n, float f);
+	};
+
+	class PerspectiveCamera : public Camera
+	{
+	public:
+		PerspectiveCamera(float fov, float ar, float n, float f);
+
+		void SetProjectionMatrix(float fov, float ar, float n, float f);
+	};
+}
+*/

@@ -1,6 +1,7 @@
 #include "swpch.hpp"
-#include "Camera.hpp"
 #include "gtx/transform.hpp"
+#include "Transform.hpp"
+#include "Camera.hpp"
 
 namespace Swallow {
 
@@ -23,22 +24,22 @@ namespace Swallow {
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
-	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)
-		:Camera(glm::ortho(left, right, bottom, top)) {}
+	OrthographicCamera::OrthographicCamera(float left, float right, float top, float bottom)
+		:Camera(glm::ortho(left, right, top, bottom)) {}
 
-	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top, float n, float f)
-		: Camera(glm::ortho(left, right, bottom, top, n, f)) {
-		SW_CORE_TRACE("{}, {}, {}, {}", left, right, bottom, top);
+	OrthographicCamera::OrthographicCamera(float left, float right, float top, float bottom, float n, float f)
+		: Camera(glm::ortho(left, right, top, bottom, n, f)) {
+		SW_CORE_TRACE("{}, {}, {}, {}", left, right, top, bottom);
 	}
 
-	void OrthographicCamera::SetProjectionMatrix(float left, float right, float bottom, float top)
+	void OrthographicCamera::SetProjectionMatrix(float left, float right, float top, float bottom)
 	{
-		Camera::SetProjectionMatrix(glm::ortho(left, right, bottom, top, -1.0f, 1.0f));
+		Camera::SetProjectionMatrix(glm::ortho(left, right, top, bottom, -1.0f, 1.0f));
 	}
 
-	void OrthographicCamera::SetProjectionMatrix(float left, float right, float bottom, float top, float n, float f)
+	void OrthographicCamera::SetProjectionMatrix(float left, float right, float top, float bottom, float n, float f)
 	{
-		Camera::SetProjectionMatrix(glm::ortho(left, right, bottom, top, n, f));
+		Camera::SetProjectionMatrix(glm::ortho(left, right, top, bottom, n, f));
 	}
 
 	PerspectiveCamera::PerspectiveCamera(float fov, float ar, float n, float f)
@@ -49,3 +50,48 @@ namespace Swallow {
 		Camera::SetProjectionMatrix(glm::perspective(fov, ar, n, f));
 	}
 }
+
+/*
+namespace Swallow {
+
+	Camera::Camera(const glm::mat4 &projection) : m_ProjectionMatrix(projection)
+	{
+		m_Transform.SetPosition({0, 0, 0});
+		m_Transform.SetRotation({0, 0, 0});
+		Recalculate();
+	}
+
+	void Camera::Recalculate()
+	{
+		m_Transform.Recalculate();
+		m_ViewMatrix = m_Transform.GetRotationMatrix() * m_Transform.GetTranslationMatrix();
+		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+	}
+
+	OrthographicCamera::OrthographicCamera(float left, float right, float top, float bottom)
+		:Camera(glm::ortho(left, right, top, bottom)) {}
+
+	OrthographicCamera::OrthographicCamera(float left, float right, float top, float bottom, float n, float f)
+		: Camera(glm::ortho(left, right, top, bottom, n, f)) {
+		SW_CORE_TRACE("{}, {}, {}, {}", left, right, top, bottom);
+	}
+
+	void OrthographicCamera::SetProjectionMatrix(float left, float right, float top, float bottom)
+	{
+		Camera::SetProjectionMatrix(glm::ortho(left, right, top, bottom, -1.0f, 1.0f));
+	}
+
+	void OrthographicCamera::SetProjectionMatrix(float left, float right, float top, float bottom, float n, float f)
+	{
+		Camera::SetProjectionMatrix(glm::ortho(left, right, top, bottom, n, f));
+	}
+
+	PerspectiveCamera::PerspectiveCamera(float fov, float ar, float n, float f)
+		:Camera(glm::perspective(fov, ar, n, f)) {}
+
+	void PerspectiveCamera::SetProjectionMatrix(float fov, float ar, float n, float f)
+	{
+		Camera::SetProjectionMatrix(glm::perspective(fov, ar, n, f));
+	}
+}
+*/

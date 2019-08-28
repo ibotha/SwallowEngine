@@ -22,6 +22,7 @@
 #include "Swallow/Renderer/Shader.hpp"
 #include "Swallow/Renderer/Texture.hpp"
 #include "Swallow/Renderer/VertexArray.hpp"
+#include "Swallow/Renderer/GameObject.hpp"
 // -------------------------------------------
 
 #include "Swallow/Renderer/Camera.hpp"
