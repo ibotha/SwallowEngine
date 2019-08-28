@@ -40,7 +40,7 @@ project "Sandbox"
 
 	filter "system:macosx"
         systemversion "latest"
-
+		buildoptions { "-Wall", "-Werror", "-Wextra"}
         defines
         {
             "SW_PLATFORM_MACOSX"
