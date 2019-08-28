@@ -73,6 +73,7 @@ project "Swallow"
 	filter "system:macosx"
 		systemversion "latest"
 
+		buildoptions { "-Werror", "-Wall", "-Wextra"}
 		defines
 		{
 			"SW_PLATFORM_MACOSX",

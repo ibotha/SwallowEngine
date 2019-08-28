@@ -1,7 +1,10 @@
 #include "SandboxApp.hpp"
+#include "Swallow/Renderer/material/FlatColourMaterial.hpp"
 
 Sandbox::Sandbox() {
-	PushLayer(new StartLayer());
+	Swallow::FlatColourMaterial::Init("assets/shaders/flatColour.vs", "assets/shaders/flatColour.fs");
+	m_StartLayer = std::make_shared<StartLayer>();
+	PushLayer(m_StartLayer);
 }
 
 Sandbox::~Sandbox() {

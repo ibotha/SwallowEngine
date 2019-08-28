@@ -79,10 +79,14 @@ StartLayer::StartLayer()
 		}
 	)";
 
+	std::string path("assets/shaders/");
+	m_BoxMaterial = Swallow::FlatColourMaterial::Create();
+	m_BoxMaterial->SetColour(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+	m_FloorMaterial = Swallow::FlatColourMaterial::Create();
+	m_FloorMaterial->SetColour(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 	m_TextureShader = Swallow::Shader::Create(textureVertexSrc, textureFragmentSrc);
 
-	Swallow::RenderCommand::SetDepthTest(true);
-	//m_CheckerBoardTexture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
+	m_CheckerBoardTexture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
 }
 
 void StartLayer::OnEvent(Swallow::Event &e) {
@@ -188,7 +192,6 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 
 	static float rot = 0.0f;
 	rot += 1.0f * ts.GetSeconds();
-
 	//std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 
 	// Swallow::P_Cube *cube_0 = new Swallow::P_Cube();
@@ -226,6 +229,7 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 	cube_3->GetTransform()->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	cube_3->GetTransform()->Recalculate();
 	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_FlatColorShader), cube_3);
+
 
 	Swallow::Renderer::EndScene();
 }

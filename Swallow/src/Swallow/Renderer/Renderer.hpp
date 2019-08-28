@@ -19,6 +19,8 @@ namespace Swallow {
 		~Renderer();
 		Renderer &operator=(const Renderer&);
 
+		static void Init();
+
 		static void BeginScene(Camera& c);
 		static void EndScene();
 
