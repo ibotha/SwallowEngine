@@ -24,7 +24,7 @@ namespace Swallow {
 		static void BeginScene(Camera& c);
 		static void EndScene();
 
-		static void Submit(Ref<GameObject>& object);
+		static void Submit(const Ref<GameObject>& object);
 
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	private:
