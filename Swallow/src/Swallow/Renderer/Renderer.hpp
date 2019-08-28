@@ -2,6 +2,7 @@
 #include "Camera.hpp"
 #include "Buffer.hpp"
 #include "Shader.hpp"
+#include "GameObject.hpp"
 
 #include "RenderCommand.hpp"
 // TODO: Remove
@@ -18,10 +19,12 @@ namespace Swallow {
 		~Renderer();
 		Renderer &operator=(const Renderer&);
 
+		static void Init();
+
 		static void BeginScene(Camera& c);
 		static void EndScene();
 
-		static void Submit(const Ref<OpenGLShader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));
+		static void Submit(Ref<GameObject>& object);
 
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	private:

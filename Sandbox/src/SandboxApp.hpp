@@ -12,4 +12,5 @@ private:
 	Sandbox(const Sandbox &s) = default;
 	Sandbox &operator=(const Sandbox &s) = default;
 
+	Swallow::Ref<StartLayer> m_StartLayer;
 };

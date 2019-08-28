@@ -6,6 +6,8 @@ extern Swallow::Application* Swallow::CreateApplication();
 
 int main(int argc, char **argv)
 {
+	static_cast<void>(argc);
+	static_cast<void>(argv);
 	Swallow::Log::Init();
 
 	SW_CORE_WARN("Initialized Log");

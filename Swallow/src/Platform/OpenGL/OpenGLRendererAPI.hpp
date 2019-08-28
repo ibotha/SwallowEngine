@@ -14,13 +14,14 @@ namespace Swallow {
 
 	private:
 
+		virtual void Init() override;
 
 		// Inherited via RendererAPI
 		virtual void SetClearColor(const glm::vec4 & color) override;
 
-		virtual void SetDepthTest(bool val) override;
-
 		virtual void Clear() override;
+		virtual void ClearColour() override;
+		virtual void ClearDepth() override;
 
 		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) override;
 

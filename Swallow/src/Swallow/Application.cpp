@@ -17,9 +17,10 @@ namespace Swallow {
 
 		m_Window = Scope<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
-		m_Window->SetVSync(false);
 
-		m_ImGuiLayer = new ImGuiLayer();
+		Renderer::Init();
+
+		m_ImGuiLayer = std::make_shared<ImGuiLayer>();
 		PushOverlay(m_ImGuiLayer);
 	}
 
@@ -28,14 +29,24 @@ namespace Swallow {
 	{
 	}
 
-	void Application::PushLayer(Layer * layer)
+	void Application::PushLayer(Ref<Layer> layer)
 	{
 		m_LayerStack.PushLayer(layer);
 	}
 
-	void Application::PushOverlay(Layer * layer)
+	void Application::PushOverlay(Ref<Layer> layer)
 	{
 		m_LayerStack.PushOverlay(layer);
+	}
+
+	void Application::PopLayer(Ref<Layer> layer)
+	{
+		m_LayerStack.PopLayer(layer);
+	}
+
+	void Application::PopOverlay(Ref<Layer> layer)
+	{
+		m_LayerStack.PopOverlay(layer);
 	}
 
 	void Application::OnEvent(Event &e)
@@ -53,7 +64,6 @@ namespace Swallow {
 
 	void Application::Run()
 	{
-		float x = 0.0f;
 		while (m_Running)
 		{
 			float time = (float)glfwGetTime();
@@ -62,21 +72,26 @@ namespace Swallow {
 			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 			RenderCommand::Clear();
 
-			for (Layer* layer : m_LayerStack)
+			for (Ref<Layer> layer : m_LayerStack)
+			{
+				RenderCommand::ClearDepth();
 				layer->OnUpdate(timestep);
+			}
 
 			m_ImGuiLayer->Begin();
 
-			for (Layer* layer : m_LayerStack)
+			for (Ref<Layer> layer : m_LayerStack)
 				layer->OnImGuiRender();
 
 			m_ImGuiLayer->End();
+			
 			m_Window->OnUpdate();
 		}
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent &e)
 	{
+		static_cast<void>(e);
 		m_Running = false;
 
 		return true;

@@ -18,6 +18,7 @@ namespace Swallow {
 	private:
 
 		unsigned int ChannelType(int channel);
+		unsigned int InternalChannelType(int channel);
 		uint32_t m_Width, m_Height;
 		std::string m_Path;
 

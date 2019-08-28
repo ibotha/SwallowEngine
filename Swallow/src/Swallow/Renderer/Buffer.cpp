@@ -5,6 +5,28 @@
 
 namespace Swallow {
 
+	static uint32_t ShaderDataTypeSize(ShaderDataType type)
+	{
+		switch (type)
+		{
+			case Swallow::ShaderDataType::Float: return 4;
+			case Swallow::ShaderDataType::Float2: return 4 * 2;
+			case Swallow::ShaderDataType::Float3: return 4 * 3;
+			case Swallow::ShaderDataType::Float4: return 4 * 4;
+			case Swallow::ShaderDataType::Mat3: return 4 * 3 * 3;
+			case Swallow::ShaderDataType::Mat4: return 4 * 4 * 4;
+			case Swallow::ShaderDataType::Int: return 4;
+			case Swallow::ShaderDataType::Int2: return 4 * 2;
+			case Swallow::ShaderDataType::Int3: return 4 * 3;
+			case Swallow::ShaderDataType::Int4: return 4 * 4;
+			case Swallow::ShaderDataType::Bool: return 1;
+		default:
+			break;
+		}
+		SW_CORE_ASSERT(false, "Unknown Data Shader Data Type");
+		return 0;
+	}
+
 	BufferElement::BufferElement(ShaderDataType type, const std::string &name, bool normalized)
 	:Name(name), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
 	{}
