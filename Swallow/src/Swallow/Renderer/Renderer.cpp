@@ -34,13 +34,12 @@ namespace Swallow {
 	{
 	}
 
-	void Renderer::Submit(const Ref<OpenGLShader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform)
+	void Renderer::Submit(const Ref<OpenGLShader>& shader, Ref<GameObject>& object)
 	{
 		shader->Bind();
 		shader->UploadUniformMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
-		shader->UploadUniformMat4("u_Model", transform);
-		vertexArray->Bind();
-		RenderCommand::DrawIndexed(vertexArray);
+		shader->UploadUniformMat4("u_Model", object->GetTransform()->GetModelMatrix());
+		object->GetVertexArray()->Bind();
+		RenderCommand::DrawIndexed(object->GetVertexArray());
 	}
-
 }
