@@ -7,6 +7,31 @@ namespace Swallow {
 	{
 	}
 
+	void Layer::OnAttach()
+	{
+
+	}
+
+	void Layer::OnDetach()
+	{
+
+	}
+
+	void Layer::OnUpdate(Timestep timestep)
+	{
+		static_cast<void>(timestep);
+	}
+
+	void Layer::OnImGuiRender()
+	{
+
+	}
+
+	void Layer::OnEvent(Event &e)
+	{
+		static_cast<void>(e);
+	}
+
 	Layer::~Layer()
 	{
 	}

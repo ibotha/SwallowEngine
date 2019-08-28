@@ -84,6 +84,8 @@ namespace Swallow {
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
 		{
+			static_cast<void>(scancode);
+			static_cast<void>(mods);
 			WindowsWindow::WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			Event *event;
@@ -121,6 +123,7 @@ namespace Swallow {
 
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
+			static_cast<void>(mods);
 			WindowsWindow::WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 			if (action == GLFW_PRESS)

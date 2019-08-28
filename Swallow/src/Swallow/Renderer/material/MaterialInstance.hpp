@@ -6,7 +6,7 @@
 /*   By: ibotha <ibotha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 14:09:25 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/28 13:34:14 by ibotha           ###   ########.fr       */
+/*   Updated: 2019/08/28 14:35:50 by ibotha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ namespace Swallow {
             MaterialInstance &operator=(MaterialInstance const &rhs);
             virtual ~MaterialInstance();
             inline Ref<Shader> GetShader() { return m_Shader; }
-
-        protected:
             virtual void Bind() = 0;
             virtual void Unbind() = 0;
+
+        protected:
 
             Ref<Shader> m_Shader;
 

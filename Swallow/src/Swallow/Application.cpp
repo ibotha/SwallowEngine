@@ -64,7 +64,6 @@ namespace Swallow {
 
 	void Application::Run()
 	{
-		float x = 0.0f;
 		while (m_Running)
 		{
 			float time = (float)glfwGetTime();
@@ -92,6 +91,7 @@ namespace Swallow {
 
 	bool Application::OnWindowClose(WindowCloseEvent &e)
 	{
+		static_cast<void>(e);
 		m_Running = false;
 
 		return true;

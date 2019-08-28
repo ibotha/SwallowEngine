@@ -6,7 +6,7 @@
 namespace Swallow {
 
 	Camera::Camera(const glm::mat4 &projection)
-		:m_Position({ 0, 0, 0 }), m_Rotation({0, 0, 0}), m_ProjectionMatrix(projection)
+		:m_ProjectionMatrix(projection), m_Position({ 0, 0, 0 }), m_Rotation({0, 0, 0})
 	{
 		Recalculate();
 	}
