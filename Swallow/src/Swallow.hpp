@@ -1,5 +1,7 @@
 #pragma once
 
+#include "swpch.hpp"
+
 // for external use by swallow applications
 
 #include "Swallow/Application.hpp"
