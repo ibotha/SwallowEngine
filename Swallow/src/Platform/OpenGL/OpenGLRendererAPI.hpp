@@ -14,7 +14,7 @@ namespace Swallow {
 
 	private:
 
-		virtual void Init();
+		virtual void Init() override;
 
 		// Inherited via RendererAPI
 		virtual void SetClearColor(const glm::vec4 & color) override;

@@ -33,8 +33,7 @@ namespace Swallow {
 			initialise(vertexCode, fragmentCode);
 		}
 		catch (std::ifstream::failure &e) {
-			std::cout << "File read exception: " << e.what() << std::endl;
-			// TODO Add correct error assertion and logging
+			SW_CORE_ERROR("File read exception: {}\n", e.what());
 		}
 	}
 

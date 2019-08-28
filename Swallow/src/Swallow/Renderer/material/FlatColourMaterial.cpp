@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   FlatColourMaterial.cpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppreez <ppreez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ibotha <ibotha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 14:38:21 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/27 15:21:48 by ppreez           ###   ########.fr       */
+/*   Updated: 2019/08/28 13:42:46 by ibotha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "swpch.hpp"
 #include "FlatColourMaterial.hpp"
 
 // FlatColourMaterial::FlatColourMaterial()
@@ -38,17 +39,16 @@
 
 namespace Swallow
 {
-    Ref<FlatColourMaterialInstance> FlatColourMaterial::Create(const std::string &flatColourShaderPath, const std::string &textureShaderPath)
+
+	Ref<Shader> FlatColourMaterial::m_Shader;
+
+	void FlatColourMaterial::Init(const std::string &VertexPath, const std::string &FragmentPath)
+	{
+		m_Shader = Shader::CreateFromPath(VertexPath.c_str(), FragmentPath.c_str());
+	}
+
+    Ref<FlatColourMaterialInstance> FlatColourMaterial::Create()
     {
-        switch (Renderer::GetAPI())
-        {
-            case RendererAPI::API::None:
-                return nullptr;
-            case RendererAPI::API::OpenGL:
-                return std::make_shared<FlatColourMaterialInstance>(flatColourShaderPath, textureShaderPath);
-            default:
-                break;
-        }
-        return nullptr;
+		return std::make_shared<FlatColourMaterialInstance>(m_Shader);
     }
 }

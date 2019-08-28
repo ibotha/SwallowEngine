@@ -16,7 +16,8 @@ private:
 	Swallow::Ref<Swallow::Texture2D> m_CheckerBoardTexture;
 	
 	//Pieter test
-	Swallow::Ref<Swallow::FlatColourMaterialInstance> m_FlatColour;
+	Swallow::Ref<Swallow::FlatColourMaterialInstance> m_FloorMaterial;
+	Swallow::Ref<Swallow::FlatColourMaterialInstance> m_BoxMaterial;
 
 	float	m_Y = 0.0f;
 	float	m_YVelocity = 0.0f;

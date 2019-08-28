@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   MaterialInstance.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppreez <ppreez@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ibotha <ibotha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/23 14:09:14 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/27 10:59:52 by ppreez           ###   ########.fr       */
+/*   Updated: 2019/08/28 13:26:20 by ibotha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "swpch.hpp"
 
 #include "MaterialInstance.hpp"
 
