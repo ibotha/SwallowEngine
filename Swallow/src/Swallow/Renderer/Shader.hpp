@@ -1,5 +1,4 @@
 #pragma once
-#include "swpch.hpp"
 
 namespace Swallow {
 
