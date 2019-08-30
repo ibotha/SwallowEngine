@@ -1,5 +1,5 @@
 #include "StartLayer.hpp"
-#include "Swallow/Renderer/Primatives.hpp"
+#include "Swallow/AssetManager/GameObject.hpp"
 
 StartLayer::StartLayer()
 	:Layer("Start Layer"), m_Camera(glm::radians(60.0f), Swallow::Application::Get().GetWindow().GetWidth() / (float)Swallow::Application::Get().GetWindow().GetHeight(), 0.0001f, 100000.0f)
@@ -50,7 +50,7 @@ StartLayer::StartLayer()
 	m_FloorMaterial = Swallow::FlatColourMaterial::Create();
 	m_FloorMaterial->SetColour(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
-	m_CheckerBoardTexture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
+	//m_CheckerBoardTexture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
 	m_Cube = Swallow::Primatives::Cube();
 	m_Cube->SetMaterial(m_BoxMaterial);
 	m_Cube->GetTransform()->SetPosition(glm::vec3(0.0, -2.01, -0.0));
@@ -66,6 +66,7 @@ StartLayer::StartLayer()
 
 void StartLayer::OnEvent(Swallow::Event &e) {
 	Swallow::EventDispatcher dispatcher(e);
+	(void)e;
 	dispatcher.Dispatch<Swallow::MouseButtonPressedEvent>(BIND_EVENT_FN(StartLayer::OnMouseButtonPressed));
 	dispatcher.Dispatch<Swallow::MouseMovedEvent>(BIND_EVENT_FN(StartLayer::OnMouseMovedEvent));
 	dispatcher.Dispatch<Swallow::KeyPressedEvent>(BIND_EVENT_FN(StartLayer::OnKeyPressed));
@@ -93,6 +94,7 @@ bool StartLayer::OnMouseMovedEvent(Swallow::MouseMovedEvent &e)
 
 bool StartLayer::OnKeyPressed(Swallow::KeyPressedEvent &e)
 {
+	(void)e;
 	return true;
 }
 

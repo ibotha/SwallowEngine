@@ -1,6 +1,6 @@
 #include "swpch.hpp"
 #include "gtx/transform.hpp"
-#include "Transform.hpp"
+#include "../AssetManager/Transform.hpp"
 #include "Camera.hpp"
 
 namespace Swallow {
@@ -29,7 +29,6 @@ namespace Swallow {
 
 	OrthographicCamera::OrthographicCamera(float left, float right, float top, float bottom, float n, float f)
 		: Camera(glm::ortho(left, right, top, bottom, n, f)) {
-		SW_CORE_TRACE("{}, {}, {}, {}", left, right, top, bottom);
 	}
 
 	void OrthographicCamera::SetProjectionMatrix(float left, float right, float top, float bottom)

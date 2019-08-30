@@ -6,7 +6,7 @@
 /*   By: ibotha <ibotha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 13:35:54 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/28 13:32:57 by ibotha           ###   ########.fr       */
+/*   Updated: 2019/08/28 16:05:11 by ibotha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ namespace Swallow {
             FlatColourMaterialInstance &operator=(FlatColourMaterialInstance const &rhs);
             ~FlatColourMaterialInstance();
 
-            void Bind();
-            void Unbind();
+            virtual void Bind() override;
+            virtual void Unbind() override;
             inline void SetColour(const glm::vec4 &colour) {m_Colour = colour;}
 
             inline glm::vec4 GetColour() const { return m_Colour; }

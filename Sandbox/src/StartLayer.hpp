@@ -18,7 +18,7 @@ private:
 	Swallow::Ref<Swallow::FlatColourMaterialInstance> m_FloorMaterial;
 	Swallow::Ref<Swallow::FlatColourMaterialInstance> m_BoxMaterial;
 
-	float	m_Y = 0.0f;
+	//float	m_Y = 0.0f;
 	float	m_YVelocity = 0.0f;
 	bool	m_CanJump = true;
 	glm::vec4 pos;
