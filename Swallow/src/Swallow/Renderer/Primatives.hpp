@@ -11,5 +11,6 @@ namespace Swallow {
         ~Primatives();
 
         static Ref<GameObject> Cube();
+        static Ref<GameObject> Quad();
     };
 }
