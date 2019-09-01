@@ -50,7 +50,7 @@ StartLayer::StartLayer()
 	m_FloorMaterial = Swallow::FlatColourMaterial::Create();
 	m_FloorMaterial->SetColour(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
-	m_CheckerBoardTexture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
+	//m_CheckerBoardTexture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
 	m_Cube = Swallow::Primatives::Cube();
 	m_Cube->SetMaterial(m_BoxMaterial);
 	m_Cube->GetTransform()->SetPosition(glm::vec3(0.0, -2.01, -0.0));

@@ -1,12 +1,15 @@
 #pragma once
 #include "Swallow/Renderer/Shader.hpp"
 
+//TODO: FIX THIS
+typedef unsigned int GLenum;
+
 namespace Swallow {
 	class OpenGLShader : public Shader
 	{
 	public:
 		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
-		OpenGLShader(const char *vertexPath, const char *fragmentPath);
+		OpenGLShader(const std::string &filepath);
 		OpenGLShader(const OpenGLShader &rhs) = default;
 		OpenGLShader &operator=(const OpenGLShader &rhs) = default;
 		virtual ~OpenGLShader();
@@ -27,7 +30,10 @@ namespace Swallow {
 		virtual void UploadUniformMat4(std::string const &name, glm::mat4 const &v);
 
 	private:
+		std::string ReadFile(const std::string& filepath);
+		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
+		void Compile(const std::unordered_map<GLenum, std::string> &sources);
+	private:
 		uint32_t m_RendererID;
-		void initialise(const std::string &vertexSrc, const std::string &fragmentPath);
 	};
 }
