@@ -20,7 +20,7 @@ project "Sandbox"
 	files
 	{
 		"%{prj.name}/src/**.hpp",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
 	}
 
 	includedirs
@@ -31,12 +31,19 @@ project "Sandbox"
 		enginedir .. "%{IncludeDir.Glad}",
 		enginedir .. "%{IncludeDir.glm}",
 		enginedir .. "%{IncludeDir.ImGui}",
-		enginedir .. "%{IncludeDir.AssImp}"
+		enginedir .. "%{IncludeDir.AssImp}",
+		enginedir .. "%{IncludeDir.AssImpBuild}"
+	}
+
+	libdirs
+	{
+		enginedir .. "vendor/AssImp/build/code"
 	}
 
 	links
 	{
-		"Swallow"
+		"Swallow",
+		"assimp"
 	}
 
 	filter "system:macosx"
@@ -56,8 +63,7 @@ project "Sandbox"
 			"CoreVideo.framework",
 			"GLFW",
 			"Glad",
-			"ImGui",
-			"AssImp"
+			"ImGui"
 		}
 
 		postbuildcommands { "echo \"cd %{prj.name} && ../bin/" .. outputdir .. "/%{prj.name}/%{prj.name}\" > ../Run.sh" }
