@@ -35,15 +35,9 @@ project "Sandbox"
 		enginedir .. "%{IncludeDir.AssImpBuild}"
 	}
 
-	libdirs
-	{
-		enginedir .. "vendor/AssImp/build/code"
-	}
-
 	links
 	{
-		"Swallow",
-		"assimp"
+		"Swallow"
 	}
 
 	filter "system:macosx"
@@ -63,7 +57,8 @@ project "Sandbox"
 			"CoreVideo.framework",
 			"GLFW",
 			"Glad",
-			"ImGui"
+			"ImGui",
+			"AssImp"
 		}
 
 		postbuildcommands { "echo \"cd %{prj.name} && ../bin/" .. outputdir .. "/%{prj.name}/%{prj.name}\" > ../Run.sh" }

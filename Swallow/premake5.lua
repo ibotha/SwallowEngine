@@ -24,6 +24,7 @@ group "Dependencies"
 	include "vendor/GLFW"
 	include "vendor/Glad"
 	include "vendor/imgui"
+	include "vendor/AssImp"
 group ""
 
 project "Swallow"
@@ -65,9 +66,9 @@ project "Swallow"
 	{
 		"GLFW",
 		"Glad",
+		"AssImp",
 		"ImGui",
-		"opengl32.lib",
-		"vendor/AssImp/build/code/"
+		"opengl32.lib"
 	}
 
 	defines

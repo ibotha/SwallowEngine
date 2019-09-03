@@ -8,30 +8,19 @@ namespace Swallow {
     class AssetManager
     {
     public:
+        static void LoadObject(const std::string& name, const std::string& path);
+        static void LoadTexture(const std::string& name, const std::string& path);
+        static Ref<VertexArray> FetchObject(const std::string& byName);
+        static Ref<Texture2D> FetchTexture(const std::string& byName);
+
+    private:
         AssetManager();
         AssetManager &operator=(const AssetManager&) = default;
         AssetManager(const AssetManager&) = default;
-
-        void LoadObject(std::string name, std::string path);
-        void LoadTexture(std::string name, std::string path);
-        VertexArray FetchObject(std::string byName);
-        Texture2D FetchTexture(std::string byName);
-
-    private:
-        struct ObjectInfo
-        {
-            std::string name;
-            Swallow::Ref<VertexArray> VA;
-        };
-
-        struct TextureInfo
-        {
-            std::string name;
-            Swallow::Ref<Texture2D> texture;
-        };
-
-        ObjectInfo Objects;
-        TextureInfo Textures;
+        ~AssetManager();
+        
+        static std::map<std::string, Ref<VertexArray>> Objects;
+        static std::map<std::string, Ref<Texture2D>> Textures;
         /*
         inline void SetTransform(Ref<Transform> transform) { m_Transform = transform; }
         inline void SetVertexArray(Ref<VertexArray> VA) { m_VertexArray = VA; }
