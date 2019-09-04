@@ -17,11 +17,13 @@ IncludeDir["Glad"] = "vendor/Glad/include"
 IncludeDir["ImGui"] = "vendor/imgui"
 IncludeDir["glm"] = "vendor/glm/glm"
 IncludeDir["stb_image"] = "vendor/stb_image"
+IncludeDir["freetype"] = "vendor/freetype/include"
 
 group "Dependencies"
 	include "vendor/GLFW"
 	include "vendor/Glad"
 	include "vendor/imgui"
+	include "vendor/freetype"
 group ""
 
 project "Swallow"
@@ -43,7 +45,7 @@ project "Swallow"
 		"src/**.cpp",
 		"vendor/glm/glm/**.hpp",
 		"vendor/glm/glm/**.inl",
-		"vendor/stb_image/**",
+		"vendor/stb_image/**"
 	}
 
 	includedirs
@@ -54,7 +56,8 @@ project "Swallow"
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.freetype}"
 	}
 
 	links
@@ -62,6 +65,7 @@ project "Swallow"
 		"GLFW",
 		"Glad",
 		"ImGui",
+		"freetype",
 		"opengl32.lib"
 	}
 

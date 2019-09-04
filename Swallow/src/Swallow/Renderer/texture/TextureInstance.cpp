@@ -6,7 +6,7 @@
 /*   By: ppreez <ppreez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 15:38:36 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/28 15:50:30 by ppreez           ###   ########.fr       */
+/*   Updated: 2019/08/30 14:41:00 by ppreez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,10 @@ namespace Swallow {
     TextureInstance::~TextureInstance()
     {
         
+    }
+
+    void TextureInstance::SetTextureImage(Ref<Texture2D> image)
+    {
+        m_TextureImage = image;
     }
 }

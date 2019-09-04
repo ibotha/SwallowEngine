@@ -93,6 +93,8 @@ bool StartLayer::OnMouseMovedEvent(Swallow::MouseMovedEvent &e)
 
 bool StartLayer::OnKeyPressed(Swallow::KeyPressedEvent &e)
 {
+	(void)e; // Silencing unused parameter error
+	(void)m_Y; // Silencing unused private field error
 	return true;
 }
 

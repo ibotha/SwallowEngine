@@ -6,7 +6,7 @@
 /*   By: ppreez <ppreez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 15:37:24 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/28 16:54:00 by ppreez           ###   ########.fr       */
+/*   Updated: 2019/08/30 14:40:32 by ppreez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ namespace Swallow {
             inline Ref<Texture2D> GetTextureImage() { return m_TextureImage;}
             virtual void Bind() = 0;
             virtual void Unbind() = 0;
+            void SetTextureImage(Ref<Texture2D> image);
         protected:
             Ref<Shader> m_Texture;
             Ref<Texture2D> m_TextureImage;

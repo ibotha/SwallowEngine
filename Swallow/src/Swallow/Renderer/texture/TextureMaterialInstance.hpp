@@ -6,7 +6,7 @@
 /*   By: ppreez <ppreez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:09:54 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/30 14:23:46 by ppreez           ###   ########.fr       */
+/*   Updated: 2019/08/30 14:44:02 by ppreez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ namespace Swallow {
 
             void Bind();
             void Unbind();
+
             void SetLightDirection(glm::vec3 LightDirection);
             void SetViewProjection(glm::mat4 ViewProjection);
             void SetRot(glm::mat4 Rot);
             void SetModel(glm::mat4 Model);
+            
             glm::vec3 GetLightDirection();
             glm::mat4 GetViewProjection();
             glm::mat4 GetRot();

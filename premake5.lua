@@ -30,6 +30,7 @@ project "Sandbox"
 		enginedir .. "%{IncludeDir.GLFW}",
 		enginedir .. "%{IncludeDir.Glad}",
 		enginedir .. "%{IncludeDir.glm}",
+		enginedir .. "%{IncludeDir.freetype}",
 		enginedir .. "%{IncludeDir.ImGui}"
 	}
 
@@ -55,7 +56,8 @@ project "Sandbox"
 			"CoreVideo.framework",
 			"GLFW",
 			"Glad",
-			"ImGui"
+			"ImGui",
+			"freetype"
 		}
 
 		postbuildcommands { "echo \"cd %{prj.name} && ../bin/" .. outputdir .. "/%{prj.name}/%{prj.name}\" > ../Run.sh" }
