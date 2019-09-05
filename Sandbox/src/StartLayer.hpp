@@ -11,7 +11,9 @@ class StartLayer : public Swallow::Layer {
 private:
 
 	Swallow::Ref<Swallow::GameObject> m_Floor;
+	Swallow::Ref<Swallow::GameObject> m_Pyramid;
 	Swallow::Ref<Swallow::GameObject> m_Cube;
+	Swallow::Ref<Swallow::GameObject> m_skull;
 	Swallow::Ref<Swallow::Texture2D> m_CheckerBoardTexture;
 	
 	//Pieter test

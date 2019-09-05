@@ -1,5 +1,6 @@
 #include "StartLayer.hpp"
 #include "Swallow/AssetManager/GameObject.hpp"
+#include "Swallow/AssetManager/AssetManager.hpp"
 
 StartLayer::StartLayer()
 	:Layer("Start Layer"), m_Camera(glm::radians(60.0f), Swallow::Application::Get().GetWindow().GetWidth() / (float)Swallow::Application::Get().GetWindow().GetHeight(), 0.0001f, 100000.0f)
@@ -47,6 +48,8 @@ StartLayer::StartLayer()
 
 	m_BoxMaterial = Swallow::FlatColourMaterial::Create();
 	m_BoxMaterial->SetColour(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+	Swallow::Ref<Swallow::FlatColourMaterialInstance> SkullMaterial = Swallow::FlatColourMaterial::Create();
+	SkullMaterial->SetColour(glm::vec4(0.8f, 0.8f, 1.0f, 1.0f));
 	m_FloorMaterial = Swallow::FlatColourMaterial::Create();
 	m_FloorMaterial->SetColour(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
@@ -62,6 +65,15 @@ StartLayer::StartLayer()
 	m_Floor->GetTransform()->SetPosition(glm::vec3(0.0, -0.01, -2.0));
 	m_Floor->GetTransform()->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_Floor->GetTransform()->Recalculate();
+
+	//Load objects (testing framework beta 0.0.01 alpha beta)
+	m_skull = std::make_shared<Swallow::GameObject>();
+	m_skull->SetMaterial(SkullMaterial);
+	m_skull->GetTransform()->SetPosition(glm::vec3(0, -1, 0));
+	m_skull->GetTransform()->SetScale(glm::vec3(0.05f, 0.05f, 0.05f));
+	m_skull->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
+	m_skull->SetVertexArray(Swallow::AssetManager::FetchObject("Skull", "skull"));
+	m_skull->GetTransform()->Recalculate();
 }
 
 void StartLayer::OnEvent(Swallow::Event &e) {
@@ -105,7 +117,6 @@ void StartLayer::OnImGuiRender() {
 }
 
 void StartLayer::OnUpdate(Swallow::Timestep ts) {
-	
 	m_Camera = Swallow::PerspectiveCamera(glm::radians(60.0f), Swallow::Application::Get().GetWindow().GetWidth() / (float)Swallow::Application::Get().GetWindow().GetHeight(), 0.0001f, 100000.0f);
 	float moveSpeed = 5.0f;
 
@@ -172,6 +183,8 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 
 	Swallow::Renderer::Submit(m_Cube);
 	Swallow::Renderer::Submit(m_Floor);
-
+	m_skull->GetTransform()->SetRotation(glm::vec3(rot / 2.0f, rot, 0.0f));
+	m_skull->GetTransform()->Recalculate();
+	Swallow::Renderer::Submit(m_skull);
 	Swallow::Renderer::EndScene();
 }
