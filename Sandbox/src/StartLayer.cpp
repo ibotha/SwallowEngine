@@ -62,6 +62,11 @@ StartLayer::StartLayer()
 	m_Floor->GetTransform()->SetPosition(glm::vec3(0.0, -0.01, -2.0));
 	m_Floor->GetTransform()->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_Floor->GetTransform()->Recalculate();
+
+	m_Text = Swallow::Text::Create();
+	m_Text->SetText("A");
+	m_Text->SetPos(glm::vec3(1.0f, 0.0f, 0.0f));
+	m_Text->Recalculate();
 }
 
 void StartLayer::OnEvent(Swallow::Event &e) {
@@ -172,6 +177,7 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 
 	Swallow::Renderer::Submit(m_Cube);
 	Swallow::Renderer::Submit(m_Floor);
+	Swallow::Renderer::Submit(m_Text);
 
 	Swallow::Renderer::EndScene();
 }

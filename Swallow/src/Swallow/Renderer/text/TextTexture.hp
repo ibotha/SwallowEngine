@@ -6,7 +6,7 @@
 /*   By: ppreez <ppreez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/04 11:57:17 by ppreez            #+#    #+#             */
-/*   Updated: 2019/09/04 15:59:56 by ppreez           ###   ########.fr       */
+/*   Updated: 2019/09/05 11:37:51 by ppreez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ namespace Swallow
         private:
             // TextTexture();
             std::map<GLchar, s_Character> m_Characters;
-            FT_Library m_FT;
-            FT_Face m_Arial;
+            FT_Face m_Face;
             FT_UInt m_Glyph_Width;
             FT_UInt m_Glyph_Height;
             uint32_t m_Width;

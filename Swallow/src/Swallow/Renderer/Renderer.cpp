@@ -44,4 +44,9 @@ namespace Swallow {
 		object->GetVertexArray()->Bind();
 		RenderCommand::DrawIndexed(object->GetVertexArray());
 	}
+	
+	void Renderer::Submit(const Ref<Text>& object)
+	{
+		object->Draw();
+	}
 }

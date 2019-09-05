@@ -6,6 +6,7 @@
 #include <gtc/type_ptr.hpp>
 #include "Platform/OpenGL/OpenGLShader.hpp"
 #include "Swallow/Renderer/material/FlatColourMaterial.hpp"
+#include "Swallow/Renderer/Text.hpp"
 
 class StartLayer : public Swallow::Layer {
 private:
@@ -13,6 +14,7 @@ private:
 	Swallow::Ref<Swallow::GameObject> m_Floor;
 	Swallow::Ref<Swallow::GameObject> m_Cube;
 	Swallow::Ref<Swallow::Texture2D> m_CheckerBoardTexture;
+	Swallow::Ref<Swallow::Text> m_Text;
 	
 	//Pieter test
 	Swallow::Ref<Swallow::FlatColourMaterialInstance> m_FloorMaterial;

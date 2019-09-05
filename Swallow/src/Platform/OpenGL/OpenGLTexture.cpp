@@ -109,5 +109,70 @@ namespace Swallow {
 		glActiveTexture(GL_TEXTURE0 + slot);
 		glBindTexture(GL_TEXTURE_2D, m_RendererID);
 	}
+	
+	uint32_t OpenGLCharacter::GetWidth() const
+	{
+		return m_Width;
+	}
+
+	uint32_t OpenGLCharacter::GetHeight() const
+	{
+		return m_Height;
+	}
+	
+	uint32_t OpenGLCharacter::GetTop() const
+	{
+		return m_Top;
+	}
+
+	uint32_t OpenGLCharacter::GetLeft() const
+	{
+		return m_Left;
+	}
+	
+	void OpenGLCharacter::Bind(uint32_t slot) const
+	{
+		glActiveTexture(GL_TEXTURE0 + slot);
+		glBindTexture(GL_TEXTURE_2D, m_RendererID);
+	}
+
+	OpenGLCharacter::OpenGLCharacter(const FT_GlyphSlot glyph)
+	{
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		m_Width = glyph->bitmap.width;
+		m_Height = glyph->bitmap.rows;
+		m_Left = glyph->bitmap_left;
+		m_Top = glyph->bitmap_top;
+		#ifdef MODERN_GL
+				glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
+				glTextureStorage2D(m_RendererID, 1, InternalChannelType(channels), m_Width, m_Height);
+		#else
+				glActiveTexture(GL_TEXTURE31);
+				glGenTextures(1, &m_RendererID);
+				glBindTexture(GL_TEXTURE_2D, m_RendererID);
+		#endif
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+		#ifdef MODERN_GL
+				glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, ChannelType(channels), GL_UNSIGNED_BYTE, data);
+		#else
+				glTexImage2D(GL_TEXTURE_2D, 
+							0, 
+							GL_RED, 
+							m_Width, 
+							m_Height,                                 
+							0, 
+							GL_RED, 
+							GL_UNSIGNED_BYTE, 
+							glyph->bitmap.buffer);
+
+				glGenerateMipmap(GL_TEXTURE_2D);
+		#endif
+		glBindTexture(GL_TEXTURE_2D, m_RendererID);
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+	}
 
 }
