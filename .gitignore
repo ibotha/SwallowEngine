@@ -17,3 +17,4 @@ assets/
 Run.sh
 imgui.ini
 .vscode
+.DS_Store
