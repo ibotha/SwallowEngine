@@ -13,7 +13,8 @@ bin-int/
 *.vcxproj*
 Makefile
 *.sln
-assets/textures
+assets
 Run.sh
 imgui.ini
 .vscode
+.DS_Store

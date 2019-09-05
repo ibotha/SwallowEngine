@@ -11,14 +11,16 @@ class StartLayer : public Swallow::Layer {
 private:
 
 	Swallow::Ref<Swallow::GameObject> m_Floor;
+	Swallow::Ref<Swallow::GameObject> m_Pyramid;
 	Swallow::Ref<Swallow::GameObject> m_Cube;
+	Swallow::Ref<Swallow::GameObject> m_skull;
 	Swallow::Ref<Swallow::Texture2D> m_CheckerBoardTexture;
 	
 	//Pieter test
 	Swallow::Ref<Swallow::FlatColourMaterialInstance> m_FloorMaterial;
 	Swallow::Ref<Swallow::FlatColourMaterialInstance> m_BoxMaterial;
 
-	float	m_Y = 0.0f;
+	//float	m_Y = 0.0f;
 	float	m_YVelocity = 0.0f;
 	bool	m_CanJump = true;
 	glm::vec4 pos;

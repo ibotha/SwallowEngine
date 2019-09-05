@@ -2,7 +2,7 @@
 #include "Camera.hpp"
 #include "Buffer.hpp"
 #include "Shader.hpp"
-#include "GameObject.hpp"
+#include "../AssetManager/GameObject.hpp"
 
 #include "RenderCommand.hpp"
 // TODO: Remove
