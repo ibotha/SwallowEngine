@@ -20,7 +20,7 @@ project "Sandbox"
 	files
 	{
 		"%{prj.name}/src/**.hpp",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
 	}
 
 	includedirs
@@ -30,7 +30,9 @@ project "Sandbox"
 		enginedir .. "%{IncludeDir.GLFW}",
 		enginedir .. "%{IncludeDir.Glad}",
 		enginedir .. "%{IncludeDir.glm}",
-		enginedir .. "%{IncludeDir.ImGui}"
+		enginedir .. "%{IncludeDir.ImGui}",
+		enginedir .. "%{IncludeDir.AssImp}",
+		enginedir .. "%{IncludeDir.AssImpBuild}"
 	}
 
 	links
@@ -40,7 +42,7 @@ project "Sandbox"
 
 	filter "system:macosx"
         systemversion "latest"
-
+		buildoptions { "-Wall", "-Werror", "-Wextra"}
         defines
         {
             "SW_PLATFORM_MACOSX"
@@ -55,7 +57,8 @@ project "Sandbox"
 			"CoreVideo.framework",
 			"GLFW",
 			"Glad",
-			"ImGui"
+			"ImGui",
+			"AssImp"
 		}
 
 		postbuildcommands { "echo \"cd %{prj.name} && ../bin/" .. outputdir .. "/%{prj.name}/%{prj.name}\" > ../Run.sh" }

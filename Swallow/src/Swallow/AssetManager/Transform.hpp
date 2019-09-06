@@ -16,9 +16,9 @@ namespace Swallow {
         inline void SetRotation(const glm::vec3 &rotation) { m_Rotation = rotation; }
         inline void SetScale(const glm::vec3 &scale) { m_Scale = scale; }
 
-		inline const glm::vec3 & GetRotation() const { return m_Rotation; }
-		inline const glm::vec3 & GetPosition() const { return m_Position; }
-		inline const glm::vec3 & GetScale() const { return m_Scale; }
+		inline glm::vec3 & GetRotation() { return m_Rotation; }
+		inline glm::vec3 & GetPosition() { return m_Position; }
+		inline glm::vec3 & GetScale() { return m_Scale; }
         inline const glm::mat4 & GetRotationMatrix() const { return m_RotationMatrix; }
 		inline const glm::mat4 & GetTranslationMatrix() const { return m_TranslationMatrix; }
 		inline const glm::mat4 & GetScaleMatrix() const { return m_ScaleMatrix; }
