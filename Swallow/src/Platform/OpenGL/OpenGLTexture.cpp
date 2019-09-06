@@ -120,14 +120,19 @@ namespace Swallow {
 		return m_Height;
 	}
 	
-	uint32_t OpenGLCharacter::GetTop() const
+	int32_t OpenGLCharacter::GetTop() const
 	{
 		return m_Top;
 	}
 
-	uint32_t OpenGLCharacter::GetLeft() const
+	int32_t OpenGLCharacter::GetLeft() const
 	{
 		return m_Left;
+	}
+
+	int32_t OpenGLCharacter::GetAdvance() const
+	{
+		return m_Advance;
 	}
 	
 	void OpenGLCharacter::Bind(uint32_t slot) const
@@ -143,6 +148,7 @@ namespace Swallow {
 		m_Height = glyph->bitmap.rows;
 		m_Left = glyph->bitmap_left;
 		m_Top = glyph->bitmap_top;
+		m_Advance = glyph->advance.x;
 		#ifdef MODERN_GL
 				glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
 				glTextureStorage2D(m_RendererID, 1, InternalChannelType(channels), m_Width, m_Height);

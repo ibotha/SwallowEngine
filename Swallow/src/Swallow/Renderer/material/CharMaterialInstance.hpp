@@ -14,10 +14,12 @@ namespace Swallow {
 
             virtual void Bind() override;
             virtual void Unbind() override;
+            bool CanPrint();
             inline void SetColour(const glm::vec4 &colour) {m_Colour = colour;}
             inline glm::vec4 GetColour() const { return m_Colour; }
             inline void SetChar(char c) {m_Char = c;}
             inline char GetChar() const { return m_Char; }
+            inline Ref<Character> GetCharRef() { return (*m_Chars)[m_Char]; }
         private:
             CharMaterialInstance();
             glm::vec4 m_Colour;

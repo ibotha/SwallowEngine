@@ -3,6 +3,9 @@
 #include "Swallow/Renderer/Renderer.hpp"
 #include "CharMaterialInstance.hpp"
 #include "Swallow/Renderer/Texture.hpp"
+#ifndef SW_FONT_RESOLUTION
+    #define SW_FONT_RESOLUTION 128.0
+#endif
 
 namespace Swallow
 {

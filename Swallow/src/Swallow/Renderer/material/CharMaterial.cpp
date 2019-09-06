@@ -36,12 +36,12 @@ namespace Swallow
             out vec4 color;
 
             uniform sampler2D text;
-            uniform vec3 textColor;
+            uniform vec4 textColor;
 
             void main()
             {    
-                vec4 sampled = vec4(1.0, 1.0, 1.0, texture(0, TexCoords).r);
-                color = vec4(textColor, 1.0) * sampled;
+                vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);
+                color = textColor * sampled;
             }
 		)";
 		m_Shader = Shader::Create(sVertexSrc, sFragmentSrc);
@@ -58,7 +58,7 @@ namespace Swallow
         {
             SW_CORE_ASSERT(!error, "Arial font face could not be initialised");
         }
-        FT_Set_Pixel_Sizes(face, 0, 48);
+        FT_Set_Pixel_Sizes(face, 0, SW_FONT_RESOLUTION);
         for (unsigned char c = 0; c < 128; c++)
         {
             if (FT_Load_Char(face, c, FT_LOAD_RENDER))

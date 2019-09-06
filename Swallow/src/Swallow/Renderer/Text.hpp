@@ -13,10 +13,14 @@ namespace Swallow
             void Recalculate();
             
             inline void SetText(const std::string &text) {m_Text = text; }
-            inline void SetPos(const glm::vec3 &pos) { m_Pos = pos; }
+            inline void SetColour(const glm::vec4 &colour) {m_Colour = colour; }
+            inline glm::vec4 &GetColour() { return m_Colour; }
+            inline Ref<Transform> GetTransform() {return m_Transform;}
+
         private:
             std::string m_Text;
             std::vector<Ref<GameObject>> m_Quads;
-            glm::vec3 m_Pos;
+            Ref<Transform> m_Transform;
+            glm::vec4 m_Colour;
     };
 }

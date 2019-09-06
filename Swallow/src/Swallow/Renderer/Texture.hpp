@@ -28,8 +28,9 @@ namespace Swallow {
 	{
 	public:
 		virtual ~Character() = default;
-		virtual uint32_t GetTop() const = 0;
-		virtual uint32_t GetLeft() const = 0;
+		virtual int32_t GetTop() const = 0;
+		virtual int32_t GetLeft() const = 0;
+		virtual int32_t GetAdvance() const = 0;
 		static Ref<Character> Create(const FT_GlyphSlot);
 	protected:
 

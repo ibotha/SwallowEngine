@@ -6,7 +6,7 @@
 /*   By: ppreez <ppreez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/28 16:12:58 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/30 14:35:18 by ppreez           ###   ########.fr       */
+/*   Updated: 2019/09/06 09:32:52 by ppreez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,6 @@ namespace Swallow {
     void TextureMaterialInstance::Bind()
     {
         m_Texture->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(m_Texture)->UploadUniformFloat3("u_LightDirection", m_LightDirection);
-		std::dynamic_pointer_cast<OpenGLShader>(m_Texture)->UploadUniformMat4("u_ViewProjection", m_ViewProjection);
-		std::dynamic_pointer_cast<OpenGLShader>(m_Texture)->UploadUniformMat4("u_Rot", m_Rot);
-		std::dynamic_pointer_cast<OpenGLShader>(m_Texture)->UploadUniformMat4("u_Model", m_Model);
     }
 
     void TextureMaterialInstance::Unbind()
