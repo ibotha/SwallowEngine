@@ -13,3 +13,6 @@
 [submodule "Swallow/vendor/OpenAL"]
 	path = Swallow/vendor/OpenAL
 	url = https://github.com/WolfenGames/openal-soft.git
+[submodule "Swallow/vendor/AssImp"]
+	path = Swallow/vendor/AssImp
+	url = https://github.com/ibotha/AssImp

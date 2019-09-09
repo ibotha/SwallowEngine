@@ -1,7 +1,7 @@
 #pragma once
 #include "Transform.hpp"
-#include "VertexArray.hpp"
-#include "material/MaterialInstance.hpp"
+#include "../Renderer/VertexArray.hpp"
+#include "../Renderer/material/MaterialInstance.hpp"
 
 namespace Swallow {
 
