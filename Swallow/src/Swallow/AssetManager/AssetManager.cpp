@@ -7,7 +7,11 @@ namespace Swallow {
     
     std::map<std::string, std::map<std::string, Ref<VertexArray>>> AssetManager::Objects;
     std::map<std::string, Swallow::Ref<Texture2D>> AssetManager::Textures;
-    
+    size_t AssetManager::iterator;
+    size_t AssetManager::delay;
+    size_t AssetManager::delayCounter;
+    std::string AssetManager::mainMeshName;
+
     AssetManager::AssetManager()
     {
 
@@ -15,10 +19,14 @@ namespace Swallow {
 
     void AssetManager::LoadObject(const std::string& name, const std::string& path)
     {
+        iterator = 0;
+        delay = 7;
+        delayCounter = 0;
+        mainMeshName = "";
         Assimp::Importer Importer;
+
         const aiScene* pScene = Importer.ReadFile(path.c_str(), aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_OptimizeMeshes);
         std::map<std::string, Ref<VertexArray>> VAinfo;
-
         if (pScene)
         {
             for (unsigned int i = 0; i < pScene->mNumMeshes; i++)
@@ -125,4 +133,34 @@ namespace Swallow {
         return blank;
     }
     */
+
+    Ref<VertexArray> AssetManager::Animate(const std::string& byName, const std::string& meshName)
+    {
+        size_t i = 0;
+
+        if (delayCounter == delay)
+        {
+            if (iterator == Objects[byName].size())
+                iterator = 0;
+
+            for (auto const &mesh: Objects[byName])
+            {
+                if (i == iterator)
+                {
+                    mainMeshName = mesh.first;
+                    iterator++;
+                    delayCounter = 0;
+                    break;
+                }
+                i++;
+            }
+        }
+
+        delayCounter++;
+
+        if (mainMeshName != "")
+            return FetchObject(byName, mainMeshName);
+        else
+            return FetchObject(byName, meshName);
+    }
 }
