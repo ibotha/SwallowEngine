@@ -74,6 +74,8 @@ StartLayer::StartLayer()
 	m_skull->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
 	m_skull->SetVertexArray(Swallow::AssetManager::FetchObject("Skull", "skull"));
 	m_skull->GetTransform()->Recalculate();
+	Swallow::Ref<Swallow::AudioBuffer> x = Swallow::AudioBuffer::Create("assets/Sounds/InGameSound.wav");
+
 }
 
 void StartLayer::OnEvent(Swallow::Event &e) {

@@ -1,21 +1,17 @@
 #pragma once
 
-#include "SoundElement.hpp"
 
 namespace Swallow
 {
 	class AudioBuffer
 	{
 	public:
-		virtual void	Init() = 0;
-		virtual void	Destory() = 0;
-
-		virtual void	Play() = 0;
-		virtual void	Pause() = 0;
+		AudioBuffer()=default;
 		virtual			~AudioBuffer(){}
 
-		static Ref<AudioBuffer>	Create();
+		//I NEED STUFF!!!
+		static Ref<AudioBuffer>	Create(const std::string& fn);
+		virtual uint32_t	GetID() = 0;
 	private:
-		SoundElement	element;
 	};
 }
