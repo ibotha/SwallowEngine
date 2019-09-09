@@ -10,9 +10,8 @@ class StartLayer : public Swallow::Layer {
 private:
 
 	Swallow::Ref<Swallow::VertexArray> m_SquareVA;
-	Swallow::Ref<Swallow::Shader> m_FlatColorShader;
-	Swallow::Ref<Swallow::Shader> m_TextureShader;
 	Swallow::Ref<Swallow::Texture2D> m_CheckerBoardTexture;
+	Swallow::ShaderLibrary m_SLib;
 
 	float	m_Y = 0.0f;
 	float	m_YVelocity = 0.0f;
