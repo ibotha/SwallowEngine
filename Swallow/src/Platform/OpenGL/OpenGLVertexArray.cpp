@@ -55,6 +55,15 @@ namespace Swallow {
 		vertexBuffer->Bind();
 
 		int i = 0;
+		for (const auto &j : m_VertexBuffers)
+		{
+			for (const auto &e : j->GetLayout())
+			{
+				(void)e;
+				i++;
+			}
+		}
+
 		for (const auto &e : vertexBuffer->GetLayout())
 		{
 			const void *idea = reinterpret_cast<const void *>(e.Offset);
@@ -80,7 +89,7 @@ namespace Swallow {
 		m_IndexBuffer = indexBuffer;
 	}
 
-	const std::vector<Ref<VertexBuffer>>& OpenGLVertexArray::GetVertexBuffers() const
+	std::vector<Ref<VertexBuffer>>& OpenGLVertexArray::GetVertexBuffers()
 	{
 		return m_VertexBuffers;
 	}

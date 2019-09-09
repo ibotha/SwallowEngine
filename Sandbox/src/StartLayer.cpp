@@ -8,44 +8,6 @@ StartLayer::StartLayer()
 	pos = glm::vec4(0, 0, 0, 0);
 	rot = glm::vec4(0, 0, 0, 0);
 
-	std::string textureVertexSrc = R"(
-		#version 330 core
-		
-
-		layout(location = 0) in vec3 a_Position;
-		layout(location = 1) in vec3 a_Normal;
-		layout(location = 2) in vec2 a_TexCoord;
-
-		out vec3 v_Normal;
-		out vec2 v_TexCoord;
-
-		uniform mat4 u_ViewProjection;
-		uniform mat4 u_Rot;
-		uniform mat4 u_Model;
-
-		void main() {
-			gl_Position = (u_ViewProjection * u_Model) * vec4(a_Position, 1.0);
-			v_Normal = normalize(u_Rot * vec4(a_Normal, 0.0)).xyz;
-			v_TexCoord = a_TexCoord;
-		}
-	)";
-
-	std::string textureFragmentSrc = R"(
-		#version 330 core
-
-		layout(location = 0) out vec4 color;
-		in vec3 v_Normal;
-		in vec2 v_TexCoord;
-
-		uniform vec3 u_LightDirection = vec3(0, -1, 0);
-		uniform sampler2D u_Texture;
-
-		void main() {
-			float Light = max(0.0, dot(v_Normal, -normalize(u_LightDirection))) * 0.9 + 0.1;
-			color = vec4(texture(u_Texture, v_TexCoord).rgb * Light, 1.0);
-		}
-	)";
-
 	m_BoxMaterial = Swallow::FlatColourMaterial::Create();
 	m_BoxMaterial->SetColour(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 	Swallow::Ref<Swallow::FlatColourMaterialInstance> SkullMaterial = Swallow::FlatColourMaterial::Create();
@@ -56,24 +18,62 @@ StartLayer::StartLayer()
 	//m_CheckerBoardTexture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
 	m_Cube = Swallow::Primatives::Cube();
 	m_Cube->SetMaterial(m_BoxMaterial);
-	m_Cube->GetTransform()->SetPosition(glm::vec3(0.0, -2.01, -0.0));
-	m_Cube->GetTransform()->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_Cube->GetTransform()->SetPosition(glm::vec3(0.0, -0.5f, 0.0));
+	m_Cube->GetTransform()->SetScale(glm::vec3(10.0f, 1.0f, 10.0f));
 	m_Cube->GetTransform()->Recalculate();
 
 	m_Floor = Swallow::Primatives::Cube();
 	m_Floor->SetMaterial(m_FloorMaterial);
-	m_Floor->GetTransform()->SetPosition(glm::vec3(0.0, -0.01, -2.0));
+	m_Floor->GetTransform()->SetPosition(glm::vec3(0.0, -0.0, -2.0));
 	m_Floor->GetTransform()->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_Floor->GetTransform()->Recalculate();
 
 	//Load objects (testing framework beta 0.0.01 alpha beta)
 	m_skull = std::make_shared<Swallow::GameObject>();
 	m_skull->SetMaterial(SkullMaterial);
-	m_skull->GetTransform()->SetPosition(glm::vec3(0, -1, 0));
-	m_skull->GetTransform()->SetScale(glm::vec3(0.05f, 0.05f, 0.05f));
+	m_skull->GetTransform()->SetPosition(glm::vec3(0, -0.65f, 0));
+	m_skull->GetTransform()->SetScale(glm::vec3(0.1f, 0.1f, 0.1f));
 	m_skull->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
-	m_skull->SetVertexArray(Swallow::AssetManager::FetchObject("Skull", "skull"));
+	m_skull->SetVertexArray(Swallow::AssetManager::FetchObject("Car", "Lamborghini_Aventador"));
 	m_skull->GetTransform()->Recalculate();
+
+	animMaterial = Swallow::AnimationMaterial::Create();
+	animMaterial->SetColour(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+	//Load objects (testing framework beta 0.0.01 alpha beta)
+	m_StateAnimationTest = std::make_shared<Swallow::GameObject>();
+	m_StateAnimationTest->SetMaterial(animMaterial);
+	m_StateAnimationTest->GetTransform()->SetPosition(glm::vec3(0, -0.65f, 0));
+	m_StateAnimationTest->GetTransform()->SetScale(glm::vec3(0.1f, 0.1f, 0.1f));
+	m_StateAnimationTest->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
+	m_StateAnimationTest->SetVertexArray(Swallow::AssetManager::FetchObject("Torus", "Torus"));
+	m_StateAnimationTest->GetTransform()->Recalculate();
+
+
+	//Load objects (testing framework beta 0.0.01 alpha beta)
+	m_StateAnimationTest2 = std::make_shared<Swallow::GameObject>();
+	m_StateAnimationTest2->SetMaterial(animMaterial);
+	m_StateAnimationTest2->GetTransform()->SetPosition(glm::vec3(0, -0.65f, 0));
+	m_StateAnimationTest2->GetTransform()->SetScale(glm::vec3(0.1f, 0.1f, 0.1f));
+	m_StateAnimationTest2->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
+	m_StateAnimationTest2->SetVertexArray(Swallow::VertexArray::Create());
+	m_StateAnimationTest2->GetVertexArray()->SetIndexBuffer(Swallow::AssetManager::FetchObject("Pillar", "Cube.001")->GetIndexBuffer());
+	m_StateAnimationTest2->GetTransform()->Recalculate();
+
+	//m_PillarAnimation = Swallow::AnimationController::Create();
+	m_PillarAnimation = Swallow::AnimationController::Create("Pillar");
+	m_PillarAnimation->AddKeyFrame("Cube.001");
+	m_PillarAnimation->AddKeyFrame("Cube.002");
+	m_PillarAnimation->AddKeyFrame("Cube.003");
+	m_PillarAnimation->AddKeyFrame("Cube.004");
+
+	m_PillarAnimation2 = Swallow::AnimationController::Create("Pillar");
+	m_PillarAnimation2->AddKeyFrame("Cube.005");
+	m_PillarAnimation2->AddKeyFrame("Cube.006");
+	m_PillarAnimation2->AddKeyFrame("Cube.007");
+	m_PillarAnimation2->AddKeyFrame("Cube.009");
+
+	m_PillarAnimationMid = m_PillarAnimation;
 }
 
 void StartLayer::OnEvent(Swallow::Event &e) {
@@ -107,6 +107,10 @@ bool StartLayer::OnMouseMovedEvent(Swallow::MouseMovedEvent &e)
 bool StartLayer::OnKeyPressed(Swallow::KeyPressedEvent &e)
 {
 	(void)e;
+	if (m_PillarAnimationMid == m_PillarAnimation)
+		m_PillarAnimationMid = m_PillarAnimation2;
+	else
+		m_PillarAnimationMid = m_PillarAnimation;
 	return true;
 }
 
@@ -178,13 +182,30 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 
 	//Create a primative
 
-	static float rot = 0.0f;
-	rot += 1.0f * ts.GetSeconds();
+	// static int state = 0;
+	// static float rot = 0.0f;
+	if (m_PillarAnimationMid->Advance(1 * ts.GetSeconds()) || true)
+	{
+		m_StateAnimationTest2->GetVertexArray()->GetVertexBuffers().clear();
+		m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVB1());
+		m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVB2());
+	}
+	m_StateAnimationTest2->GetTransform()->Recalculate();
+	animMaterial->SetAnim(glm::vec1(m_PillarAnimationMid->GetAdvancedTime()));//animMaterial->SetAnim(glm::vec1(rot));
+	Swallow::Renderer::Submit(m_StateAnimationTest2);
+	
 
-	Swallow::Renderer::Submit(m_Cube);
-	Swallow::Renderer::Submit(m_Floor);
-	m_skull->GetTransform()->SetRotation(glm::vec3(rot / 2.0f, rot, 0.0f));
-	m_skull->GetTransform()->Recalculate();
-	Swallow::Renderer::Submit(m_skull);
+	//Swallow::Renderer::Submit(m_Cube);
+	//Swallow::Renderer::Submit(m_Floor);
+	
+	//m_skull->GetTransform()->SetRotation(glm::vec3(0.0f, rot, 0.0f));
+	//m_skull->GetTransform()->Recalculate();
+	//Swallow::Renderer::Submit(m_skull);
+	//m_StateAnimationTest->SetVertexArray(Swallow::AssetManager::Animate("Pillar", "Cube"));
+	//m_StateAnimationTest->GetTransform()->Recalculate();
+	//Swallow::Renderer::Submit(m_StateAnimationTest);
+
+	//m_StateAnimationTest2->SetVertexArray(Swallow::AssetManager::Animate("Pillar", "Cube"));
+
 	Swallow::Renderer::EndScene();
 }
