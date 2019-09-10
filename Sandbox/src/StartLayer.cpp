@@ -203,7 +203,7 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 
 	Swallow::Renderer::BeginScene(m_Camera);
 
-	//Create a primative
+	//Create an Animation
 
 	static float rot = 0.0f;
 	// if (m_PillarAnimationMid->Advance(1 * ts.GetSeconds()) || true)
@@ -215,6 +215,15 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 	// m_StateAnimationTest2->GetTransform()->Recalculate();
 	// animMaterial->SetAnim(glm::vec1(m_PillarAnimationMid->GetAdvancedTime()));//animMaterial->SetAnim(glm::vec1(rot));
 	// Swallow::Renderer::Submit(m_StateAnimationTest2);
+	if (m_PillarAnimationMid->Advance(1 * ts.GetSeconds()) || true)
+	{
+		m_StateAnimationTest2->GetVertexArray()->GetVertexBuffers().clear();
+		m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVertexBuffer1());
+		m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVertexBuffer2());
+	}
+	m_StateAnimationTest2->GetTransform()->Recalculate();
+	animMaterial->SetAnim(glm::vec1(m_PillarAnimationMid->GetAdvancedTime()));//animMaterial->SetAnim(glm::vec1(rot));
+	Swallow::Renderer::Submit(m_StateAnimationTest2);
 	
 
 	m_Text->GetTransform()->SetPosition(glm::vec3(0.0, rot / 3.0f - 5.f, -2.0));
