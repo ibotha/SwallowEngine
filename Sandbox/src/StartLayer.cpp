@@ -132,16 +132,11 @@ bool StartLayer::OnMouseMovedEvent(Swallow::MouseMovedEvent &e)
 
 bool StartLayer::OnKeyPressed(Swallow::KeyPressedEvent &e)
 {
-<<<<<<< HEAD
-	static_cast<void>(e); // Silencing unused parameter error
-	static_cast<void>(m_Y); // Silencing unused private field error
-=======
 	(void)e;
 	if (m_PillarAnimationMid == m_PillarAnimation)
 		m_PillarAnimationMid = m_PillarAnimation2;
 	else
 		m_PillarAnimationMid = m_PillarAnimation;
->>>>>>> 71330948a42a3561307c74cb9c4a37a32dbc077d
 	return true;
 }
 
