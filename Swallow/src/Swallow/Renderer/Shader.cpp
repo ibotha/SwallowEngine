@@ -33,14 +33,14 @@ namespace Swallow {
 	return nullptr;
 	}
 
-	Ref<Shader> Shader::CreateFromPath(const char *vertexPath, const char *fragmentPath)
+	Ref<Shader> Shader::Create(const std::string &filepath)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLShader>(vertexPath, fragmentPath);
+			return std::make_shared<OpenGLShader>(filepath);
 		default:
 			break;
 	}

@@ -20,7 +20,7 @@ project "Sandbox"
 	files
 	{
 		"%{prj.name}/src/**.hpp",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
 	}
 
 	includedirs
@@ -32,6 +32,8 @@ project "Sandbox"
 		enginedir .. "%{IncludeDir.glm}",
 		enginedir .. "%{IncludeDir.freetype}",
 		enginedir .. "%{IncludeDir.ImGui}"
+		enginedir .. "%{IncludeDir.AssImp}",
+		enginedir .. "%{IncludeDir.AssImpBuild}"
 	}
 
 	links
@@ -58,6 +60,7 @@ project "Sandbox"
 			"Glad",
 			"ImGui",
 			"freetype"
+			"AssImp"
 		}
 
 		postbuildcommands { "echo \"cd %{prj.name} && ../bin/" .. outputdir .. "/%{prj.name}/%{prj.name}\" > ../Run.sh" }

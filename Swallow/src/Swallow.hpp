@@ -24,7 +24,12 @@
 #include "Swallow/Renderer/Shader.hpp"
 #include "Swallow/Renderer/Texture.hpp"
 #include "Swallow/Renderer/VertexArray.hpp"
-#include "Swallow/Renderer/GameObject.hpp"
+// -------------------------------------------
+
+// -------------Asset Manager-----------------
+#include "Swallow/AssetManager/GameObject.hpp"
+#include "Swallow/AssetManager/Primatives.hpp"
+#include "Swallow/AssetManager/AnimationController.hpp"
 // -------------------------------------------
 
 #include "Swallow/Renderer/Camera.hpp"

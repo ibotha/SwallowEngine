@@ -4,6 +4,7 @@
 #include "Shader.hpp"
 #include "GameObject.hpp"
 #include "Text.hpp"
+#include "../AssetManager/GameObject.hpp"
 
 #include "RenderCommand.hpp"
 // TODO: Remove

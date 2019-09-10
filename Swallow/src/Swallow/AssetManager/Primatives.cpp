@@ -1,7 +1,7 @@
 #include "swpch.hpp"
-#include "Buffer.hpp"
+#include "../Renderer/Buffer.hpp"
 #include "GameObject.hpp"
-#include "VertexArray.hpp"
+#include "../Renderer/VertexArray.hpp"
 #include "Primatives.hpp"
 
 namespace Swallow {

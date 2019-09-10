@@ -17,7 +17,7 @@ namespace Swallow {
 		virtual void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
 		virtual void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
 
-		virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const override;
+		virtual std::vector<Ref<VertexBuffer>>& GetVertexBuffers() override;
 		virtual const Ref<IndexBuffer>& GetIndexBuffer() const override;
 
 	private:
