@@ -61,10 +61,40 @@ namespace Swallow {
         Ref<GameObject> ret = std::make_shared<GameObject>();
         Ref<VertexArray> VA = VertexArray::Create();
 		float Verteces[4 * 9] = {
-			-1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
-			 1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 
-			 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 
-			-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f
+			-1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+			 1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 
+			 1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 
+			-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f
+		};
+        
+        Ref<VertexBuffer> VB = VertexBuffer::Create(Verteces, sizeof(Verteces));
+        VB->SetLayout({
+            { Swallow::ShaderDataType::Float3, "a_Position" },
+            { Swallow::ShaderDataType::Float3, "a_Normal" },
+            { Swallow::ShaderDataType::Float2, "a_TexCoord" },
+        });
+        VA->AddVertexBuffer(VB);
+        
+		uint32_t Indeces[3 * 2] = {
+			0, 1, 2,
+			2, 3, 0
+		};
+
+        Ref<IndexBuffer> IB = IndexBuffer::Create(Indeces, sizeof(Indeces) / sizeof(uint32_t));
+        VA->SetIndexBuffer(IB);
+        ret->SetVertexArray(VA);
+        return (ret);
+    }
+
+    Ref<GameObject> Primatives::CharQuad()
+    {
+        Ref<GameObject> ret = std::make_shared<GameObject>();
+        Ref<VertexArray> VA = VertexArray::Create();
+		float Verteces[4 * 9] = {
+			 0.0f,  1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+			 1.0f,  1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 
+			 1.0f,  0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 
+			 0.0f,  0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f
 		};
         
         Ref<VertexBuffer> VB = VertexBuffer::Create(Verteces, sizeof(Verteces));

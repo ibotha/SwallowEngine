@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FlatColourMaterial.hpp                             :+:      :+:    :+:   */
+/*   TextureMaterial.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ppreez <ppreez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/26 13:52:54 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/28 16:45:08 by ppreez           ###   ########.fr       */
+/*   Created: 2019/08/28 16:03:20 by ppreez            #+#    #+#             */
+/*   Updated: 2019/08/30 14:38:09 by ppreez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include "Swallow/Renderer/Renderer.hpp"
-#include "FlatColourMaterialInstance.hpp"
+#include "TextureMaterialInstance.hpp"
 
-namespace Swallow
-{
-    class FlatColourMaterial
+namespace Swallow {
+    
+    class TextureMaterial
     {
         public:
-			static void Init();
-        //     FlatColourMaterial();
-        //     FlatColourMaterial(FlatColourMaterial const &rhs);
-        //     FlatColourMaterial &operator=(FlatColourMaterial const &rhs);
-        //     ~FlatColourMaterial();
-			static Ref<FlatColourMaterialInstance> Create();
-
-		private:
-			static Ref<Shader> m_Shader;
+            static void Init();
+            static Ref<TextureMaterialInstance> Create();
+        private:
+            static Ref<Shader> m_Texture;
     };
 }

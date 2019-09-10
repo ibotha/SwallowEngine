@@ -36,6 +36,7 @@
 // -------------Asset Manager-----------------
 #include "Swallow/AssetManager/GameObject.hpp"
 #include "Swallow/AssetManager/Primatives.hpp"
+#include "Swallow/AssetManager/AnimationController.hpp"
 // -------------------------------------------
 
 #include "Swallow/Renderer/Camera.hpp"

@@ -2,7 +2,8 @@
 #include "Camera.hpp"
 #include "Buffer.hpp"
 #include "Shader.hpp"
-#include "../AssetManager/GameObject.hpp"
+#include "Text.hpp"
+#include "Swallow/AssetManager/GameObject.hpp"
 
 #include "RenderCommand.hpp"
 // TODO: Remove
@@ -25,6 +26,7 @@ namespace Swallow {
 		static void EndScene();
 
 		static void Submit(const Ref<GameObject>& object);
+		static void Submit(const Ref<Text>& object);
 
 		inline static RendererAPI::API GetAPI() { return RendererAPI::GetAPI(); }
 	private:
