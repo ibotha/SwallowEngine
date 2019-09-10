@@ -31,7 +31,7 @@ project "Sandbox"
 		enginedir .. "%{IncludeDir.Glad}",
 		enginedir .. "%{IncludeDir.glm}",
 		enginedir .. "%{IncludeDir.freetype}",
-		enginedir .. "%{IncludeDir.ImGui}"
+		enginedir .. "%{IncludeDir.ImGui}",
 		enginedir .. "%{IncludeDir.AssImp}",
 		enginedir .. "%{IncludeDir.AssImpBuild}"
 	}
@@ -59,7 +59,7 @@ project "Sandbox"
 			"GLFW",
 			"Glad",
 			"ImGui",
-			"freetype"
+			"freetype",
 			"AssImp"
 		}
 

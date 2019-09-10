@@ -33,6 +33,7 @@ private:
 	glm::vec4 pos;
 	glm::vec4 rot;
 	glm::vec4 col = {1, 1, 1, 1};
+	Swallow::Ref<Swallow::Text> m_Text;
 
 
 	Swallow::PerspectiveCamera m_Camera;

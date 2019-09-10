@@ -1,5 +1,6 @@
 #pragma once
-#include "GameObject.hpp" 
+
+#include "Swallow/AssetManager/GameObject.hpp"
 
 namespace Swallow
 {

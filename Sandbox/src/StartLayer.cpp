@@ -27,7 +27,6 @@ StartLayer::StartLayer()
 	m_Floor->GetTransform()->SetPosition(glm::vec3(0.0, -0.0, -2.0));
 	m_Floor->GetTransform()->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_Floor->GetTransform()->Recalculate();
-<<<<<<< HEAD
 	SW_INFO("HERE");
 
 	m_Text = Swallow::Text::Create();
@@ -51,7 +50,6 @@ the DEATH STAR, an armored space station with enough
 	m_Text->GetTransform()->SetScale(glm::vec3(0.4f, 0.4f, 0.4f));
 	m_Text->Recalculate();
 	SW_INFO("HERE");
-=======
 
 	//Load objects (testing framework beta 0.0.01 alpha beta)
 	m_skull = std::make_shared<Swallow::GameObject>();
@@ -59,7 +57,7 @@ the DEATH STAR, an armored space station with enough
 	m_skull->GetTransform()->SetPosition(glm::vec3(0, -0.65f, 0));
 	m_skull->GetTransform()->SetScale(glm::vec3(0.1f, 0.1f, 0.1f));
 	m_skull->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
-	m_skull->SetVertexArray(Swallow::AssetManager::FetchObject("Car", "Lamborghini_Aventador"));
+	// m_skull->SetVertexArray(Swallow::AssetManager::FetchObject("Car", "Lamborghini_Aventador"));
 	m_skull->GetTransform()->Recalculate();
 
 	animMaterial = Swallow::AnimationMaterial::Create();
@@ -71,7 +69,7 @@ the DEATH STAR, an armored space station with enough
 	m_StateAnimationTest->GetTransform()->SetPosition(glm::vec3(0, -0.65f, 0));
 	m_StateAnimationTest->GetTransform()->SetScale(glm::vec3(0.1f, 0.1f, 0.1f));
 	m_StateAnimationTest->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
-	m_StateAnimationTest->SetVertexArray(Swallow::AssetManager::FetchObject("Torus", "Torus"));
+	// m_StateAnimationTest->SetVertexArray(Swallow::AssetManager::FetchObject("Torus", "Torus"));
 	m_StateAnimationTest->GetTransform()->Recalculate();
 
 
@@ -82,7 +80,7 @@ the DEATH STAR, an armored space station with enough
 	m_StateAnimationTest2->GetTransform()->SetScale(glm::vec3(0.1f, 0.1f, 0.1f));
 	m_StateAnimationTest2->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
 	m_StateAnimationTest2->SetVertexArray(Swallow::VertexArray::Create());
-	m_StateAnimationTest2->GetVertexArray()->SetIndexBuffer(Swallow::AssetManager::FetchObject("Pillar", "Cube.001")->GetIndexBuffer());
+	// m_StateAnimationTest2->GetVertexArray()->SetIndexBuffer(Swallow::AssetManager::FetchObject("Pillar", "Cube.001")->GetIndexBuffer());
 	m_StateAnimationTest2->GetTransform()->Recalculate();
 
 	//m_PillarAnimation = Swallow::AnimationController::Create();
@@ -99,7 +97,6 @@ the DEATH STAR, an armored space station with enough
 	m_PillarAnimation2->AddKeyFrame("Cube.009");
 
 	m_PillarAnimationMid = m_PillarAnimation;
->>>>>>> 71330948a42a3561307c74cb9c4a37a32dbc077d
 }
 
 void StartLayer::OnEvent(Swallow::Event &e) {
@@ -208,27 +205,24 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 
 	//Create a primative
 
-	// static int state = 0;
-	// static float rot = 0.0f;
-	if (m_PillarAnimationMid->Advance(1 * ts.GetSeconds()) || true)
-	{
-		m_StateAnimationTest2->GetVertexArray()->GetVertexBuffers().clear();
-		m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVB1());
-		m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVB2());
-	}
-	m_StateAnimationTest2->GetTransform()->Recalculate();
-	animMaterial->SetAnim(glm::vec1(m_PillarAnimationMid->GetAdvancedTime()));//animMaterial->SetAnim(glm::vec1(rot));
-	Swallow::Renderer::Submit(m_StateAnimationTest2);
+	static float rot = 0.0f;
+	// if (m_PillarAnimationMid->Advance(1 * ts.GetSeconds()) || true)
+	// {
+	// 	m_StateAnimationTest2->GetVertexArray()->GetVertexBuffers().clear();
+	// 	m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVB1());
+	// 	m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVB2());
+	// }
+	// m_StateAnimationTest2->GetTransform()->Recalculate();
+	// animMaterial->SetAnim(glm::vec1(m_PillarAnimationMid->GetAdvancedTime()));//animMaterial->SetAnim(glm::vec1(rot));
+	// Swallow::Renderer::Submit(m_StateAnimationTest2);
 	
 
-<<<<<<< HEAD
-	m_Text->GetTransform()->SetPosition(glm::vec3(0.0, rot / 3.0 - 5, -2.0));
+	m_Text->GetTransform()->SetPosition(glm::vec3(0.0, rot / 3.0f - 5.f, -2.0));
 	m_Text->Recalculate();
 
-	Swallow::Renderer::Submit(m_Cube);
-	Swallow::Renderer::Submit(m_Floor);
+	// Swallow::Renderer::Submit(m_Cube);
+	// Swallow::Renderer::Submit(m_Floor);
 	Swallow::Renderer::Submit(m_Text);
-=======
 	//Swallow::Renderer::Submit(m_Cube);
 	//Swallow::Renderer::Submit(m_Floor);
 	
@@ -240,7 +234,6 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 	//Swallow::Renderer::Submit(m_StateAnimationTest);
 
 	//m_StateAnimationTest2->SetVertexArray(Swallow::AssetManager::Animate("Pillar", "Cube"));
->>>>>>> 71330948a42a3561307c74cb9c4a37a32dbc077d
 
 	Swallow::Renderer::EndScene();
 }

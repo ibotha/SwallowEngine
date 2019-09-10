@@ -60,7 +60,7 @@ project "Swallow"
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.freetype}"
+		"%{IncludeDir.freetype}",
 		"%{IncludeDir.AssImp}",
 		"%{IncludeDir.AssImpBuild}"
 	}

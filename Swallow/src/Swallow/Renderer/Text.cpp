@@ -1,6 +1,6 @@
 #include "swpch.hpp"
 #include "Text.hpp"
-#include "Primatives.hpp"
+#include "Swallow/AssetManager/Primatives.hpp"
 #include "Renderer.hpp"
 #include "Swallow/Renderer/material/CharMaterial.hpp"
 #include "material/CharMaterialInstance.hpp"
