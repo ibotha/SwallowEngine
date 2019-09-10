@@ -14,7 +14,6 @@ namespace Swallow
 		~Audio();
 
 		static void Init();
-		static void Submit(const Ref<AudioBuffer>& object);
 
 		inline  static AudioAPI::API GetAPI() { return AudioAPI::GetAPI(); }
 	};

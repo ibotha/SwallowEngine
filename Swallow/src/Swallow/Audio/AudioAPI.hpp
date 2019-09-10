@@ -12,6 +12,10 @@ namespace Swallow
 
 	public:
 		virtual void Init() = 0;
+		virtual void SetPosition(const glm::vec3& pos) = 0;
+		virtual void SetVelocity(const glm::vec3& vel) = 0;
+		virtual void SetAt(const glm::vec3& at) = 0;
+		virtual void SetUp(const glm::vec3& up) = 0;
 
 		inline static API GetAPI() { return s_API;  }
 

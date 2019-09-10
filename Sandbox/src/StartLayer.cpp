@@ -74,7 +74,13 @@ StartLayer::StartLayer()
 	m_skull->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
 	m_skull->SetVertexArray(Swallow::AssetManager::FetchObject("Skull", "skull"));
 	m_skull->GetTransform()->Recalculate();
-	Swallow::Ref<Swallow::AudioBuffer> x = Swallow::AudioBuffer::Create("assets/Sounds/InGameSound.wav");
+
+	x = Swallow::AudioBuffer::Create("assets/Sounds/InGameSound.wav");
+	s = Swallow::AudioSource::Create();
+	s->SetPosition({0.0f, 0.0f, 0.0f});
+	s->SetVelocity({0.f, 0.f, 0.f});
+	s->SetLooping(true);
+	s->Play(x);
 
 }
 
@@ -180,8 +186,9 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 
 	//Create a primative
 
-	static float rot = 0.0f;
-	rot += 1.0f * ts.GetSeconds();
+	static float rot = 10.0f;
+	rot -= 1.0f * ts.GetSeconds();
+	Swallow::AudioCommand::SetPosition(m_Camera.GetPosition());
 
 	Swallow::Renderer::Submit(m_Cube);
 	Swallow::Renderer::Submit(m_Floor);

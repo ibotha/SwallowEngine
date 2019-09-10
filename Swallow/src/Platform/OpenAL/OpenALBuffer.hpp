@@ -15,7 +15,7 @@ namespace Swallow
 		OpenALBuffer(const OpenALBuffer&) = default;
 		OpenALBuffer &operator=(const OpenALBuffer&) = default;
 
-		inline uint32_t GetID() { return m_Id; }
+		virtual uint32_t GetID() const override { return m_Id; }
 		~OpenALBuffer();
 	};
 }

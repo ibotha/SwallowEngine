@@ -30,6 +30,7 @@
 #include "Swallow/Audio/AudioCommand.hpp"
 
 #include "Swallow/Audio/AudioBuffer.hpp"
+#include "Swallow/Audio/AudioSource.hpp"
 // -------------------------------------------
 
 // -------------Asset Manager-----------------

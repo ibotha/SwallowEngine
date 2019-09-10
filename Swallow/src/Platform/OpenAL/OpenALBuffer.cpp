@@ -66,10 +66,6 @@ namespace Swallow
 		char* data = new char[size];
 		in.read(data, size);
 
-		auto device = alcOpenDevice(0);
-		auto context = alcCreateContext(device, 0);
-		alcMakeContextCurrent(context);
-
 		alGenBuffers(1, &m_Id);
 
 		if (chan == 1)
@@ -93,13 +89,6 @@ namespace Swallow
 		}
 		alBufferData(this->m_Id, format, data, size, samplerate);
 
-		unsigned int	source;
-		alGenSources(1, &source);
-
-		alSourcei(source, AL_BUFFER, this->m_Id);
-		alSourcei(source, AL_LOOPING, AL_TRUE);
-
-		alSourcePlay(source);
 	}
 
 	OpenALBuffer::~OpenALBuffer()

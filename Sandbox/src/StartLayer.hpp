@@ -15,6 +15,8 @@ private:
 	Swallow::Ref<Swallow::GameObject> m_Cube;
 	Swallow::Ref<Swallow::GameObject> m_skull;
 	Swallow::Ref<Swallow::Texture2D> m_CheckerBoardTexture;
+	Swallow::Ref<Swallow::AudioBuffer> x;
+	Swallow::Ref<Swallow::AudioSource> s;
 	
 	//Pieter test
 	Swallow::Ref<Swallow::FlatColourMaterialInstance> m_FloorMaterial;
