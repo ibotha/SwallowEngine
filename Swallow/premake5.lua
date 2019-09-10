@@ -20,6 +20,7 @@ IncludeDir["stb_image"] = "vendor/stb_image"
 IncludeDir["freetype"] = "vendor/freetype/include"
 IncludeDir["AssImp"] = "vendor/AssImp/include"
 IncludeDir["AssImpBuild"] = "vendor/AssImp/build/include"
+IncludeDir["OpenAL"] = "vendor/OpenAL/include"
 
 group "Dependencies"
 	include "vendor/GLFW"
@@ -27,6 +28,7 @@ group "Dependencies"
 	include "vendor/imgui"
 	include "vendor/freetype"
 	include "vendor/AssImp"
+	include "vendor/OpenAL"
 group ""
 
 project "Swallow"
@@ -62,7 +64,8 @@ project "Swallow"
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.freetype}",
 		"%{IncludeDir.AssImp}",
-		"%{IncludeDir.AssImpBuild}"
+		"%{IncludeDir.AssImpBuild}",
+		"%{IncludeDir.OpenAL}"
 	}
 
 	links
@@ -71,6 +74,7 @@ project "Swallow"
 		"Glad",
 		"AssImp",
 		"ImGui",
+		"OpenAL",
 		"freetype",
 		"opengl32.lib"
 	}

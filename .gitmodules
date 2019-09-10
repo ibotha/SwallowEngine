@@ -10,6 +10,9 @@
 [submodule "Swallow/vendor/spdlog"]
 	path = Swallow/vendor/spdlog
 	url = https://github.com/ibotha/spdlog
+[submodule "Swallow/vendor/OpenAL"]
+	path = Swallow/vendor/OpenAL
+	url = https://github.com/WolfenGames/openal-soft.git
 [submodule "Swallow/vendor/freetype"]
 	path = Swallow/vendor/freetype
 	url = https://github.com/pdpreez/freetype.git
