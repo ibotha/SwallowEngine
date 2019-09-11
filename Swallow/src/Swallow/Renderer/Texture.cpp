@@ -3,6 +3,9 @@
 #include "Renderer.hpp"
 #include "Platform/OpenGL/OpenGLTexture.hpp"
 
+#include "ft2build.h"
+#include FT_FREETYPE_H
+
 namespace Swallow {
 
 	Texture2D::Texture2D(){}
@@ -26,6 +29,20 @@ namespace Swallow {
 			return nullptr;
 		case RendererAPI::API::OpenGL:
 			return std::make_shared<OpenGLTexture2D>(path);
+		default:
+			break;
+		}
+		return nullptr;
+	}
+
+	Ref<Character> Character::Create(const FT_GlyphSlot glyph)
+	{
+		switch (Renderer::GetAPI())
+		{
+		case RendererAPI::API::None:
+			return nullptr;
+		case RendererAPI::API::OpenGL:
+			return std::make_shared<OpenGLCharacter>(glyph);
 		default:
 			break;
 		}

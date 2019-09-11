@@ -25,10 +25,18 @@
 #include "Swallow/Renderer/Texture.hpp"
 #include "Swallow/Renderer/VertexArray.hpp"
 // -------------------------------------------
+// ---------------Audio--------------------
+#include "Swallow/Audio/Audio.hpp"
+#include "Swallow/Audio/AudioCommand.hpp"
+
+#include "Swallow/Audio/AudioBuffer.hpp"
+#include "Swallow/Audio/AudioSource.hpp"
+// -------------------------------------------
 
 // -------------Asset Manager-----------------
 #include "Swallow/AssetManager/GameObject.hpp"
 #include "Swallow/AssetManager/Primatives.hpp"
+#include "Swallow/AssetManager/AnimationController.hpp"
 // -------------------------------------------
 
 #include "Swallow/Renderer/Camera.hpp"

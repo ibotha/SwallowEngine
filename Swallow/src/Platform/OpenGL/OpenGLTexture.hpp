@@ -25,4 +25,30 @@ namespace Swallow {
 		uint32_t m_RendererID;
 	};
 
+	class OpenGLCharacter : public Character
+	{
+	public:
+		OpenGLCharacter(const FT_GlyphSlot glyph);
+		OpenGLCharacter(const OpenGLCharacter &rhs) = default;
+		OpenGLCharacter &operator=(const OpenGLCharacter &rhs) = default;
+		virtual ~OpenGLCharacter() = default;
+
+		// Inherited via Texture2D
+		virtual uint32_t GetWidth() const override;
+		virtual uint32_t GetHeight() const override;
+		virtual int32_t GetTop() const override;
+		virtual int32_t GetLeft() const override;
+		virtual int32_t GetAdvance() const override;
+		virtual void Bind(uint32_t slot = 0) const override;
+	private:
+
+		unsigned int ChannelType(int channel);
+		unsigned int InternalChannelType(int channel);
+		int32_t m_Width, m_Height;
+		int32_t m_Left, m_Top;
+		int32_t m_Advance;
+
+		uint32_t m_RendererID;
+	};
+
 }

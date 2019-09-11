@@ -19,6 +19,8 @@ namespace Swallow {
         static void ListObjects();
         static void ListMeshes(const std::string& byName);
 
+        static Ref<VertexArray> Animate(const std::string& byName, const std::string& meshName);
+
     private:
         AssetManager();
         AssetManager &operator=(const AssetManager&) = default;
@@ -27,6 +29,13 @@ namespace Swallow {
 
         static std::map<std::string, std::map<std::string, Ref<VertexArray>>> Objects;
         static std::map<std::string, Ref<Texture2D>> Textures;
+
+        //Testing Animation (Crude)
+        static size_t iterator;
+        static size_t delay;
+        static size_t delayCounter;
+        static std::string mainMeshName;
+
 
         /*
         inline void SetTransform(Ref<Transform> transform) { m_Transform = transform; }

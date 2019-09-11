@@ -3,39 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   FlatColourMaterial.cpp                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibotha <ibotha@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ppreez <ppreez@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/26 14:38:21 by ppreez            #+#    #+#             */
-/*   Updated: 2019/08/28 14:42:54 by ibotha           ###   ########.fr       */
+/*   Updated: 2019/09/05 13:13:04 by ppreez           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "swpch.hpp"
 #include "FlatColourMaterial.hpp"
-
-// FlatColourMaterial::FlatColourMaterial()
-// {
-
-// }
-
-// FlatColourMaterial::FlatColourMaterial(FlatColourMaterial const &rhs)
-// {
-//     *this = rhs;
-// }
-
-// FlatColourMaterial &FlatColourMaterial::operator=(FlatColourMaterial const &rhs)
-// {
-//     if (this != &rhs)
-//     {
-//         *this = rhs;
-//     }
-//     return *this;
-// }
-
-// FlatColourMaterial::~FlatColourMaterial()
-// {
-
-// }
 
 namespace Swallow
 {

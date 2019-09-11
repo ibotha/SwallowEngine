@@ -30,9 +30,11 @@ project "Sandbox"
 		enginedir .. "%{IncludeDir.GLFW}",
 		enginedir .. "%{IncludeDir.Glad}",
 		enginedir .. "%{IncludeDir.glm}",
+		enginedir .. "%{IncludeDir.freetype}",
 		enginedir .. "%{IncludeDir.ImGui}",
 		enginedir .. "%{IncludeDir.AssImp}",
-		enginedir .. "%{IncludeDir.AssImpBuild}"
+		enginedir .. "%{IncludeDir.AssImpBuild}",
+		enginedir .. "%{IncludeDir.OpenAL}"
 	}
 
 	links
@@ -55,9 +57,15 @@ project "Sandbox"
 			"OpenGL.framework",
 			"GLUT.framework",
 			"CoreVideo.framework",
+			"OpenAL.framework",
+			"AudioUnit.framework",
+			"AudioToolbox.framework",
+			"CoreAudio.framework",
 			"GLFW",
 			"Glad",
 			"ImGui",
+			"OpenAL",
+			"freetype",
 			"AssImp"
 		}
 
