@@ -165,79 +165,91 @@ namespace Swallow {
 		glUseProgram(0);
 	}
 	
+	int32_t OpenGLShader::GetUniformLocation(const std::string &name)
+	{
+		if (m_Cache.find(name) != m_Cache.end())
+		{
+			return m_Cache[name];
+		}
+		SW_CORE_TRACE("Cache miss: {}", name);
+		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		m_Cache[name] = loc;
+		return loc;
+	}
+
 	void OpenGLShader::UploadUniformFloat1(std::string const &name, glm::vec1 const &v)
 	{
-		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		int32_t loc = GetUniformLocation(name);
 		if (loc != -1)
 			glUniform1f(loc, v.x);
 	}
 
 	void OpenGLShader::UploadUniformFloat2(std::string const &name, glm::vec2 const &v)
 	{
-		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		int32_t loc = GetUniformLocation(name);
 		if (loc != -1)
 			glUniform2f(loc, v.x, v.y);
 	}
 
 	void OpenGLShader::UploadUniformFloat3(std::string const &name, glm::vec3 const &v)
 	{
-		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		int32_t loc = GetUniformLocation(name);
 		if (loc != -1)
 			glUniform3f(loc, v.x, v.y, v.z);
 	}
 
 	void OpenGLShader::UploadUniformFloat4(std::string const &name, glm::vec4 const &v)
 	{
-		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		int32_t loc = GetUniformLocation(name);
 		if (loc != -1)
 			glUniform4f(loc, v.x, v.y, v.z, v.w);
 	}
 
 	void OpenGLShader::UploadUniformInt1(std::string const &name, glm::ivec1 const &v)
 	{
-		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		int32_t loc = GetUniformLocation(name);
 		if (loc != -1)
 			glUniform1i(loc, v.x);
 	}
 
 	void OpenGLShader::UploadUniformInt2(std::string const &name, glm::ivec2 const &v)
 	{
-		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		int32_t loc = GetUniformLocation(name);
 		if (loc != -1)
 			glUniform2i(loc, v.x, v.y);
 	}
 
 	void OpenGLShader::UploadUniformInt3(std::string const &name, glm::ivec3 const &v)
 	{
-		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		int32_t loc = GetUniformLocation(name);
 		if (loc != -1)
 			glUniform3i(loc, v.x, v.y, v.z);
 	}
 
 	void OpenGLShader::UploadUniformInt4(std::string const &name, glm::ivec4 const &v)
 	{
-		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		int32_t loc = GetUniformLocation(name);
 		if (loc != -1)
 			glUniform4i(loc, v.x, v.y, v.z, v.w);
 	}
 
 	void OpenGLShader::UploadUniformMat2(std::string const &name, glm::mat2 const &m)
 	{
-		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		int32_t loc = GetUniformLocation(name);
 		if (loc != -1)
 			glUniformMatrix2fv(loc, 1, false, &m[0][0]);
 	}
 
 	void OpenGLShader::UploadUniformMat3(std::string const &name, glm::mat3 const &m)
 	{
-		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		int32_t loc = GetUniformLocation(name);
 		if (loc != -1)
 			glUniformMatrix3fv(loc, 1, false, &m[0][0]);
 	}
 
 	void OpenGLShader::UploadUniformMat4(std::string const &name, glm::mat4 const &m)
 	{
-		int32_t loc = glGetUniformLocation(m_RendererID, name.c_str());
+		int32_t loc = GetUniformLocation(name);
 		if (loc != -1)
 			glUniformMatrix4fv(loc, 1, false, &m[0][0]);
 	}
