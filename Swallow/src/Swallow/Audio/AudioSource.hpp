@@ -18,7 +18,10 @@ namespace Swallow
 			virtual glm::vec3 GetPosition() const = 0;
 			virtual glm::vec3 GetVelocity() const = 0;
 
-			virtual void Play(const Ref<AudioBuffer>& buffer) = 0;
+			virtual void SetBuffer(const Ref<AudioBuffer>& buffer) = 0;
+			virtual void Pause() = 0;
+			virtual void Play() = 0;
+			virtual void Stop() = 0;
 
 			static Ref<AudioSource> Create();
 	};

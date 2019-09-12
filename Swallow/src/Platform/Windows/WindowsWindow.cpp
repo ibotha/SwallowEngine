@@ -34,9 +34,6 @@ namespace Swallow {
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
-		SW_CORE_INFO("Creating Window {0} ({1}, {2})", m_Data.Title, m_Data.Width, m_Data.Height);
-
-
 		if (!s_GLFWInitialized) {
 			int success = glfwInit();
 

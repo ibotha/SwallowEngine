@@ -19,7 +19,10 @@ namespace Swallow
 			virtual glm::vec3 GetPosition() const override;
 			virtual glm::vec3 GetVelocity() const override;
 
-			virtual void Play(const Ref<AudioBuffer>& buffer) override;
+			virtual void SetBuffer(const Ref<AudioBuffer>& buffer) override;
+			virtual void Pause() override;
+			virtual void Play() override;
+			virtual void Stop() override;
 
 		private:
 
