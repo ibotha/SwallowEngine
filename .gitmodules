@@ -16,3 +16,6 @@
 [submodule "Swallow/vendor/AssImp"]
 	path = Swallow/vendor/AssImp
 	url = https://github.com/ibotha/AssImp
+[submodule "Swallow/vendor/freetype"]
+	path = Swallow/vendor/freetype
+	url = https://github.com/ibotha/freetype.git
