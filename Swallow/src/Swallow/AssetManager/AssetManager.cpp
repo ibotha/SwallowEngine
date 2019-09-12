@@ -80,7 +80,7 @@ namespace Swallow {
         }
         else
         {
-            std::cout << "Loading Mesh Error!" << std::endl;
+            SW_CORE_WARN("Loading Mesh Error! {} : {}", name, path);
         }
 
         Objects.insert(std::make_pair(name, VAinfo));
