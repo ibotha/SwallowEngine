@@ -19,8 +19,6 @@ namespace Swallow {
         static void ListObjects();
         static void ListMeshes(const std::string& byName);
 
-        static Ref<VertexArray> Animate(const std::string& byName, const std::string& meshName);
-
     private:
         AssetManager();
         AssetManager &operator=(const AssetManager&) = default;
