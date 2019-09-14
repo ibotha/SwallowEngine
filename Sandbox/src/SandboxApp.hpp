@@ -1,6 +1,6 @@
 #pragma once
 #include <Swallow.hpp>
-#include "StartLayer.hpp"
+#include "Layer2D.hpp"
 
 class Sandbox : public Swallow::Application
 {
@@ -12,5 +12,5 @@ private:
 	Sandbox(const Sandbox &s) = default;
 	Sandbox &operator=(const Sandbox &s) = default;
 
-	Swallow::Ref<StartLayer> m_StartLayer;
+	Swallow::Ref<Layer2D> m_StartLayer;
 };

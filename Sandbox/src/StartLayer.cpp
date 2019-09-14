@@ -65,6 +65,7 @@ void StartLayer::OnEvent(Swallow::Event &e) {
 	dispatcher.Dispatch<Swallow::MouseButtonPressedEvent>(BIND_EVENT_FN(StartLayer::OnMouseButtonPressed));
 	dispatcher.Dispatch<Swallow::MouseMovedEvent>(BIND_EVENT_FN(StartLayer::OnMouseMovedEvent));
 	dispatcher.Dispatch<Swallow::KeyPressedEvent>(BIND_EVENT_FN(StartLayer::OnKeyPressed));
+	dispatcher.Dispatch<Swallow::WindowResizeEvent>(BIND_EVENT_FN(StartLayer::OnWindowResize));
 }
 
 bool StartLayer::OnMouseButtonPressed(Swallow::MouseButtonPressedEvent &e)
@@ -75,6 +76,12 @@ bool StartLayer::OnMouseButtonPressed(Swallow::MouseButtonPressedEvent &e)
 		rot = glm::vec4(0, 0, 0, 1);
 	}
 	return true;
+}
+
+bool StartLayer::OnWindowResize(Swallow::WindowResizeEvent &e)
+{
+	m_Camera = Swallow::PerspectiveCamera(glm::radians(60.0f), Swallow::Application::Get().GetWindow().GetWidth() / (float)Swallow::Application::Get().GetWindow().GetHeight(), 0.0001f, 100000.0f);
+	return false;
 }
 
 bool StartLayer::OnMouseMovedEvent(Swallow::MouseMovedEvent &e)
@@ -100,7 +107,6 @@ void StartLayer::OnImGuiRender() {
 
 void StartLayer::OnUpdate(Swallow::Timestep ts) {
 	
-	m_Camera = Swallow::PerspectiveCamera(glm::radians(60.0f), Swallow::Application::Get().GetWindow().GetWidth() / (float)Swallow::Application::Get().GetWindow().GetHeight(), 0.0001f, 100000.0f);
 	float moveSpeed = 5.0f;
 
 	m_YVelocity -= 16.8f * ts.GetSeconds();
@@ -160,7 +166,7 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 	Swallow::Renderer::BeginScene(m_Camera);
 	static float rot = 0.0f;
 	rot += 1.0f * ts.GetSeconds();
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour"))->UploadUniformFloat4("u_Color", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour"))->UploadUniformFloat4("u_Colour", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
 	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour")), m_SquareVA, glm::translate(glm::vec3(4.0, 0.0, 0.0)));
 	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("texture"))->Bind();
 	m_CheckerBoardTexture->Bind(1);
@@ -171,7 +177,7 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("texture")), m_SquareVA, glm::translate(glm::vec3(-4.0, 0.0, 0.0)) * glm::rotate(rot, glm::vec3(1, 0, 0)));
 	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour"))->Bind();
 	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour"))->UploadUniformMat4("u_Rot", glm::identity<glm::mat4>());
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour"))->UploadUniformFloat4("u_Color", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour"))->UploadUniformFloat4("u_Colour", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour")), m_SquareVA, glm::translate(glm::vec3(0.0, -2.01, -0.0)) * glm::scale(glm::vec3(100, 1, 100)));
 
 	Swallow::Renderer::EndScene();
