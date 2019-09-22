@@ -5,22 +5,28 @@
 namespace Swallow {
 
 	Camera::Camera(const glm::mat4 &projection)
-		:m_Position({ 0, 0, 0 }), m_Rotation({0, 0, 0}), m_ProjectionMatrix(projection)
+		:m_ProjectionMatrix(projection)
 	{
 		Recalculate();
 	}
 
 	void Camera::Recalculate()
 	{
-		glm::mat4 xRotation = glm::rotate(glm::mat4(1.0f), m_Rotation.x, glm::vec3(1, 0, 0));
-		glm::mat4 yRotation = glm::rotate(glm::mat4(1.0f), m_Rotation.y, glm::vec3(0, 1, 0));
-		glm::mat4 zRotation = glm::rotate(glm::mat4(1.0f), m_Rotation.z, glm::vec3(0, 0, 1));
-		m_TranslationMatrix = glm::translate(glm::mat4(1.0f), m_Position);
-		m_RotationMatrix = zRotation * yRotation * xRotation;
-		m_TranslationMatrix = glm::inverse(m_TranslationMatrix);
-		m_RotationMatrix = glm::inverse(m_RotationMatrix);
 		m_ViewMatrix = m_RotationMatrix * m_TranslationMatrix;
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+	}
+
+	void Camera::SetRotation(const glm::vec3 & rotation)
+	{
+		glm::mat4 xRotation = glm::rotate(glm::mat4(1.0f), -rotation.x, glm::vec3(1, 0, 0));
+		glm::mat4 yRotation = glm::rotate(glm::mat4(1.0f), -rotation.y, glm::vec3(0, 1, 0));
+		glm::mat4 zRotation = glm::rotate(glm::mat4(1.0f), -rotation.z, glm::vec3(0, 0, 1));
+		m_RotationMatrix = xRotation * yRotation * zRotation;
+	}
+
+	void Camera::SetPosition(const glm::vec3 & position)
+	{
+		m_TranslationMatrix = glm::translate(glm::mat4(1.0f), -position);
 	}
 
 	OrthographicCamera::OrthographicCamera(float left, float right, float bottom, float top)

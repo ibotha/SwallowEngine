@@ -20,7 +20,7 @@ namespace Swallow {
 
 		static void Init();
 
-		static void BeginScene(Camera& c);
+		static void BeginScene(const Camera& c);
 		static void EndScene();
 
 		static void Submit(const Ref<OpenGLShader>& shader, const Ref<VertexArray>& vertexArray, const glm::mat4& transform = glm::mat4(1.0f));

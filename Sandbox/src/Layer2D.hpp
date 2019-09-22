@@ -9,11 +9,9 @@ private:
 	Swallow::ShaderLibrary m_SLib;
 
 	glm::vec4 col;
-	glm::vec4 pos;
-	glm::vec4 rot;
 
 
-	Swallow::OrthographicCamera m_Camera;
+	Swallow::OrthographicCameraController m_Camera;
 public:
 	Layer2D();
 	virtual ~Layer2D() = default;

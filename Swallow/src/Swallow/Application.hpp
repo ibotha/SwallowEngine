@@ -2,7 +2,6 @@
 
 #include "Core.hpp"
 
-#define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 #include "Window.hpp"
 #include "LayerStack.hpp"
 #include "Events/Event.hpp"

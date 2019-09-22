@@ -12,12 +12,9 @@ namespace Swallow {
 		Camera(const glm::mat4 &projection);
 
 		void Recalculate();
-		void SetRotation(const glm::vec3 &rotation) { m_Rotation = rotation; }
-		void SetPosition(const glm::vec3 &position) { m_Position = position; }
+		void SetRotation(const glm::vec3 &rotation);
+		void SetPosition(const glm::vec3 &position);
 
-
-		const glm::vec3 & GetRotation() const { return m_Rotation; }
-		const glm::vec3 & GetPosition() const { return m_Position; }
 		const glm::mat4 & GetRotationMatrix() const { return m_RotationMatrix; }
 		const glm::mat4 & GetTranslationMatrix() const { return m_TranslationMatrix; }
 		const glm::mat4 & GetViewMatrix() const { return m_ViewMatrix; }
@@ -34,8 +31,6 @@ namespace Swallow {
 		glm::mat4 m_RotationMatrix;
 		glm::mat4 m_TranslationMatrix;
 		glm::mat4 m_ViewMatrix;
-		glm::vec3 m_Position;
-		glm::vec3 m_Rotation;
 	};
 
 	class OrthographicCamera : public Camera

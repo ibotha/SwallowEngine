@@ -25,7 +25,7 @@ namespace Swallow {
 		RenderCommand::Init();
 	}
 
-	void Renderer::BeginScene(Camera &c)
+	void Renderer::BeginScene(const Camera &c)
 	{
 		s_SceneData->ViewProjectionMatrix = c.GetViewProjectionMatrix();
 	}

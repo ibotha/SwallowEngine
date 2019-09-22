@@ -6,11 +6,8 @@
 
 
 Layer2D::Layer2D()
-	:m_Camera(-1 * AR, 1 * AR, -1, 1)
+	:m_Camera(AR)
 {
-	m_Camera.SetPosition(glm::vec3(0.0f));
-	m_Camera.SetRotation(glm::vec3(0.0f));
-	m_Camera.Recalculate();
 	m_SquareVA = Swallow::VertexArray::Create();
 	float vertices[] = {
 		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
@@ -37,14 +34,12 @@ Layer2D::Layer2D()
 
 bool Layer2D::OnWindowResize(Swallow::WindowResizeEvent & e)
 {
-	float ar = e.GetWidth() / static_cast<float>(e.GetHeight());
-	m_Camera.SetProjectionMatrix(-1 * ar, 1 * ar, 1, 1);
-	m_Camera.Recalculate();
 	return false;
 }
 
 void Layer2D::OnEvent(Swallow::Event & e)
 {
+	m_Camera.OnEvent(e);
 	Swallow::EventDispatcher d(e);
 	d.Dispatch<Swallow::WindowResizeEvent>(BIND_EVENT_FN(Layer2D::OnWindowResize));
 }
@@ -58,7 +53,8 @@ void Layer2D::OnImGuiRender()
 
 void Layer2D::OnUpdate(Swallow::Timestep ts)
 {
-	Swallow::Renderer::BeginScene(m_Camera);
+	m_Camera.OnUpdate(ts);
+	Swallow::Renderer::BeginScene(m_Camera.GetCamera());
 	Swallow::Ref<Swallow::OpenGLShader> &t = std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("Texture"));
 	Swallow::Ref<Swallow::OpenGLShader> &fc = std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("Flatcolour"));
 	m_CheckerBoardTexture->Bind(0);
