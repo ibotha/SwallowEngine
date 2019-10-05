@@ -39,10 +39,12 @@ namespace Swallow {
 		inline void End() { m_Running = false; }
 	private:
 		bool OnWindowClose(WindowCloseEvent &e);
+		bool OnWindowResize(WindowResizeEvent &e);
 
 		Scope<Window> m_Window;
 		Ref<ImGuiLayer> m_ImGuiLayer;
 		bool m_Running = true;
+		bool m_Minimised = false;
 		LayerStack m_LayerStack;
 
 		static Application* s_Instance;

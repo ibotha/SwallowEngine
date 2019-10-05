@@ -53,6 +53,7 @@ namespace Swallow {
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
+		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{
@@ -73,11 +74,12 @@ namespace Swallow {
 			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 			RenderCommand::Clear();
 
-			for (Ref<Layer> layer : m_LayerStack)
-			{
-				RenderCommand::ClearDepth();
-				layer->OnUpdate(timestep);
-			}
+			if (!m_Minimised)
+				for (Ref<Layer> layer : m_LayerStack)
+				{
+					RenderCommand::ClearDepth();
+					layer->OnUpdate(timestep);
+				}
 
 			m_ImGuiLayer->Begin();
 
@@ -94,6 +96,20 @@ namespace Swallow {
 	{
 		m_Running = false;
 
-		return true;
+		return false;
+	}
+
+	bool Application::OnWindowResize(WindowResizeEvent & e)
+	{
+		if (e.GetWidth() == 0 || e.GetHeight() == 0)
+		{
+			m_Minimised = true;
+			return false;
+		}
+		m_Minimised = false;
+
+		Renderer::OnWindowResize(e.GetWidth(), e.GetHeight());
+
+		return false;
 	}
 }

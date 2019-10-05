@@ -24,6 +24,9 @@ namespace Swallow {
 		virtual inline Camera &GetCamera() override { return m_Camera; }
 		virtual void OnEvent(Event &e) override;
 		virtual void OnUpdate(Timestep &ts) override;
+
+		inline void SetZoomLevel(float zoom) { m_ZoomLevel = zoom; }
+		inline float GetZoomLevel() const { return m_ZoomLevel; }
 	private:
 		bool OnMouseScrolled(MouseScrolledEvent &e);
 		bool OnWindowResize(WindowResizeEvent &e);
