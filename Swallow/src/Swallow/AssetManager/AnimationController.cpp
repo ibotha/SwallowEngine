@@ -1,7 +1,4 @@
 #include "AnimationController.hpp"
-#define ONGOING_KEYFRAME 0
-#define NEXT_KEYFRAME 1
-#define LAST_KEYFRAME 2
 
 namespace Swallow
 {
@@ -15,12 +12,18 @@ namespace Swallow
 
     int AnimationController::Advance(float deltaTime)
     {
+        int first = m_AdvanceTimer;
 		m_AdvanceTimer += deltaTime;
+        int  second = m_AdvanceTimer;
 		
-		if (m_AdvanceTimer >= m_KeyFrames.size() - 1)
-			m_AdvanceTimer = 0;
+		if (m_AdvanceTimer >= m_KeyFrames.size())
+        {
+            return LAST_KEYFRAME;
+        }
+        if (first != second)
+            return NEXT_KEYFRAME;
         
-        return 0;
+        return ONGOING_KEYFRAME;
     }
 
     Ref<AnimationController> AnimationController::Create(const std::string & assignedName)
@@ -35,12 +38,13 @@ namespace Swallow
 
     Ref<VertexBuffer> AnimationController::GetVertexBuffer1()
     {
-        return Swallow::AssetManager::FetchObject(m_BaseObjectName, m_KeyFrames[static_cast<int>(m_AdvanceTimer)])->GetVertexBuffers()[0];
+        SW_INFO("{}, {}", (static_cast<int>(m_AdvanceTimer) % m_KeyFrames.size()), ((static_cast<int>(m_AdvanceTimer) + 1) % m_KeyFrames.size()));
+        return Swallow::AssetManager::FetchObject(m_BaseObjectName, m_KeyFrames[static_cast<int>(m_AdvanceTimer) % m_KeyFrames.size()])->GetVertexBuffers()[0];
     }
 
     Ref<VertexBuffer> AnimationController::GetVertexBuffer2()
     {
-        return Swallow::AssetManager::FetchObject(m_BaseObjectName, m_KeyFrames[static_cast<int>(m_AdvanceTimer) + 1])->GetVertexBuffers()[0];
+        return Swallow::AssetManager::FetchObject(m_BaseObjectName, m_KeyFrames[(static_cast<int>(m_AdvanceTimer) + 1) % m_KeyFrames.size()])->GetVertexBuffers()[0];
     }
     
 }

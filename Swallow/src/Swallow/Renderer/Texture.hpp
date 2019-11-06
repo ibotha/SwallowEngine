@@ -21,7 +21,7 @@ namespace Swallow {
 		Texture2D(const Texture2D&);
 		Texture2D &operator=(const Texture2D&);
 		virtual ~Texture2D() = default;
-		static Ref<Texture2D> Create(const std::string& path);
+		static Ref<Texture2D> Create(const std::string& path, bool flipy = false);
 	};
 	
 	class Character : public Texture

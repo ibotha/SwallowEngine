@@ -23,6 +23,6 @@ namespace Swallow {
             static void Init();
             static Ref<TextureMaterialInstance> Create();
         private:
-            static Ref<Shader> m_Texture;
+            static Ref<Shader> m_Shader;
     };
 }
