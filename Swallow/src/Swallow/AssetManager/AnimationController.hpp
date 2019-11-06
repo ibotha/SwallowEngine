@@ -1,6 +1,9 @@
 #pragma once
 #include "GameObject.hpp"
 #include "AssetManager.hpp"
+#define ONGOING_KEYFRAME 0
+#define NEXT_KEYFRAME 1
+#define LAST_KEYFRAME 2
 
 namespace Swallow {
 
@@ -17,8 +20,10 @@ namespace Swallow {
         void AddKeyFrame(std::string keyframeName);
         
         inline void SetBaseObjectName(std::string baseName) { m_BaseObjectName = baseName; }
+
+        inline void SetAdvanceTimer(float time) { m_AdvanceTimer = time; }
         
-        inline float GetAdvancedTime() { return m_AdvanceTimer - static_cast<int>(m_AdvanceTimer); }
+        inline float GetAdvancedTime() { float bob = 1.0f; return glm::modf(m_AdvanceTimer, bob); }
         inline std::string GetBase() { return m_BaseObjectName; }
 
         Ref<VertexBuffer> GetVertexBuffer1();

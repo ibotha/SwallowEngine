@@ -6,7 +6,7 @@ namespace Swallow {
 	class OpenGLTexture2D : public Texture2D
 	{
 	public:
-		OpenGLTexture2D(const std::string& path);
+		OpenGLTexture2D(const std::string& path, bool flipy = false);
 		OpenGLTexture2D(const OpenGLTexture2D &rhs) = default;
 		OpenGLTexture2D &operator=(const OpenGLTexture2D &rhs) = default;
 		virtual ~OpenGLTexture2D();

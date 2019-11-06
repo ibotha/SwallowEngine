@@ -86,10 +86,10 @@ namespace Swallow {
         Objects.insert(std::make_pair(name, VAinfo));
     }
 
-    void AssetManager::LoadTexture(const std::string& name, const std::string& path)
+    void AssetManager::LoadTexture(const std::string& name, const std::string& path, bool flipy)
     {
-        (void)name;
-        (void)path;
+        Ref<Texture2D> tex = Texture2D::Create(path, flipy);
+        Textures.insert(std::make_pair(name, tex));
     }
 
     void AssetManager::ListObjects()

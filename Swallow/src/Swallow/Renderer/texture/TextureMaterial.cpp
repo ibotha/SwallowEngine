@@ -13,8 +13,11 @@
 #include "swpch.hpp"
 #include "TextureMaterial.hpp"
 
+
 namespace Swallow
 {
+	Ref<Shader> TextureMaterial::m_Shader;
+
     void TextureMaterial::Init()
     {
         std::string textureVertexSrc = R"(
@@ -46,7 +49,7 @@ namespace Swallow
 		in vec3 v_Normal;
 		in vec2 v_TexCoord;
 
-		uniform vec3 u_LightDirection = vec3(0, -1, 0);
+		uniform vec3 u_LightDirection = vec3(0.3, -1, -0.5);
 		uniform sampler2D u_Texture;
 
 		void main() {
@@ -54,11 +57,11 @@ namespace Swallow
 			color = vec4(texture(u_Texture, v_TexCoord).rgb * Light, 1.0);
 		}
 	)";
-        m_Texture = Shader::Create(textureVertexSrc, textureFragmentSrc);
+        m_Shader = Shader::Create(textureVertexSrc, textureFragmentSrc);
     }
 
     Ref<TextureMaterialInstance> TextureMaterial::Create()
     {
-        return std::make_shared<TextureMaterialInstance>(m_Texture);
+        return std::make_shared<TextureMaterialInstance>(m_Shader);
     }
 }
