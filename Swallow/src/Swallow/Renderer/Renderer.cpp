@@ -37,6 +37,7 @@ namespace Swallow {
 
 	void Renderer::Submit(const Ref<GameObject>& object)
 	{
+		if (!(object && object->GetMaterial() && object->GetVertexArray())) return;
 		object->GetMaterial()->Bind();
 		std::dynamic_pointer_cast<OpenGLShader>(object->GetMaterial()->GetShader())->UploadUniformMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
 		std::dynamic_pointer_cast<OpenGLShader>(object->GetMaterial()->GetShader())->UploadUniformMat4("u_Rot", object->GetTransform()->GetRotationMatrix());

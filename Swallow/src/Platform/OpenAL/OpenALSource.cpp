@@ -53,11 +53,26 @@ namespace Swallow
 		return retval;
 	}
 
-
-	void OpenALSource::Play(const Ref<AudioBuffer>& buffer)
+	void OpenALSource::SetBuffer(const Ref<AudioBuffer>& buffer)
 	{
+
 		alSourcei(m_Id, AL_BUFFER, buffer->GetID());
+	}
+
+	void OpenALSource::Pause()
+	{
+		alSourcePause(m_Id);
+	}
+
+	void OpenALSource::Stop()
+	{
+		alSourceStop(m_Id);
+	}
+
+	void OpenALSource::Play()
+	{
 		alSourcePlay(m_Id);
 	}
+
 
 }
