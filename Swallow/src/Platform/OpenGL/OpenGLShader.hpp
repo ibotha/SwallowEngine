@@ -30,10 +30,13 @@ namespace Swallow {
 		virtual void UploadUniformMat4(std::string const &name, glm::mat4 const &v);
 
 	private:
+		int32_t GetUniformLocation(const std::string &name);
 		std::string ReadFile(const std::string& filepath);
 		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
 		void Compile(const std::unordered_map<GLenum, std::string> &sources);
 	private:
-		uint32_t m_RendererID;
+
+		std::unordered_map<std::string, uint32_t> m_Cache;
+		int32_t m_RendererID;
 	};
 }
