@@ -27,6 +27,29 @@ StartLayer::StartLayer()
 	m_Floor->GetTransform()->SetPosition(glm::vec3(0.0, -0.0, -2.0));
 	m_Floor->GetTransform()->SetScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	m_Floor->GetTransform()->Recalculate();
+	SW_INFO("HERE");
+
+	m_Text = Swallow::Text::Create();
+	std::string hi = R"(
+  It is a period of civil war. Rebel spaceships,
+   striking from a hidden base, have won their
+first victory against the evil Galactic Empire.
+During the battle, Rebel spies managed to steal
+  secret plans to the Empire's ultimate weapon,
+the DEATH STAR, an armored space station with enough
+    power to destroy an entire planet. 
+
+ Pursued by the Empire’s sinister agents, Princess
+  Leia races home aboard her starship, custodian of
+ the stolen plans that can save her people and restore
+          freedom to the galaxy...
+		  )";
+	m_Text->SetText(hi);
+	m_Text->SetColour(glm::vec4(0.7, 0.5, 0.1, 1.0));
+	m_Text->GetTransform()->SetPosition(glm::vec3(5.0f, 0.0f, 0.0f));
+	m_Text->GetTransform()->SetScale(glm::vec3(0.4f, 0.4f, 0.4f));
+	m_Text->Recalculate();
+	SW_INFO("HERE");
 
 	//Load objects (testing framework beta 0.0.01 alpha beta)
 	m_skull = std::make_shared<Swallow::GameObject>();
@@ -34,8 +57,15 @@ StartLayer::StartLayer()
 	m_skull->GetTransform()->SetPosition(glm::vec3(0, -0.65f, 0));
 	m_skull->GetTransform()->SetScale(glm::vec3(0.1f, 0.1f, 0.1f));
 	m_skull->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
-	m_skull->SetVertexArray(Swallow::AssetManager::FetchObject("Car", "Lamborghini_Aventador"));
+	// m_skull->SetVertexArray(Swallow::AssetManager::FetchObject("Car", "Lamborghini_Aventador"));
 	m_skull->GetTransform()->Recalculate();
+
+	x = Swallow::AudioBuffer::Create("assets/Sounds/Background.wav");
+	s = Swallow::AudioSource::Create();
+	s->SetPosition({0.0f, 0.0f, 0.0f});
+	s->SetVelocity({0.f, 0.f, 0.f});
+	s->SetLooping(true);
+	s->Play(x);
 
 	animMaterial = Swallow::AnimationMaterial::Create();
 	animMaterial->SetColour(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
@@ -46,7 +76,7 @@ StartLayer::StartLayer()
 	m_StateAnimationTest->GetTransform()->SetPosition(glm::vec3(0, -0.65f, 0));
 	m_StateAnimationTest->GetTransform()->SetScale(glm::vec3(0.1f, 0.1f, 0.1f));
 	m_StateAnimationTest->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
-	m_StateAnimationTest->SetVertexArray(Swallow::AssetManager::FetchObject("Torus", "Torus"));
+	// m_StateAnimationTest->SetVertexArray(Swallow::AssetManager::FetchObject("Torus", "Torus"));
 	m_StateAnimationTest->GetTransform()->Recalculate();
 
 
@@ -57,7 +87,7 @@ StartLayer::StartLayer()
 	m_StateAnimationTest2->GetTransform()->SetScale(glm::vec3(0.1f, 0.1f, 0.1f));
 	m_StateAnimationTest2->GetTransform()->SetRotation(glm::vec3(glm::radians(-90.0f), 0.0f, 0.0f));
 	m_StateAnimationTest2->SetVertexArray(Swallow::VertexArray::Create());
-	m_StateAnimationTest2->GetVertexArray()->SetIndexBuffer(Swallow::AssetManager::FetchObject("Pillar", "Cube.001")->GetIndexBuffer());
+	// m_StateAnimationTest2->GetVertexArray()->SetIndexBuffer(Swallow::AssetManager::FetchObject("Pillar", "Cube.001")->GetIndexBuffer());
 	m_StateAnimationTest2->GetTransform()->Recalculate();
 
 	//m_PillarAnimation = Swallow::AnimationController::Create();
@@ -182,17 +212,35 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 
 	//Create an Animation
 
-	if (m_PillarAnimationMid->Advance(1 * ts.GetSeconds()) || true)
-	{
-		m_StateAnimationTest2->GetVertexArray()->GetVertexBuffers().clear();
-		m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVertexBuffer1());
-		m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVertexBuffer2());
-	}
-	m_StateAnimationTest2->GetTransform()->Recalculate();
-	animMaterial->SetAnim(glm::vec1(m_PillarAnimationMid->GetAdvancedTime()));//animMaterial->SetAnim(glm::vec1(rot));
-	Swallow::Renderer::Submit(m_StateAnimationTest2);
+	static float rot = 10.0f;
+	rot -= 1.0f * ts.GetSeconds();
+	Swallow::AudioCommand::SetPosition(m_Camera.GetPosition());
+	// if (m_PillarAnimationMid->Advance(1 * ts.GetSeconds()) || true)
+	// {
+	// 	m_StateAnimationTest2->GetVertexArray()->GetVertexBuffers().clear();
+	// 	m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVB1());
+	// 	m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVB2());
+	// }
+	// m_StateAnimationTest2->GetTransform()->Recalculate();
+	// animMaterial->SetAnim(glm::vec1(m_PillarAnimationMid->GetAdvancedTime()));//animMaterial->SetAnim(glm::vec1(rot));
+	// Swallow::Renderer::Submit(m_StateAnimationTest2);
+	// if (m_PillarAnimationMid->Advance(1 * ts.GetSeconds()) || true)
+	// {
+	// 	m_StateAnimationTest2->GetVertexArray()->GetVertexBuffers().clear();
+	// 	m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVertexBuffer1());
+	// 	m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVertexBuffer2());
+	// }
+	// m_StateAnimationTest2->GetTransform()->Recalculate();
+	// animMaterial->SetAnim(glm::vec1(m_PillarAnimationMid->GetAdvancedTime()));//animMaterial->SetAnim(glm::vec1(rot));
+	// Swallow::Renderer::Submit(m_StateAnimationTest2);
 	
 
+	m_Text->GetTransform()->SetPosition(glm::vec3(0.0, rot / 3.0f - 5.f, -2.0));
+	m_Text->Recalculate();
+
+	// Swallow::Renderer::Submit(m_Cube);
+	// Swallow::Renderer::Submit(m_Floor);
+	Swallow::Renderer::Submit(m_Text);
 	//Swallow::Renderer::Submit(m_Cube);
 	//Swallow::Renderer::Submit(m_Floor);
 	

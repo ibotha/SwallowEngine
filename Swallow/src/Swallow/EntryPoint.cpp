@@ -10,7 +10,6 @@ int main(int argc, char **argv)
 	static_cast<void>(argv);
 	Swallow::Log::Init();
 
-	SW_CORE_WARN("Initialized Log");
 	auto app = Swallow::CreateApplication();
 	app->Run();
 	delete app;

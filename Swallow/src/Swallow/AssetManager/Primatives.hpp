@@ -12,5 +12,6 @@ namespace Swallow {
 
         static Ref<GameObject> Cube();
         static Ref<GameObject> Quad();
+        static Ref<GameObject> CharQuad();
     };
 }

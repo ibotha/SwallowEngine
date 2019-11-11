@@ -18,6 +18,8 @@ private:
 	Swallow::Ref<Swallow::GameObject> m_StateAnimationTest;
 	Swallow::Ref<Swallow::GameObject> m_StateAnimationTest2;
 	Swallow::Ref<Swallow::Texture2D> m_CheckerBoardTexture;
+	Swallow::Ref<Swallow::AudioBuffer> x;
+	Swallow::Ref<Swallow::AudioSource> s;
 	Swallow::Ref<Swallow::AnimationMaterialInstance> animMaterial;
 	Swallow::Ref<Swallow::AnimationController> m_PillarAnimationMid;
 	Swallow::Ref<Swallow::AnimationController> m_PillarAnimation;
@@ -33,6 +35,7 @@ private:
 	glm::vec4 pos;
 	glm::vec4 rot;
 	glm::vec4 col = {1, 1, 1, 1};
+	Swallow::Ref<Swallow::Text> m_Text;
 
 
 	Swallow::PerspectiveCamera m_Camera;

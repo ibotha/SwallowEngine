@@ -2,8 +2,12 @@
 
 #include "Swallow/Window.hpp"
 #include "Swallow/Renderer/GraphicsContext.hpp"
+#include "Swallow/Audio/AudioContext.hpp"
 
 #include <GLFW/glfw3.h>
+#include "AL/al.h"
+#include "AL/alc.h"
+#include "AL/alext.h"
 
 namespace Swallow {
 	
@@ -35,9 +39,11 @@ namespace Swallow {
 		virtual void Init(const WindowProps& props);
 		virtual void Shutdown();
 	
-		GLFWwindow* m_Window;
+		GLFWwindow *m_Window;
+		ALCcontext *m_Audio;
 
-		GraphicsContext *m_Context;
+		GraphicsContext *m_GraphicsContext;
+		AudioContext *m_AudioContext;
 
 		struct WindowData {
 			std::string Title;
