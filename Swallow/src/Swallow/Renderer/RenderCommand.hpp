@@ -14,6 +14,7 @@ namespace Swallow {
 		inline static void SetClearColor(const glm::vec4& color) { s_RendererAPI->SetClearColor(color); }
 
 		inline static void DrawIndexed(const Ref<VertexArray>& vertexArray) { s_RendererAPI->DrawIndexed(vertexArray); }
+		inline static void ResizeWindow(const glm::vec2& newSize) { s_RendererAPI->ResizeWindow(newSize); }
 	private:
 		static RendererAPI* s_RendererAPI;
 	};

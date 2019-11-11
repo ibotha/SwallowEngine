@@ -24,6 +24,7 @@ namespace Swallow {
 		virtual void ClearDepth() override;
 
 		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) override;
+		virtual void ResizeWindow(const glm::vec2& newSize) override;
 
 	};
 

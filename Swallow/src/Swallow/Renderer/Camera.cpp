@@ -2,6 +2,7 @@
 #include "gtx/transform.hpp"
 #include "../AssetManager/Transform.hpp"
 #include "Camera.hpp"
+#include "Swallow/Application.hpp"
 
 namespace Swallow {
 
@@ -47,6 +48,15 @@ namespace Swallow {
 	void PerspectiveCamera::SetProjectionMatrix(float fov, float ar, float n, float f)
 	{
 		Camera::SetProjectionMatrix(glm::perspective(fov, ar, n, f));
+	}
+
+	glm::vec2 Camera::WorldToScreenPoint(const glm::vec3 &point)
+	{
+		glm::vec3 ndc = glm::vec4(point.x, point.y, point.z, 0) * GetViewProjectionMatrix();
+		glm::vec2 ret;
+		ret.x = Application::Get().GetWindow().GetWidth() * ((ndc.x + 1.0f) * 0.5f);
+		ret.y = Application::Get().GetWindow().GetHeight() * ((2.0f - (1.0f + ndc.y)) * 0.5f);
+		return ret;
 	}
 }
 
