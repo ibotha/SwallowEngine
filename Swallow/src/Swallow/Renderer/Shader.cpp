@@ -23,27 +23,27 @@ namespace Swallow {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:
-			return nullptr;
-		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLShader>(vertexSrc, fragmentSrc);
-		default:
-			break;
-	}
-	return nullptr;
+			case RendererAPI::API::None:
+				return nullptr;
+			case RendererAPI::API::OpenGL:
+				return std::make_shared<OpenGLShader>(vertexSrc, fragmentSrc);
+			default:
+				break;
+		}
+		return nullptr;
 	}
 
 	Ref<Shader> Shader::Create(const std::string &filepath)
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RendererAPI::API::None:
-			return nullptr;
-		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLShader>(filepath);
-		default:
-			break;
-	}
-	return nullptr;
+			case RendererAPI::API::None:
+				return nullptr;
+			case RendererAPI::API::OpenGL:
+				return std::make_shared<OpenGLShader>(filepath);
+			default:
+				break;
+		}
+		return nullptr;
 	}
 }
