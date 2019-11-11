@@ -134,33 +134,4 @@ namespace Swallow {
     }
     */
 
-    Ref<VertexArray> AssetManager::Animate(const std::string& byName, const std::string& meshName)
-    {
-        size_t i = 0;
-
-        if (delayCounter == delay)
-        {
-            if (iterator == Objects[byName].size())
-                iterator = 0;
-
-            for (auto const &mesh: Objects[byName])
-            {
-                if (i == iterator)
-                {
-                    mainMeshName = mesh.first;
-                    iterator++;
-                    delayCounter = 0;
-                    break;
-                }
-                i++;
-            }
-        }
-
-        delayCounter++;
-
-        if (mainMeshName != "")
-            return FetchObject(byName, mainMeshName);
-        else
-            return FetchObject(byName, meshName);
-    }
 }
