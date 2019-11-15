@@ -14,6 +14,12 @@ namespace Swallow {
 		m_Shader = shader;
     }
 
+    AnimationMaterialInstance::AnimationMaterialInstance(Ref<Shader> shader, Ref<Texture2D> texture)//:m_Colour(0.0f)
+    {
+		m_Shader = shader;
+        m_Texture = texture;
+    }
+
     AnimationMaterialInstance::AnimationMaterialInstance(AnimationMaterialInstance const &rhs)
     {
         *this = rhs;
@@ -38,7 +44,12 @@ namespace Swallow {
     void AnimationMaterialInstance::Bind()
     {
         m_Shader->Bind();
-        std::dynamic_pointer_cast<OpenGLShader>(m_Shader)->UploadUniformFloat1("u_Colour", m_Colour);
+
+        if (m_Texture != nullptr)
+            m_Texture->Bind();
+        else
+            std::dynamic_pointer_cast<OpenGLShader>(m_Shader)->UploadUniformFloat1("u_Colour", m_Colour);
+    
         std::dynamic_pointer_cast<OpenGLShader>(m_Shader)->UploadUniformFloat1("u_Anim", u_Anim);
     }
 
