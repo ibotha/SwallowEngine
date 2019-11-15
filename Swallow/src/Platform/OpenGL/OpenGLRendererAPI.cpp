@@ -44,4 +44,9 @@ namespace Swallow {
 	{
 		glDrawElements(GL_TRIANGLES, vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 	}
+
+	void OpenGLRendererAPI::ResizeWindow(const glm::vec2& newSize)
+	{
+		static_cast<void>(newSize);	
+	}
 }

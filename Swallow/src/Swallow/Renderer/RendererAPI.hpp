@@ -20,6 +20,7 @@ namespace Swallow {
 		virtual void ClearColour() = 0;
 
 		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) = 0;
+		virtual void ResizeWindow(const glm::vec2& newSize) = 0;
 
 		inline static API GetAPI() { return s_API; }
 	private:
