@@ -5,6 +5,8 @@
 #include "Swallow/Events/KeyEvent.hpp"
 #include "Swallow/Events/MouseEvent.hpp"
 
+#include "Platform/OpenAL/OpenALContext.hpp"
+
 #include "Platform/OpenGL/OpenGLContext.hpp"
 #include <glad/glad.h>
 
@@ -32,9 +34,6 @@ namespace Swallow {
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
-		SW_CORE_INFO("Creating Window {0} ({1}, {2})", m_Data.Title, m_Data.Width, m_Data.Height);
-
-
 		if (!s_GLFWInitialized) {
 			int success = glfwInit();
 
@@ -54,8 +53,14 @@ namespace Swallow {
 
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 
-		m_Context = new OpenGLContext(m_Window);
-		m_Context->Init();
+		m_GraphicsContext = new OpenGLContext(m_Window);
+		m_GraphicsContext->Init();
+
+		auto m_Device = alcOpenDevice(0);
+		m_Audio = alcCreateContext(m_Device, 0);
+
+		m_AudioContext = new OpenALContext(m_Audio);
+		m_AudioContext->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
@@ -158,12 +163,13 @@ namespace Swallow {
 	void Swallow::WindowsWindow::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);
+		alcDestroyContext(m_Audio);
 	}
 
 	void Swallow::WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		m_Context->SwapBuffers();
+		m_GraphicsContext->SwapBuffers();
 	}
 
 	inline void * WindowsWindow::GetNativeWindow() const

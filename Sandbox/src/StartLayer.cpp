@@ -60,6 +60,13 @@ the DEATH STAR, an armored space station with enough
 	// m_skull->SetVertexArray(Swallow::AssetManager::FetchObject("Car", "Lamborghini_Aventador"));
 	m_skull->GetTransform()->Recalculate();
 
+	x = Swallow::AudioBuffer::Create("assets/Sounds/Background.wav");
+	s = Swallow::AudioSource::Create();
+	s->SetPosition({0.0f, 0.0f, 0.0f});
+	s->SetVelocity({0.f, 0.f, 0.f});
+	s->SetLooping(true);
+	s->Play(x);
+
 	animMaterial = Swallow::AnimationMaterial::Create();
 	animMaterial->SetColour(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
@@ -205,7 +212,9 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 
 	//Create an Animation
 
-	static float rot = 0.0f;
+	static float rot = 10.0f;
+	rot -= 1.0f * ts.GetSeconds();
+	Swallow::AudioCommand::SetPosition(m_Camera.GetPosition());
 	// if (m_PillarAnimationMid->Advance(1 * ts.GetSeconds()) || true)
 	// {
 	// 	m_StateAnimationTest2->GetVertexArray()->GetVertexBuffers().clear();
@@ -215,15 +224,15 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 	// m_StateAnimationTest2->GetTransform()->Recalculate();
 	// animMaterial->SetAnim(glm::vec1(m_PillarAnimationMid->GetAdvancedTime()));//animMaterial->SetAnim(glm::vec1(rot));
 	// Swallow::Renderer::Submit(m_StateAnimationTest2);
-	if (m_PillarAnimationMid->Advance(1 * ts.GetSeconds()) || true)
-	{
-		m_StateAnimationTest2->GetVertexArray()->GetVertexBuffers().clear();
-		m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVertexBuffer1());
-		m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVertexBuffer2());
-	}
-	m_StateAnimationTest2->GetTransform()->Recalculate();
-	animMaterial->SetAnim(glm::vec1(m_PillarAnimationMid->GetAdvancedTime()));//animMaterial->SetAnim(glm::vec1(rot));
-	Swallow::Renderer::Submit(m_StateAnimationTest2);
+	// if (m_PillarAnimationMid->Advance(1 * ts.GetSeconds()) || true)
+	// {
+	// 	m_StateAnimationTest2->GetVertexArray()->GetVertexBuffers().clear();
+	// 	m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVertexBuffer1());
+	// 	m_StateAnimationTest2->GetVertexArray()->AddVertexBuffer(m_PillarAnimationMid->GetVertexBuffer2());
+	// }
+	// m_StateAnimationTest2->GetTransform()->Recalculate();
+	// animMaterial->SetAnim(glm::vec1(m_PillarAnimationMid->GetAdvancedTime()));//animMaterial->SetAnim(glm::vec1(rot));
+	// Swallow::Renderer::Submit(m_StateAnimationTest2);
 	
 
 	m_Text->GetTransform()->SetPosition(glm::vec3(0.0, rot / 3.0f - 5.f, -2.0));

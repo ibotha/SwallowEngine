@@ -18,6 +18,8 @@ private:
 	Swallow::Ref<Swallow::GameObject> m_StateAnimationTest;
 	Swallow::Ref<Swallow::GameObject> m_StateAnimationTest2;
 	Swallow::Ref<Swallow::Texture2D> m_CheckerBoardTexture;
+	Swallow::Ref<Swallow::AudioBuffer> x;
+	Swallow::Ref<Swallow::AudioSource> s;
 	Swallow::Ref<Swallow::AnimationMaterialInstance> animMaterial;
 	Swallow::Ref<Swallow::AnimationController> m_PillarAnimationMid;
 	Swallow::Ref<Swallow::AnimationController> m_PillarAnimation;

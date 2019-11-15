@@ -4,6 +4,7 @@
 #include "imgui.h"
 #include "glm.hpp"
 #include "Renderer/Renderer.hpp"
+#include "Audio/Audio.hpp"
 #include "GLFW/glfw3.h"
 
 namespace Swallow {
@@ -19,6 +20,7 @@ namespace Swallow {
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
+		Audio::Init();
 
 		m_ImGuiLayer = std::make_shared<ImGuiLayer>();
 		PushOverlay(m_ImGuiLayer);
@@ -75,7 +77,8 @@ namespace Swallow {
 			for (Ref<Layer> layer : m_LayerStack)
 			{
 				RenderCommand::ClearDepth();
-				layer->OnUpdate(timestep);
+				if (layer)
+					layer->OnUpdate(timestep);
 			}
 
 			m_ImGuiLayer->Begin();

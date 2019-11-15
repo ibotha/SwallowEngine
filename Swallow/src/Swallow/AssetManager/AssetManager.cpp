@@ -80,16 +80,16 @@ namespace Swallow {
         }
         else
         {
-            std::cout << "Loading Mesh Error!" << std::endl;
+            SW_CORE_WARN("Loading Mesh Error! {} : {}", name, path);
         }
 
         Objects.insert(std::make_pair(name, VAinfo));
     }
 
-    void AssetManager::LoadTexture(const std::string& name, const std::string& path)
+    void AssetManager::LoadTexture(const std::string& name, const std::string& path, bool flipy)
     {
-        (void)name;
-        (void)path;
+        Ref<Texture2D> tex = Texture2D::Create(path, flipy);
+        Textures.insert(std::make_pair(name, tex));
     }
 
     void AssetManager::ListObjects()
@@ -134,33 +134,4 @@ namespace Swallow {
     }
     */
 
-    Ref<VertexArray> AssetManager::Animate(const std::string& byName, const std::string& meshName)
-    {
-        size_t i = 0;
-
-        if (delayCounter == delay)
-        {
-            if (iterator == Objects[byName].size())
-                iterator = 0;
-
-            for (auto const &mesh: Objects[byName])
-            {
-                if (i == iterator)
-                {
-                    mainMeshName = mesh.first;
-                    iterator++;
-                    delayCounter = 0;
-                    break;
-                }
-                i++;
-            }
-        }
-
-        delayCounter++;
-
-        if (mainMeshName != "")
-            return FetchObject(byName, mainMeshName);
-        else
-            return FetchObject(byName, meshName);
-    }
 }

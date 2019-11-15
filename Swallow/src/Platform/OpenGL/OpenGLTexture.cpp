@@ -4,11 +4,11 @@
 #include <stb_image.h>
 
 namespace Swallow {
-	OpenGLTexture2D::OpenGLTexture2D(const std::string & path)
+	OpenGLTexture2D::OpenGLTexture2D(const std::string & path, bool flipy)
 		: m_Path(path)
 	{
 		int width, height, channels;
-		stbi_set_flip_vertically_on_load(true);
+		stbi_set_flip_vertically_on_load(flipy);
 		stbi_uc * data = stbi_load(path.c_str(), &width, &height, &channels, 0);
 		SW_CORE_ASSERT(data, "Failed to load image! {}", path);
 		m_Width = width;

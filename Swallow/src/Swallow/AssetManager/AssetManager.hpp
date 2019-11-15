@@ -13,13 +13,11 @@ namespace Swallow {
     {
     public:
         static void LoadObject(const std::string& name, const std::string& path);
-        static void LoadTexture(const std::string& name, const std::string& path);
+        static void LoadTexture(const std::string& name, const std::string& path, bool flipy = false);
         static Ref<VertexArray> FetchObject(const std::string& byName, const std::string& meshName);
         static Ref<Texture2D> FetchTexture(const std::string& byName);
         static void ListObjects();
         static void ListMeshes(const std::string& byName);
-
-        static Ref<VertexArray> Animate(const std::string& byName, const std::string& meshName);
 
     private:
         AssetManager();

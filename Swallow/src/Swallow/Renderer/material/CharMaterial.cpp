@@ -53,7 +53,7 @@ namespace Swallow
         {
             SW_CORE_ASSERT(!error, "FreeType could not be initialised");
         }
-        error = FT_New_Face(ft, "assets/fonts/Arial.ttf", 0, &face);
+        error = FT_New_Face(ft, "assets/Fonts/Arial.ttf", 0, &face);
         if (error)
         {
             SW_CORE_ASSERT(!error, "Arial font face could not be initialised");
