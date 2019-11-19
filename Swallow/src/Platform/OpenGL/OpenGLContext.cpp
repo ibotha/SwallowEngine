@@ -6,6 +6,7 @@
 
 namespace Swallow {
 
+
 	OpenGLContext::OpenGLContext(GLFWwindow * windowHandle)
 		:m_WindowHandle(windowHandle)
 	{

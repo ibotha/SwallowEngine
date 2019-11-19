@@ -23,7 +23,7 @@ namespace Swallow {
 	class Application
 	{
 	public:
-		Application();
+		Application(WindowProps* props = nullptr);
 		virtual ~Application();
 
 		void Run();
@@ -34,6 +34,8 @@ namespace Swallow {
 		void PushOverlay(Ref<Layer> layer);
 		void PopLayer(Ref<Layer> layer);
 		void PopOverlay(Ref<Layer> layer);
+		void RecreateWindow(WindowProps* props = nullptr);
+		void RefreshWindow();
 
 		static inline Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
@@ -48,6 +50,7 @@ namespace Swallow {
 
 		static Application* s_Instance;
 		float m_LastFrameTime = 0.0f;
+		WindowProps *m_Props = nullptr;
 	};
 
 	Application *CreateApplication();

@@ -15,8 +15,8 @@ namespace Swallow {
 	{
 	public:
 		WindowsWindow(const WindowProps& props);
-		WindowsWindow(const WindowsWindow &rhs) = default;
-		WindowsWindow &operator=(const WindowsWindow &rhs) = default;
+		//WindowsWindow(const WindowsWindow &rhs) = default;
+		//WindowsWindow &operator=(const WindowsWindow &rhs) = default;
 		virtual ~WindowsWindow();
 
 		void OnUpdate() override;
@@ -42,8 +42,8 @@ namespace Swallow {
 		GLFWwindow *m_Window;
 		ALCcontext *m_Audio;
 
-		GraphicsContext *m_GraphicsContext;
-		AudioContext *m_AudioContext;
+		Scope<GraphicsContext> m_GraphicsContext;
+		Scope<AudioContext> m_AudioContext;
 
 		struct WindowData {
 			std::string Title;

@@ -11,12 +11,18 @@ namespace Swallow {
 
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application()
+	Application::Application(WindowProps* props)
 	{
 		SW_CORE_ASSERT(s_Instance == nullptr, "Cannot run more than one application");
 		s_Instance = this;
 
-		m_Window = Scope<Window>(Window::Create());
+		if (props)
+		{
+			SW_CORE_INFO("Window made with: {}, {} As {}", props->Width, props->Height, props->Title);
+			m_Window = Scope<Window>(Window::Create(*props));
+		}
+		else
+			m_Window = Scope<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
@@ -26,6 +32,29 @@ namespace Swallow {
 		PushOverlay(m_ImGuiLayer);
 	}
 
+	void Application::RefreshWindow()
+	{
+		if (m_Props)
+		{
+			PopOverlay(m_ImGuiLayer);
+			m_Window.reset();
+			m_Window = Scope<Window>(Window::Create(*m_Props));
+			m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+			Renderer::Init();
+			Audio::Init();
+			delete m_Props;
+			m_Props = nullptr;
+			PushOverlay(m_ImGuiLayer);
+		}
+	}
+
+	void Application::RecreateWindow(WindowProps* props)
+	{
+		m_Props = new WindowProps();
+		*m_Props = *props;
+		// Renderer::Init();
+		// Audio::Init();
+	}
 
 	Application::~Application()
 	{
@@ -68,6 +97,7 @@ namespace Swallow {
 	{
 		while (m_Running)
 		{
+			RefreshWindow();
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;

@@ -53,13 +53,13 @@ namespace Swallow {
 
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 
-		m_GraphicsContext = new OpenGLContext(m_Window);
+		m_GraphicsContext = std::make_unique<OpenGLContext>(m_Window);
 		m_GraphicsContext->Init();
 
 		auto m_Device = alcOpenDevice(0);
 		m_Audio = alcCreateContext(m_Device, 0);
 
-		m_AudioContext = new OpenALContext(m_Audio);
+		m_AudioContext = std::make_unique<OpenALContext>(m_Audio);
 		m_AudioContext->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
