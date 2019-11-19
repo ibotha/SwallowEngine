@@ -38,7 +38,6 @@ namespace Swallow
 
     Ref<VertexBuffer> AnimationController::GetVertexBuffer1()
     {
-        SW_INFO("{}, {}", (static_cast<int>(m_AdvanceTimer) % m_KeyFrames.size()), ((static_cast<int>(m_AdvanceTimer) + 1) % m_KeyFrames.size()));
         return Swallow::AssetManager::FetchObject(m_BaseObjectName, m_KeyFrames[static_cast<int>(m_AdvanceTimer) % m_KeyFrames.size()])->GetVertexBuffers()[0];
     }
 

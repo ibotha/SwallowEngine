@@ -17,6 +17,7 @@ namespace Swallow
             inline void SetColour(const glm::vec4 &colour) {m_Colour = colour; }
             inline glm::vec4 &GetColour() { return m_Colour; }
             inline Ref<Transform> GetTransform() {return m_Transform;}
+            inline std::string GetString() { return m_Text; }
 
         private:
             std::string m_Text;

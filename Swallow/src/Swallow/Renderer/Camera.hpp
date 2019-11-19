@@ -15,7 +15,7 @@ namespace Swallow {
 		void SetRotation(const glm::vec3 &rotation) { m_Rotation = rotation; }
 		void SetPosition(const glm::vec3 &position) { m_Position = position; }
 
-
+		glm::vec2 WorldToScreenPoint(const glm::vec3 &point);
 		const glm::vec3 & GetRotation() const { return m_Rotation; }
 		const glm::vec3 & GetPosition() const { return m_Position; }
 		const glm::mat4 & GetRotationMatrix() const { return m_RotationMatrix; }
