@@ -44,10 +44,10 @@ namespace Swallow
                 color = textColor * sampled;
             }
 		)";
-        m_Shader.reset();
+        // m_Shader.reset();
 		m_Shader = Shader::Create(sVertexSrc, sFragmentSrc);
 
-        m_Chars->clear();
+        // m_Chars->clear();
         FT_Library ft;
         FT_Face face;
         int error = FT_Init_FreeType(&ft);
