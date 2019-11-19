@@ -9,9 +9,14 @@ int main(int argc, char **argv)
 	static_cast<void>(argc);
 	static_cast<void>(argv);
 	Swallow::Log::Init();
-
+	hi:
 	auto app = Swallow::CreateApplication();
+	app->hasnt_given_up = false;
 	app->Run();
+	if (app->hasnt_given_up)
+	{
+		goto hi;
+	}
 	delete app;
 }
 

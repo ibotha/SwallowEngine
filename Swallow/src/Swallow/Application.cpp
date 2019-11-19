@@ -8,12 +8,13 @@
 #include "GLFW/glfw3.h"
 
 namespace Swallow {
-
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application(WindowProps* props)
 	{
-		SW_CORE_ASSERT(s_Instance == nullptr, "Cannot run more than one application");
+		if (s_Instance)
+			delete s_Instance;
+		// SW_CORE_ASSERT(s_Instance == nullptr, "Cannot run more than one application");
 		s_Instance = this;
 
 		if (props)
@@ -32,28 +33,10 @@ namespace Swallow {
 		PushOverlay(m_ImGuiLayer);
 	}
 
-	void Application::RefreshWindow()
+	void Application::RecreateWindow()
 	{
-		if (m_Props)
-		{
-			PopOverlay(m_ImGuiLayer);
-			m_Window.reset();
-			m_Window = Scope<Window>(Window::Create(*m_Props));
-			m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
-			Renderer::Init();
-			Audio::Init();
-			delete m_Props;
-			m_Props = nullptr;
-			PushOverlay(m_ImGuiLayer);
-		}
-	}
-
-	void Application::RecreateWindow(WindowProps* props)
-	{
-		m_Props = new WindowProps();
-		*m_Props = *props;
-		// Renderer::Init();
-		// Audio::Init();
+		m_Running = false;
+		hasnt_given_up = true;
 	}
 
 	Application::~Application()
@@ -95,15 +78,13 @@ namespace Swallow {
 
 	void Application::Run()
 	{
+		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		while (m_Running)
 		{
-			RefreshWindow();
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
-			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 			RenderCommand::Clear();
-
 			for (Ref<Layer> layer : m_LayerStack)
 			{
 				RenderCommand::ClearDepth();
@@ -117,7 +98,6 @@ namespace Swallow {
 				layer->OnImGuiRender();
 
 			m_ImGuiLayer->End();
-			
 			m_Window->OnUpdate();
 		}
 	}

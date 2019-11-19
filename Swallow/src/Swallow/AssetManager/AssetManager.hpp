@@ -18,6 +18,7 @@ namespace Swallow {
         static Ref<Texture2D> FetchTexture(const std::string& byName);
         static void ListObjects();
         static void ListMeshes(const std::string& byName);
+        static void Reset() {Objects.clear(); Textures.clear();}
 
     private:
         AssetManager();
