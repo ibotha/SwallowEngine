@@ -1,8 +1,8 @@
-#include "swpch.hpp"
-#include <Swallow/CameraController.h>
-#include <Swallow/Core.hpp>
-#include <Swallow/Input.hpp>
-#include <Swallow/KeyCodes.hpp>
+#include <swpch.hpp>
+#include <Swallow/Renderer/CameraController.hpp>
+#include <Swallow/Core/Core.hpp>
+#include <Swallow/Core/Input.hpp>
+#include <Swallow/Core/KeyCodes.hpp>
 
 namespace Swallow {
 	OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotationEnabled)

@@ -1,21 +1,21 @@
 #pragma once
 
-#include "Core.hpp"
+#include <Swallow/Core/Core.hpp>
 
-#include "Window.hpp"
-#include "LayerStack.hpp"
-#include "Events/Event.hpp"
-#include "Events/ApplicationEvent.hpp"
-#include "Events/KeyEvent.hpp"
-#include "Events/MouseEvent.hpp"
+#include <Swallow/Core/Window.hpp>
+#include <Swallow/Core/LayerStack.hpp>
+#include <Swallow/Events/Event.hpp>
+#include <Swallow/Events/ApplicationEvent.hpp>
+#include <Swallow/Events/KeyEvent.hpp>
+#include <Swallow/Events/MouseEvent.hpp>
 
-#include "ImGui/ImGuiLayer.hpp"
+#include <Swallow/ImGui/ImGuiLayer.hpp>
 
-#include "Renderer/Shader.hpp"
-#include "Renderer/Buffer.hpp"
-#include "Renderer/VertexArray.hpp"
+#include <Swallow/Renderer/Shader.hpp>
+#include <Swallow/Renderer/Buffer.hpp>
+#include <Swallow/Renderer/VertexArray.hpp>
 
-#include "Swallow/Core/Timestep.hpp"
+#include <Swallow/Core/Timestep.hpp>
 
 namespace Swallow {
 

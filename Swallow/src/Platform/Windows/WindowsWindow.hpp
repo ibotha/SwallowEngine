@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Swallow/Window.hpp"
-#include "Swallow/Renderer/GraphicsContext.hpp"
+#include <Swallow/Core/Window.hpp>
+#include <Swallow/Renderer/GraphicsContext.hpp>
 
 #include <GLFW/glfw3.h>
 

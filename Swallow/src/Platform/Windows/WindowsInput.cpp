@@ -1,6 +1,6 @@
-#include "swpch.hpp"
-#include "WindowsInput.hpp"
-#include "Swallow/Application.hpp"
+#include <swpch.hpp>
+#include <Platform/Windows/WindowsInput.hpp>
+#include <Swallow/Core/Application.hpp>
 
 #include <GLFW/glfw3.h>
 

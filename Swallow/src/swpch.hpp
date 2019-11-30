@@ -14,8 +14,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Swallow/Log.hpp"
-#include "glm.hpp"
+#include <Swallow/Core/Log.hpp>
+#include <glm.hpp>
 
 #ifdef SW_PLATFORM_WINDOWS
 	#include <Windows.h>

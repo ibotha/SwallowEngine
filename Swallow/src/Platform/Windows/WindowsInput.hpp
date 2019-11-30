@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Swallow/Core.hpp"
-#include "Swallow/Input.hpp"
+#include <Swallow/Core/Core.hpp>
+#include <Swallow/Core/Input.hpp>
 
 namespace Swallow {
 	class WindowsInput : public Input {

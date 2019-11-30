@@ -1,10 +1,10 @@
-#include "swpch.hpp"
-#include "Application.hpp"
-#include "Input.hpp"
-#include "imgui.h"
-#include "glm.hpp"
-#include "Renderer/Renderer.hpp"
-#include "GLFW/glfw3.h"
+#include <swpch.hpp>
+#include <Swallow/Core/Application.hpp>
+#include <Swallow/Core/Input.hpp>
+#include <imgui.h>
+#include <glm.hpp>
+#include <Swallow/Renderer/Renderer.hpp>
+#include <GLFW/glfw3.h>
 
 namespace Swallow {
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Layer.hpp"
-#include "Swallow/Core.hpp"
+#include <Swallow/Core/Layer.hpp>
+#include <Swallow/Core/Core.hpp>
 
 namespace Swallow {
 	class LayerStack

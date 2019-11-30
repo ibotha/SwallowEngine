@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Swallow/Core.hpp"
+#include <Swallow/Core/Core.hpp>
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
 namespace Swallow
