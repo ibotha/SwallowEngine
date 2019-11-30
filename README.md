@@ -8,14 +8,14 @@ The Swallow engine is coded in C++ and is intended to be a cross-platform high-p
 
 ## Getting Started
 
-** to get started clone this repository and all submodules.
+**to get started clone this repository and all submodules.**
 
 Update the premake5.lua in the root of the repository to fit with your project. By default the premake5.lua is configured to compile the engine with a sandbox application.
 
-** Visual Studio
+**Visual Studio**
 Open the scripts directory in the root of the repository and run "WindowsGenerate.bat". Ths should create A .sln file in the root of your repository.
 
-** Makefile On MACOS
+**Makefile On MACOS**
 Open the scripts directory in the root of the repository and run "MACOSGenerate.sh". Ths should create A makefile in the root of your repository.
 
 ### Prerequisites
@@ -28,7 +28,7 @@ For your application to run you must:
 
 Create a class that inherits from Swallow::Application:
 
-** sandboxApp.hpp
+**sandboxApp.hpp**
 ```
 #pragma once
 #include <Swallow.hpp>
@@ -48,7 +48,7 @@ private:
 
 Create An instance of that class by overriding the application creation function:
 
-** sanboxApp.cpp
+**sanboxApp.cpp**
 ```
 #include "sandboxApp.hpp"
 
