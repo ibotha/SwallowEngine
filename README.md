@@ -73,14 +73,6 @@ This should run an application window with a black screen. For examples on how t
 * [GLM](https://glm.g-truc.net/0.9.8/index.html) - Used for maths functions
 * [ImGUI](https://rometools.github.io/rome/) - Used for debugging Gui elements
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
 ## Authors
 
 * **Isard Botha** - *Initial work* - [Ibotha](https://github.com/ibotha)
@@ -89,7 +81,7 @@ See also the list of [contributors](https://github.com/ibotha/SwallowEngine/cont
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
