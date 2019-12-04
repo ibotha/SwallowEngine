@@ -23,10 +23,10 @@ namespace Swallow {
 	class Application
 	{
 	public:
-		Application();
+		Application(WindowProps* props = nullptr);
 		virtual ~Application();
-
 		void Run();
+		bool hasnt_given_up = false;
 
 		void OnEvent(Event &e);
 
@@ -34,10 +34,12 @@ namespace Swallow {
 		void PushOverlay(Ref<Layer> layer);
 		void PopLayer(Ref<Layer> layer);
 		void PopOverlay(Ref<Layer> layer);
+		void RecreateWindow();
 
 		static inline Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
 		inline void End() { m_Running = false; }
+		WindowProps *m_Props = nullptr;
 	private:
 		bool OnWindowClose(WindowCloseEvent &e);
 

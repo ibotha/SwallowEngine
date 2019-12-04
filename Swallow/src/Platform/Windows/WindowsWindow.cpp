@@ -1,5 +1,6 @@
 #include "swpch.hpp"
 #include "WindowsWindow.hpp"
+#include "Swallow/Application.hpp"
 
 #include "Swallow/Events/ApplicationEvent.hpp"
 #include "Swallow/Events/KeyEvent.hpp"
@@ -35,8 +36,8 @@ namespace Swallow {
 		m_Data.Height = props.Height;
 
 		if (!s_GLFWInitialized) {
+			SW_CORE_INFO("bjkasdbjkadsbjknadsbjk");
 			int success = glfwInit();
-
 			glfwWindowHint(GLFW_SAMPLES, 4);
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
@@ -44,7 +45,6 @@ namespace Swallow {
             #ifdef __APPLE__
                 glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
             #endif
-			
 			SW_CORE_ASSERT(success, "Could Not Initialize GLFW");
 			glfwSetErrorCallback([](int code, const char *message) {SW_CORE_ASSERT(false, "GLFW Error {0}: {1}", code, message)});
 
@@ -53,17 +53,21 @@ namespace Swallow {
 
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Title.c_str(), nullptr, nullptr);
 
-		m_GraphicsContext = new OpenGLContext(m_Window);
+		m_GraphicsContext = std::make_unique<OpenGLContext>(m_Window);
 		m_GraphicsContext->Init();
 
 		auto m_Device = alcOpenDevice(0);
 		m_Audio = alcCreateContext(m_Device, 0);
 
-		m_AudioContext = new OpenALContext(m_Audio);
+		m_AudioContext = std::make_unique<OpenALContext>(m_Audio);
 		m_AudioContext->Init();
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
+		glfwMakeContextCurrent(m_Window);
+		glClearColor(1, 1, 1, 1);
+		glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+		glfwSwapBuffers(m_Window);
 
 		// Set all the necessary callbacks for glfw events
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
@@ -164,6 +168,8 @@ namespace Swallow {
 	{
 		glfwDestroyWindow(m_Window);
 		alcDestroyContext(m_Audio);
+		glfwTerminate();
+		s_GLFWInitialized = false;
 	}
 
 	void Swallow::WindowsWindow::OnUpdate()

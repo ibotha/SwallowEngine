@@ -1,6 +1,8 @@
 #include "swpch.hpp"
 #include "OpenGLRendererAPI.hpp"
+#include "Swallow/Application.hpp"
 
+#include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
 namespace Swallow {

@@ -9,7 +9,7 @@ namespace Swallow
 
 	Ref<Shader> CharMaterial::m_Shader;
     Ref<std::map<unsigned char, Ref<Character>>> CharMaterial::m_Chars = std::make_shared<std::map<unsigned char, Ref<Character>>>();
-
+    bool once = true;
 	void CharMaterial::Init()
 	{
 
@@ -44,8 +44,10 @@ namespace Swallow
                 color = textColor * sampled;
             }
 		)";
+        // m_Shader.reset();
 		m_Shader = Shader::Create(sVertexSrc, sFragmentSrc);
 
+        // m_Chars->clear();
         FT_Library ft;
         FT_Face face;
         int error = FT_Init_FreeType(&ft);

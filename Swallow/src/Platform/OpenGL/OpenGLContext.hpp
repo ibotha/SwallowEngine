@@ -9,6 +9,7 @@ namespace Swallow {
 	{
 	public:
 		OpenGLContext(GLFWwindow* windowHandle);
+		~OpenGLContext() { SW_CORE_INFO("BYE!"); }
 		virtual void Init() override;
 		virtual void SwapBuffers() override;
 

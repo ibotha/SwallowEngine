@@ -42,6 +42,7 @@ namespace Swallow {
 		std::dynamic_pointer_cast<OpenGLShader>(object->GetMaterial()->GetShader())->UploadUniformMat4("u_ViewProjection", s_SceneData->ViewProjectionMatrix);
 		std::dynamic_pointer_cast<OpenGLShader>(object->GetMaterial()->GetShader())->UploadUniformMat4("u_Rot", object->GetTransform()->GetRotationMatrix());
 		std::dynamic_pointer_cast<OpenGLShader>(object->GetMaterial()->GetShader())->UploadUniformMat4("u_Model", object->GetTransform()->GetModelMatrix());
+		std::dynamic_pointer_cast<OpenGLShader>(object->GetMaterial()->GetShader())->UploadUniformFloat3("u_LightDirection", glm::vec3(2.0f, -3.0f, 1.0f));
 		object->GetVertexArray()->Bind();
 		RenderCommand::DrawIndexed(object->GetVertexArray());
 	}

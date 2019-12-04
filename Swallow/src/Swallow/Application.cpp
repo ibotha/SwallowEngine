@@ -8,15 +8,22 @@
 #include "GLFW/glfw3.h"
 
 namespace Swallow {
-
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application()
+	Application::Application(WindowProps* props)
 	{
-		SW_CORE_ASSERT(s_Instance == nullptr, "Cannot run more than one application");
+		if (s_Instance)
+			delete s_Instance;
+		// SW_CORE_ASSERT(s_Instance == nullptr, "Cannot run more than one application");
 		s_Instance = this;
 
-		m_Window = Scope<Window>(Window::Create());
+		if (props)
+		{
+			SW_CORE_INFO("Window made with: {}, {} As {}", props->Width, props->Height, props->Title);
+			m_Window = Scope<Window>(Window::Create(*props));
+		}
+		else
+			m_Window = Scope<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
@@ -26,6 +33,11 @@ namespace Swallow {
 		PushOverlay(m_ImGuiLayer);
 	}
 
+	void Application::RecreateWindow()
+	{
+		m_Running = false;
+		hasnt_given_up = true;
+	}
 
 	Application::~Application()
 	{
@@ -66,14 +78,13 @@ namespace Swallow {
 
 	void Application::Run()
 	{
+		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		while (m_Running)
 		{
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
-			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 			RenderCommand::Clear();
-
 			for (Ref<Layer> layer : m_LayerStack)
 			{
 				RenderCommand::ClearDepth();
@@ -87,7 +98,6 @@ namespace Swallow {
 				layer->OnImGuiRender();
 
 			m_ImGuiLayer->End();
-			
 			m_Window->OnUpdate();
 		}
 	}
