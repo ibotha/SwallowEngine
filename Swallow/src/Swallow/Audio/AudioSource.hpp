@@ -14,6 +14,7 @@ namespace Swallow
 			virtual void SetLooping(bool looping) = 0;
 			virtual void SetPosition(const glm::vec3 &position) = 0;
 			virtual void SetVelocity(const glm::vec3 &velocity) = 0;
+			virtual void SetGain(float gain) = 0;
 
 			virtual glm::vec3 GetPosition() const = 0;
 			virtual glm::vec3 GetVelocity() const = 0;

@@ -24,7 +24,7 @@ namespace Swallow {
         delayCounter = 0;
         mainMeshName = "";
         Assimp::Importer Importer;
-
+        
         const aiScene* pScene = Importer.ReadFile(path.c_str(), aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices | aiProcess_OptimizeMeshes);
         std::map<std::string, Ref<VertexArray>> VAinfo;
         if (pScene)

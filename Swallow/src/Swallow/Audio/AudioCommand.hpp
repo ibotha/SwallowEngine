@@ -11,6 +11,7 @@ namespace Swallow
 
 		inline static void SetPosition(const glm::vec3& pos) { s_AudioAPI->SetPosition(pos); }
 		inline static void SetVelocity(const glm::vec3& pos) { s_AudioAPI->SetVelocity(pos); }
+		inline static void SetGain(float gain) { s_AudioAPI->SetGain(gain); }
 		inline static void SetAt(const glm::vec3& pos) { s_AudioAPI->SetAt(pos); }
 		inline static void SetUp(const glm::vec3& pos) { s_AudioAPI->SetUp(pos); }
 	

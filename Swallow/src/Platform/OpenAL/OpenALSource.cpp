@@ -38,6 +38,10 @@ namespace Swallow
 		alSource3f(m_Id, AL_VELOCITY, velocity.x, velocity.y, velocity.z);
 	}
 
+	void OpenALSource::SetGain(float gain)
+	{
+		alSourcef(m_Id, AL_GAIN, gain);
+	}
 
 	glm::vec3 OpenALSource::GetPosition() const
 	{

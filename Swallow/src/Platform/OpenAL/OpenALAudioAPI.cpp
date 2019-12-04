@@ -27,6 +27,11 @@ namespace Swallow
 		alDistanceModel(AL_INVERSE_DISTANCE);
 	}
 
+	void OpenALAudioAPI::SetGain(float gain)
+	{
+		alListenerf(AL_GAIN, gain);
+	}
+
 	void OpenALAudioAPI::SetPosition(const glm::vec3& pos)
 	{
 		alListener3f(AL_POSITION, pos.x, pos.y, pos.z);
