@@ -166,19 +166,19 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 	Swallow::Renderer::BeginScene(m_Camera);
 	static float rot = 0.0f;
 	rot += 1.0f * ts.GetSeconds();
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour"))->UploadUniformFloat4("u_Colour", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour")), m_SquareVA, glm::translate(glm::vec3(4.0, 0.0, 0.0)));
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("texture"))->Bind();
+	m_SLib.Get("flatcolour")->SetFloat4("u_Colour", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
+	Swallow::Renderer::Submit(m_SLib.Get("flatcolour"), m_SquareVA, glm::translate(glm::vec3(4.0, 0.0, 0.0)));
+	m_SLib.Get("texture")->Bind();
 	m_CheckerBoardTexture->Bind(1);
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("texture"))->UploadUniformInt1("u_Texture", glm::ivec1(1));
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("texture"))->UploadUniformMat4("u_Rot", glm::rotate(0.0f, glm::vec3(1, 0, 0)));
-	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("texture")), m_SquareVA, glm::translate(glm::vec3(0.0, 0.0, 4.0)));
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("texture"))->UploadUniformMat4("u_Rot", glm::rotate(rot, glm::vec3(1, 0, 0)));
-	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("texture")), m_SquareVA, glm::translate(glm::vec3(-4.0, 0.0, 0.0)) * glm::rotate(rot, glm::vec3(1, 0, 0)));
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour"))->Bind();
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour"))->UploadUniformMat4("u_Rot", glm::identity<glm::mat4>());
-	std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour"))->UploadUniformFloat4("u_Colour", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
-	Swallow::Renderer::Submit(std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_SLib.Get("flatcolour")), m_SquareVA, glm::translate(glm::vec3(0.0, -2.01, -0.0)) * glm::scale(glm::vec3(100, 1, 100)));
+	m_SLib.Get("texture")->SetInt1("u_Texture", glm::ivec1(1));
+	m_SLib.Get("texture")->SetMat4("u_Rot", glm::rotate(0.0f, glm::vec3(1, 0, 0)));
+	Swallow::Renderer::Submit(m_SLib.Get("texture"), m_SquareVA, glm::translate(glm::vec3(0.0, 0.0, 4.0)));
+	m_SLib.Get("texture")->SetMat4("u_Rot", glm::rotate(rot, glm::vec3(1, 0, 0)));
+	Swallow::Renderer::Submit(m_SLib.Get("texture"), m_SquareVA, glm::translate(glm::vec3(-4.0, 0.0, 0.0)) * glm::rotate(rot, glm::vec3(1, 0, 0)));
+	m_SLib.Get("flatcolour")->Bind();
+	m_SLib.Get("flatcolour")->SetMat4("u_Rot", glm::identity<glm::mat4>());
+	m_SLib.Get("flatcolour")->SetFloat4("u_Colour", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+	Swallow::Renderer::Submit(m_SLib.Get("flatcolour"), m_SquareVA, glm::translate(glm::vec3(0.0, -2.01, -0.0)) * glm::scale(glm::vec3(100, 1, 100)));
 
 	Swallow::Renderer::EndScene();
 }

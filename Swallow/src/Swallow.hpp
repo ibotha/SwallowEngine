@@ -16,6 +16,7 @@
 
 // ---------------Renderer--------------------
 #include <Swallow/Renderer/Renderer.hpp>
+#include <Swallow/Renderer/Renderer2D.hpp>
 #include <Swallow/Renderer/RenderCommand.hpp>
 
 #include <Swallow/Renderer/Buffer.hpp>

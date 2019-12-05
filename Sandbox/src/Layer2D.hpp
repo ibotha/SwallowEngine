@@ -17,9 +17,6 @@ public:
 private:
 	Swallow::OrthographicCameraController m_Camera;
 
-	// Temp
-	Swallow::Ref<Swallow::VertexArray> m_SquareVA;
-	Swallow::Ref<Swallow::Shader> m_Shader;
-
 	glm::vec4 col = { 0.2f, 0.5f, 0.8f, 1.0f };
+	int limit = 10;
 };

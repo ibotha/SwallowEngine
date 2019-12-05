@@ -25,48 +25,33 @@ void Layer2D::OnEvent(Swallow::Event & e)
 void Layer2D::OnImGuiRender()
 {
 	ImGui::Begin("Props");
-	ImGui::ColorEdit4("Colour", glm::value_ptr(col), 0, 1);
+	ImGui::ColorEdit4("Colour", glm::value_ptr(col));
+	ImGui::InputInt("Quad Amount", &limit);
 	ImGui::End();
 }
 
 void Layer2D::OnAttach()
 {
-	m_SquareVA = Swallow::VertexArray::Create();
-	float vertices[] = {
-		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
-		 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
-		-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
-	};
-	Swallow::Ref<Swallow::VertexBuffer> VB = Swallow::VertexBuffer::Create(vertices, sizeof(vertices));
-	VB->SetLayout({
-		{ Swallow::ShaderDataType::Float3, "a_Position" },
-		{ Swallow::ShaderDataType::Float2, "a_TexCoord" }
-		});
-	m_SquareVA->AddVertexBuffer(VB);
-	uint32_t Indeces[] = {
-		0, 1, 2,
-		2, 3, 0
-	};
-	Swallow::Ref<Swallow::IndexBuffer> IB = Swallow::IndexBuffer::Create(Indeces, 6);
-	m_SquareVA->SetIndexBuffer(IB);
-	m_Shader = Swallow::Shader::Create("assets/Shaders/Flatcolour.glsl");
+	Swallow::Renderer2D::Init();
 }
 
 void Layer2D::OnDetach()
 {
+	Swallow::Renderer2D::Shutdown();
 }
 
 void Layer2D::OnUpdate(Swallow::Timestep ts)
 {
 	m_Camera.OnUpdate(ts);
-	Swallow::Renderer::BeginScene(m_Camera.GetCamera());
 
-	// TODO: Fix shader API Methods to be non OpenGL Specific
-	Swallow::Ref<Swallow::OpenGLShader> &t = std::dynamic_pointer_cast<Swallow::OpenGLShader>(m_Shader);
-	t->Bind();
-	t->UploadUniformFloat4("u_Colour", col);
+	Swallow::RenderCommand::SetClearColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
+	Swallow::RenderCommand::Clear();
 
-	Swallow::Renderer::Submit(t, m_SquareVA);
-	Swallow::Renderer::EndScene();
+	Swallow::Renderer2D::BeginScene(m_Camera.GetCamera());
+
+	for (int x = 0; x < limit; x++)
+		for (int y = 0; y < limit; y++)
+			Swallow::Renderer2D::DrawQuad({x, y}, { 0.9f, 0.9f }, col, x);
+
+	Swallow::Renderer2D::EndScene();
 }

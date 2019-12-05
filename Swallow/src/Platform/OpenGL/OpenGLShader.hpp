@@ -31,6 +31,18 @@ namespace Swallow {
 		virtual void UploadUniformMat3(std::string const &name, glm::mat3 const &v);
 		virtual void UploadUniformMat4(std::string const &name, glm::mat4 const &v);
 
+		virtual void SetFloat1(std::string const &name, glm::vec1 const &v) override;
+		virtual void SetFloat2(std::string const &name, glm::vec2 const &v) override;
+		virtual void SetFloat3(std::string const &name, glm::vec3 const &v) override;
+		virtual void SetFloat4(std::string const &name, glm::vec4 const &v) override;
+		virtual void SetInt1(std::string const &name, glm::ivec1 const &v) override;
+		virtual void SetInt2(std::string const &name, glm::ivec2 const &v) override;
+		virtual void SetInt3(std::string const &name, glm::ivec3 const &v) override;
+		virtual void SetInt4(std::string const &name, glm::ivec4 const &v) override;
+		virtual void SetMat2(std::string const &name, glm::mat2 const &v) override;
+		virtual void SetMat3(std::string const &name, glm::mat3 const &v) override;
+		virtual void SetMat4(std::string const &name, glm::mat4 const &v) override;
+
 		int32_t GetUniform(const std::string &name);
 
 	private:

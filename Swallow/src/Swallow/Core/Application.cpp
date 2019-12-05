@@ -71,7 +71,7 @@ namespace Swallow {
 			float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
-			RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+			RenderCommand::SetClearColor({ 0.9f, 0.1f, 0.1f, 1.0f });
 			RenderCommand::Clear();
 
 			if (!m_Minimised)

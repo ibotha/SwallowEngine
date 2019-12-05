@@ -48,7 +48,6 @@ namespace Swallow {
 		auto extdot = filepath.rfind(".");
 		extdot = extdot == std::string::npos ? filepath.length() : extdot;
 		m_Name = filepath.substr(lastSlash, extdot - lastSlash);
-		SW_CORE_INFO("{}", m_Name);
 		std::string source = ReadFile(filepath);
 		auto sources = PreProcess(source);
 		Compile(sources);
@@ -94,7 +93,6 @@ namespace Swallow {
 			const GLchar *source = kv.second.c_str();
 			GLuint shader = glCreateShader(type);
 			glShaderIDs[i++] = shader;
-			SW_CORE_TRACE("Adding Shader {}", shader);
 			glShaderSource(shader, 1, &source, 0);
 			glCompileShader(shader);
 
@@ -142,7 +140,6 @@ namespace Swallow {
 			// Don't leak shaders either.
 			for (int j = 0; j < i; j++)
 			{
-				SW_CORE_TRACE("Removing Shader {}", glShaderIDs[j]);
 				glDeleteShader(glShaderIDs[j]);
 			}
 
@@ -154,7 +151,6 @@ namespace Swallow {
 		// Always detach shaders after a successful link.
 		for (int j = 0; j < i; j++)
 		{
-			SW_CORE_TRACE("Removing Shader {}", glShaderIDs[j]);
 			glDeleteShader(glShaderIDs[j]);
 		}
 
@@ -177,7 +173,6 @@ namespace Swallow {
 			SW_CORE_ERROR("Could not open shader file: {}", filepath);
 			return R"(
 #type vertex
-#type vertex	
 #version 330 core
 layout(location = 0) in vec3 a_Pos;
 layout(location = 1) in vec3 a_Norm;
@@ -224,6 +219,7 @@ void main() {
 		return m_Name;
 	}
 
+#pragma region Uploads
 	void OpenGLShader::UploadUniformFloat1(std::string const &name, glm::vec1 const &v)
 	{
 		int32_t loc = GetUniform(name);
@@ -312,5 +308,65 @@ void main() {
 		}
 		return uni->second;
 	}
+#pragma endregion
+
+#pragma region SetAPI
+
+	void OpenGLShader::SetFloat1(std::string const& name, glm::vec1 const& v)
+	{
+		UploadUniformFloat1(name, v);
+	}
+
+	void OpenGLShader::SetFloat2(std::string const& name, glm::vec2 const& v)
+	{
+		UploadUniformFloat2(name, v);
+	}
+
+	void OpenGLShader::SetFloat3(std::string const& name, glm::vec3 const& v)
+	{
+		UploadUniformFloat3(name, v);
+	}
+
+	void OpenGLShader::SetFloat4(std::string const& name, glm::vec4 const& v)
+	{
+		UploadUniformFloat4(name, v);
+	}
+
+	void OpenGLShader::SetInt1(std::string const& name, glm::ivec1 const& v)
+	{
+		UploadUniformInt1(name, v);
+	}
+
+	void OpenGLShader::SetInt2(std::string const& name, glm::ivec2 const& v)
+	{
+		UploadUniformInt2(name, v);
+	}
+
+	void OpenGLShader::SetInt3(std::string const& name, glm::ivec3 const& v)
+	{
+		UploadUniformInt3(name, v);
+	}
+
+	void OpenGLShader::SetInt4(std::string const& name, glm::ivec4 const& v)
+	{
+		UploadUniformInt4(name, v);
+	}
+
+	void OpenGLShader::SetMat2(std::string const& name, glm::mat2 const& m)
+	{
+		UploadUniformMat2(name, m);
+	}
+
+	void OpenGLShader::SetMat3(std::string const& name, glm::mat3 const& m)
+	{
+		UploadUniformMat3(name, m);
+	}
+
+	void OpenGLShader::SetMat4(std::string const& name, glm::mat4 const& m)
+	{
+		UploadUniformMat4(name, m);
+	}
+
+#pragma endregion
 
 }

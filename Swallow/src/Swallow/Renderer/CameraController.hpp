@@ -9,8 +9,6 @@ namespace Swallow {
 	{
 	public:
 		virtual ~CameraController() {}
-		virtual const Camera &GetCamera() const = 0;
-		virtual Camera &GetCamera() = 0;
 		virtual void OnEvent(Event &e) = 0;
 		virtual void OnUpdate(Timestep &ts) = 0;
 	};
@@ -20,8 +18,8 @@ namespace Swallow {
 	public:
 		OrthographicCameraController(float aspectRatio, bool rotationEnabled = false);
 		virtual ~OrthographicCameraController() {}
-		virtual inline const Camera &GetCamera() const override { return m_Camera; }
-		virtual inline Camera &GetCamera() override { return m_Camera; }
+		virtual inline const OrthographicCamera &GetCamera() const { return m_Camera; }
+		virtual inline OrthographicCamera &GetCamera() { return m_Camera; }
 		virtual void OnEvent(Event &e) override;
 		virtual void OnUpdate(Timestep &ts) override;
 
@@ -43,8 +41,8 @@ namespace Swallow {
 	{
 	public:
 		virtual ~PerspectiveCameraController() {}
-		virtual inline const Camera &GetCamera() const override { return m_Camera; }
-		virtual inline Camera &GetCamera() override { return m_Camera; }
+		virtual inline const PerspectiveCamera &GetCamera() const { return m_Camera; }
+		virtual inline PerspectiveCamera &GetCamera() { return m_Camera; }
 		virtual void OnEvent(Event &e) override;
 		virtual void OnUpdate(Timestep &ts) override;
 	private:
