@@ -6,12 +6,19 @@ extern Swallow::Application* Swallow::CreateApplication();
 
 int main(int argc, char **argv)
 {
+	SW_PROFILE_BEGIN_SESSION("StartUp", "Swallow-Startup-profile.json");
 	Swallow::Log::Init();
-
-	SW_CORE_WARN("Initialized Log");
 	auto app = Swallow::CreateApplication();
+	SW_PROFILE_END_SESSION();
+
+
+	SW_PROFILE_BEGIN_SESSION("Runtime", "Swallow-Runtime-profile.json");
 	app->Run();
+	SW_PROFILE_END_SESSION();
+
+	SW_PROFILE_BEGIN_SESSION("ShutDown", "Swallow-Shutdown-profile.json");
 	delete app;
+	SW_PROFILE_END_SESSION();
 }
 
 #endif

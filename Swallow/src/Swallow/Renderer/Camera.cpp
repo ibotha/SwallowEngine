@@ -7,17 +7,20 @@ namespace Swallow {
 	Camera::Camera(const glm::mat4 &projection)
 		:m_ProjectionMatrix(projection)
 	{
+		SW_PROFILE_FUNCTION();
 		Recalculate();
 	}
 
 	void Camera::Recalculate()
 	{
+		SW_PROFILE_FUNCTION();
 		m_ViewMatrix = m_RotationMatrix * m_TranslationMatrix;
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
 	void Camera::SetRotation(const glm::vec3 & rotation)
 	{
+		SW_PROFILE_FUNCTION();
 		glm::mat4 xRotation = glm::rotate(glm::mat4(1.0f), -rotation.x, glm::vec3(1, 0, 0));
 		glm::mat4 yRotation = glm::rotate(glm::mat4(1.0f), -rotation.y, glm::vec3(0, 1, 0));
 		glm::mat4 zRotation = glm::rotate(glm::mat4(1.0f), -rotation.z, glm::vec3(0, 0, 1));
@@ -26,6 +29,7 @@ namespace Swallow {
 
 	void Camera::SetPosition(const glm::vec3 & position)
 	{
+		SW_PROFILE_FUNCTION();
 		m_TranslationMatrix = glm::translate(glm::mat4(1.0f), -position);
 	}
 

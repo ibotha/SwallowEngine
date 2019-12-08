@@ -1,10 +1,9 @@
 #pragma once
 #include <Swallow.hpp>
-
 class Layer2D : public Swallow::Layer {
 public:
 	Layer2D();
-	virtual ~Layer2D() = default;
+	virtual ~Layer2D();
 
 	bool OnWindowResize(Swallow::WindowResizeEvent &e);
 
@@ -18,5 +17,6 @@ private:
 	Swallow::OrthographicCameraController m_Camera;
 
 	glm::vec4 col = { 0.2f, 0.5f, 0.8f, 1.0f };
+	Swallow::Ref<Swallow::Texture2D> texture;
 	int limit = 10;
 };

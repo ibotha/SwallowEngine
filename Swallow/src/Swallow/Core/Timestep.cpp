@@ -5,6 +5,7 @@ namespace Swallow {
 	Timestep::Timestep(float time)
 			:m_Time(time)
 	{
+		SW_PROFILE_FUNCTION();
 	}
 	Timestep::~Timestep(){}
 	Timestep::Timestep(const Timestep& cpy)

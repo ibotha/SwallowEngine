@@ -13,21 +13,25 @@ namespace Swallow {
 	static bool s_GLFWInitialized = false;
 
 	Window* Window::Create(const WindowProps& props) {
+		SW_PROFILE_FUNCTION();
 		return new WindowsWindow(props);
 	}
 
 	Swallow::WindowsWindow::WindowsWindow(const WindowProps & props)
 	{
+		SW_PROFILE_FUNCTION();
 		Init(props);
 	}
 
 	Swallow::WindowsWindow::~WindowsWindow()
 	{
+		SW_PROFILE_FUNCTION();
 		Shutdown();
 	}
 
 	void Swallow::WindowsWindow::Init(const WindowProps & props)
 	{
+		SW_PROFILE_FUNCTION();
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -37,7 +41,7 @@ namespace Swallow {
 
 			glfwWindowHint(GLFW_SAMPLES, 4);
 			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
             glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
             #ifdef __APPLE__
                 glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // uncomment this statement to fix compilation on OS X
@@ -149,22 +153,26 @@ namespace Swallow {
 
 	void Swallow::WindowsWindow::Shutdown()
 	{
+		SW_PROFILE_FUNCTION();
 		glfwDestroyWindow(m_Window);
 	}
 
 	void Swallow::WindowsWindow::OnUpdate()
 	{
+		SW_PROFILE_FUNCTION();
 		glfwPollEvents();
 		m_Context->SwapBuffers();
 	}
 
 	inline void * WindowsWindow::GetNativeWindow() const
 	{
+		SW_PROFILE_FUNCTION();
 		return m_Window;
 	}
 
 	void Swallow::WindowsWindow::SetVSync(bool enabled)
 	{
+		SW_PROFILE_FUNCTION();
 		if (enabled) {
 			glfwSwapInterval(1);
 		}
@@ -176,6 +184,7 @@ namespace Swallow {
 
 	bool Swallow::WindowsWindow::IsVSync() const
 	{
+		SW_PROFILE_FUNCTION();
 		return m_Data.VSync;
 	}
 

@@ -12,6 +12,7 @@ namespace Swallow {
 
 	Application::Application()
 	{
+		SW_PROFILE_FUNCTION();
 		SW_CORE_ASSERT(s_Instance == nullptr, "Cannot run more than one application");
 		s_Instance = this;
 
@@ -27,30 +28,36 @@ namespace Swallow {
 
 	Application::~Application()
 	{
+		SW_PROFILE_FUNCTION();
 	}
 
 	void Application::PushLayer(Ref<Layer> layer)
 	{
+		SW_PROFILE_FUNCTION();
 		m_LayerStack.PushLayer(layer);
 	}
 
 	void Application::PushOverlay(Ref<Layer> layer)
 	{
+		SW_PROFILE_FUNCTION();
 		m_LayerStack.PushOverlay(layer);
 	}
 
 	void Application::PopLayer(Ref<Layer> layer)
 	{
+		SW_PROFILE_FUNCTION();
 		m_LayerStack.PopLayer(layer);
 	}
 
 	void Application::PopOverlay(Ref<Layer> layer)
 	{
+		SW_PROFILE_FUNCTION();
 		m_LayerStack.PopOverlay(layer);
 	}
 
 	void Application::OnEvent(Event &e)
 	{
+		SW_PROFILE_FUNCTION();
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
@@ -65,6 +72,7 @@ namespace Swallow {
 
 	void Application::Run()
 	{
+		SW_PROFILE_FUNCTION();
 		float x = 0.0f;
 		while (m_Running)
 		{
@@ -94,6 +102,7 @@ namespace Swallow {
 
 	bool Application::OnWindowClose(WindowCloseEvent &e)
 	{
+		SW_PROFILE_FUNCTION();
 		m_Running = false;
 
 		return false;
@@ -101,6 +110,7 @@ namespace Swallow {
 
 	bool Application::OnWindowResize(WindowResizeEvent & e)
 	{
+		SW_PROFILE_FUNCTION();
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimised = true;

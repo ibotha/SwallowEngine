@@ -10,6 +10,7 @@ namespace Swallow {
 
 	void Log::Init()
 	{
+		SW_PROFILE_FUNCTION();
 		spdlog::set_pattern("%^[%T] %n: %v%$");
 		Log::s_CoreLogger = spdlog::stdout_color_mt("SWALLOW");
 		Log::s_CoreLogger->set_level(spdlog::level::trace);

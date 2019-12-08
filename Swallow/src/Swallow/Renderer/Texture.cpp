@@ -20,12 +20,28 @@ namespace Swallow {
 
 	Ref<Texture2D> Texture2D::Create(const std::string & path)
 	{
+		SW_PROFILE_FUNCTION();
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLTexture2D>(path);
+			return CreateRef<OpenGLTexture2D>(path);
+		default:
+			break;
+		}
+		return nullptr;
+	}
+
+	Ref<Texture2D> Texture2D::Create(uint32_t width, uint32_t height)
+	{
+		SW_PROFILE_FUNCTION();
+		switch (Renderer::GetAPI())
+		{
+		case RendererAPI::API::None:
+			return nullptr;
+		case RendererAPI::API::OpenGL:
+			return CreateRef<OpenGLTexture2D>(width, height);
 		default:
 			break;
 		}

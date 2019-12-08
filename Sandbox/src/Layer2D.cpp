@@ -4,9 +4,12 @@
 #include <imgui.h>
 #define AR (Swallow::Application::Get().GetWindow().GetWidth() / static_cast<float>(Swallow::Application::Get().GetWindow().GetHeight()))
 
-
 Layer2D::Layer2D()
 	:Layer("Sandbox2D"), m_Camera(AR)
+{
+}
+
+Layer2D::~Layer2D()
 {
 }
 
@@ -33,6 +36,7 @@ void Layer2D::OnImGuiRender()
 void Layer2D::OnAttach()
 {
 	Swallow::Renderer2D::Init();
+	texture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
 }
 
 void Layer2D::OnDetach()
@@ -42,16 +46,29 @@ void Layer2D::OnDetach()
 
 void Layer2D::OnUpdate(Swallow::Timestep ts)
 {
-	m_Camera.OnUpdate(ts);
+	SW_PROFILE_FUNCTION();
+	{
+		SW_PROFILE_SCOPE("CameraController::OnUpdate");
+		m_Camera.OnUpdate(ts);
+	}
 
-	Swallow::RenderCommand::SetClearColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
-	Swallow::RenderCommand::Clear();
+	{
+		SW_PROFILE_SCOPE("RenderPrep");
+		Swallow::RenderCommand::SetClearColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
+		Swallow::RenderCommand::Clear();
+	}
 
-	Swallow::Renderer2D::BeginScene(m_Camera.GetCamera());
+	{
+		SW_PROFILE_SCOPE("RenderDraw");
+		Swallow::Renderer2D::BeginScene(m_Camera.GetCamera());
 
-	for (int x = 0; x < limit; x++)
-		for (int y = 0; y < limit; y++)
-			Swallow::Renderer2D::DrawQuad({x, y}, { 0.9f, 0.9f }, col, x);
+		for (int i = 0; i < limit; i++)
+		{
+			Swallow::Renderer2D::DrawQuad({ 0.5f, 0 }, { 1.0f, 2.0f }, col);
+			Swallow::Renderer2D::DrawQuad({ 0.0f, 1.6f }, { 0.5f, 0.5f }, { 0.0f, 8.0f, 6.0f, 1.0f });
+			Swallow::Renderer2D::DrawQuad({ 0, 0 , -0.1f }, { 10.0f, 10.0f }, texture);
+		}
 
-	Swallow::Renderer2D::EndScene();
+		Swallow::Renderer2D::EndScene();
+	}
 }

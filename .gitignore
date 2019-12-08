@@ -12,7 +12,7 @@ bin-int/
 *.vcxproj*
 Makefile
 *.sln
-*/assets/textures/*
 Run.sh
 imgui.ini
 .vscode
+*profile.json

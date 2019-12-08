@@ -170,7 +170,7 @@ void StartLayer::OnUpdate(Swallow::Timestep ts) {
 	Swallow::Renderer::Submit(m_SLib.Get("flatcolour"), m_SquareVA, glm::translate(glm::vec3(4.0, 0.0, 0.0)));
 	m_SLib.Get("texture")->Bind();
 	m_CheckerBoardTexture->Bind(1);
-	m_SLib.Get("texture")->SetInt1("u_Texture", glm::ivec1(1));
+	m_SLib.Get("texture")->SetInt("u_Texture", 1);
 	m_SLib.Get("texture")->SetMat4("u_Rot", glm::rotate(0.0f, glm::vec3(1, 0, 0)));
 	Swallow::Renderer::Submit(m_SLib.Get("texture"), m_SquareVA, glm::translate(glm::vec3(0.0, 0.0, 4.0)));
 	m_SLib.Get("texture")->SetMat4("u_Rot", glm::rotate(rot, glm::vec3(1, 0, 0)));

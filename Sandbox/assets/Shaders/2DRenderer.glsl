@@ -1,29 +1,29 @@
 #type vertex	
 #version 430 core
 layout(location = 0) in vec3 a_Pos;
-layout(location = 1) in vec2 a_Tex;
-
-out vec2 v_Tex;
+layout(location = 1) in vec2 a_TexCoord;
 
 uniform mat4 u_ViewProjection;
 uniform mat4 u_Model;
 
+out vec2 v_TexCoord;
+
 void main()
 {
+	v_TexCoord = a_TexCoord;
 	gl_Position = u_ViewProjection * u_Model * vec4(a_Pos, 1.0);
-	v_Tex = a_Tex;
 }
 
 #type pixel
 #version 430 core
 
-in vec2 v_Tex;
-
+uniform vec4 u_Colour;
 uniform sampler2D u_Texture;
 
 out vec4 color;
 
+in vec2 v_TexCoord;
+
 void main() {
-	vec4 col = texture(u_Texture, v_Tex);
-	color = col;
+	color = texture(u_Texture, v_TexCoord) * u_Colour;
 }

@@ -7,12 +7,14 @@ namespace Swallow {
 
 	BufferElement::BufferElement(ShaderDataType type, const std::string &name, bool normalized)
 	:Name(name), Type(type), Size(ShaderDataTypeSize(type)), Offset(0), Normalized(normalized)
-	{}
+	{
+	}
 
 
 	BufferLayout::BufferLayout(std::initializer_list<BufferElement> const &elements)
 		:m_Elements(elements)
 	{
+		SW_PROFILE_FUNCTION();
 		CalculateOffsetsAndStride();
 	}
 
@@ -28,12 +30,13 @@ namespace Swallow {
 
 	Ref<VertexBuffer> VertexBuffer::Create(void * vertices, uint32_t size)
 	{
+		SW_PROFILE_FUNCTION();
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLVertexBuffer>(vertices, size);
+			return CreateRef<OpenGLVertexBuffer>(vertices, size);
 		default:
 			break;
 		}
@@ -42,12 +45,13 @@ namespace Swallow {
 
 	Ref<IndexBuffer> IndexBuffer::Create(uint32_t * indices, uint32_t count)
 	{
+		SW_PROFILE_FUNCTION();
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return std::make_shared<OpenGLIndexBuffer>(indices, count);
+			return CreateRef<OpenGLIndexBuffer>(indices, count);
 		default:
 			break;
 		}
