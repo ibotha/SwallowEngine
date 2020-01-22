@@ -13,7 +13,6 @@ namespace Swallow {
 	static bool s_GLFWInitialized = false;
 
 	Window* Window::Create(const WindowProps& props) {
-		SW_PROFILE_FUNCTION();
 		return new WindowsWindow(props);
 	}
 
@@ -166,7 +165,6 @@ namespace Swallow {
 
 	inline void * WindowsWindow::GetNativeWindow() const
 	{
-		SW_PROFILE_FUNCTION();
 		return m_Window;
 	}
 
@@ -184,7 +182,6 @@ namespace Swallow {
 
 	bool Swallow::WindowsWindow::IsVSync() const
 	{
-		SW_PROFILE_FUNCTION();
 		return m_Data.VSync;
 	}
 

@@ -20,7 +20,6 @@ namespace Swallow {
 
 	Ref<Texture2D> Texture2D::Create(const std::string & path)
 	{
-		SW_PROFILE_FUNCTION();
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:
@@ -35,7 +34,6 @@ namespace Swallow {
 
 	Ref<Texture2D> Texture2D::Create(uint32_t width, uint32_t height)
 	{
-		SW_PROFILE_FUNCTION();
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:

@@ -12,7 +12,6 @@ namespace Swallow {
 
 	void OrthographicCameraController::OnEvent(Event & e)
 	{
-		SW_PROFILE_FUNCTION();
 		EventDispatcher d(e);
 		d.Dispatch<MouseScrolledEvent>(BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
 		d.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OrthographicCameraController::OnWindowResize));
@@ -20,7 +19,6 @@ namespace Swallow {
 
 	void OrthographicCameraController::OnUpdate(Timestep & ts)
 	{
-		SW_PROFILE_FUNCTION();
 		if (Input::IsKeyPressed(SW_KEY_W))
 			m_Position.y += 1 * m_ZoomLevel * ts.GetSeconds();
 		if (Input::IsKeyPressed(SW_KEY_S))
@@ -42,7 +40,6 @@ namespace Swallow {
 
 	bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent & e)
 	{
-		SW_PROFILE_FUNCTION();
 		m_ZoomLevel -= e.GetYOffset();
 		m_ZoomLevel = glm::clamp(m_ZoomLevel, 1.0f, 10000.0f);
 		m_Camera.SetProjectionMatrix(-m_ZoomLevel * m_AspectRatio, m_ZoomLevel * m_AspectRatio, -m_ZoomLevel, m_ZoomLevel);
@@ -52,7 +49,6 @@ namespace Swallow {
 
 	bool OrthographicCameraController::OnWindowResize(WindowResizeEvent & e)
 	{
-		SW_PROFILE_FUNCTION();
 		m_AspectRatio = e.GetWidth() / static_cast<float>(e.GetHeight());
 
 		m_Camera.SetProjectionMatrix(-m_ZoomLevel * m_AspectRatio, m_ZoomLevel * m_AspectRatio, -m_ZoomLevel, m_ZoomLevel);

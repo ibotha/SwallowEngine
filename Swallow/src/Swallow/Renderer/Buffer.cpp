@@ -14,7 +14,6 @@ namespace Swallow {
 	BufferLayout::BufferLayout(std::initializer_list<BufferElement> const &elements)
 		:m_Elements(elements)
 	{
-		SW_PROFILE_FUNCTION();
 		CalculateOffsetsAndStride();
 	}
 
@@ -30,7 +29,6 @@ namespace Swallow {
 
 	Ref<VertexBuffer> VertexBuffer::Create(void * vertices, uint32_t size)
 	{
-		SW_PROFILE_FUNCTION();
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:
@@ -45,7 +43,6 @@ namespace Swallow {
 
 	Ref<IndexBuffer> IndexBuffer::Create(uint32_t * indices, uint32_t count)
 	{
-		SW_PROFILE_FUNCTION();
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:

@@ -35,13 +35,11 @@ void Layer2D::OnImGuiRender()
 
 void Layer2D::OnAttach()
 {
-	Swallow::Renderer2D::Init();
 	texture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
 }
 
 void Layer2D::OnDetach()
 {
-	Swallow::Renderer2D::Shutdown();
 }
 
 void Layer2D::OnUpdate(Swallow::Timestep ts)
@@ -66,7 +64,7 @@ void Layer2D::OnUpdate(Swallow::Timestep ts)
 		{
 			Swallow::Renderer2D::DrawQuad({ 0.5f, 0 }, { 1.0f, 2.0f }, col);
 			Swallow::Renderer2D::DrawQuad({ 0.0f, 1.6f }, { 0.5f, 0.5f }, { 0.0f, 8.0f, 6.0f, 1.0f });
-			Swallow::Renderer2D::DrawQuad({ 0, 0 , -0.1f }, { 10.0f, 10.0f }, texture);
+			Swallow::Renderer2D::DrawQuad({ 0, 0 , -0.1f }, { 10.0f, 10.0f }, texture, 0.0f, 10.0f);
 		}
 
 		Swallow::Renderer2D::EndScene();

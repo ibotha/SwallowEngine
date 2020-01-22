@@ -8,9 +8,7 @@ namespace Swallow {
 	class OpenGLShader : public Shader
 	{
 	public:
-		OpenGLShader(const std::string& name, const std::string & vertexSrc, const std::string & fragmentSrc);
-		OpenGLShader(const std::string& name, const std::string &filepath);
-		OpenGLShader(const std::string &filepath);
+		OpenGLShader(const std::string& name, const std::string & vertexPath, const std::string & fragmentPath);
 		OpenGLShader(const OpenGLShader &rhs) = default;
 		OpenGLShader &operator=(const OpenGLShader &rhs) = default;
 		virtual ~OpenGLShader();
@@ -47,7 +45,6 @@ namespace Swallow {
 
 	private:
 		std::string ReadFile(const std::string& filepath);
-		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
 		void Compile(const std::unordered_map<GLenum, std::string> &sources);
 	private:
 		std::string m_Name;

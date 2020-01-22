@@ -18,7 +18,6 @@ namespace Swallow {
 	ImGuiLayer::ImGuiLayer()
 		:Layer("ImGuiLayer")
 	{
-		SW_PROFILE_FUNCTION();
 	}
 
 	ImGuiLayer::ImGuiLayer(const ImGuiLayer& cpy)
@@ -36,12 +35,10 @@ namespace Swallow {
 
 	ImGuiLayer::~ImGuiLayer()
 	{
-		SW_PROFILE_FUNCTION();
 	}
 
 	void ImGuiLayer::OnAttach()
 	{
-		SW_PROFILE_FUNCTION();
 		ImGui::CreateContext();
 		ImGuiIO& io = ImGui::GetIO();
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
@@ -68,7 +65,6 @@ namespace Swallow {
 
 	void ImGuiLayer::OnDetach()
 	{
-		SW_PROFILE_FUNCTION();
 		ImGui_ImplOpenGL3_Shutdown();
 		ImGui_ImplGlfw_Shutdown();
 		ImGui::DestroyContext();
@@ -76,7 +72,6 @@ namespace Swallow {
 
 	void ImGuiLayer::Begin()
 	{
-		SW_PROFILE_FUNCTION();
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -84,7 +79,6 @@ namespace Swallow {
 
 	void ImGuiLayer::End()
 	{
-		SW_PROFILE_FUNCTION();
 		ImGuiIO& io = ImGui::GetIO();
 
 		Application& app = Application::Get();

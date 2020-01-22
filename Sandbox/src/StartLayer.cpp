@@ -54,8 +54,8 @@ StartLayer::StartLayer()
 	squareIB = Swallow::IndexBuffer::Create(squareIndex, sizeof(squareIndex) / sizeof(uint32_t));
 	m_SquareVA->SetIndexBuffer(squareIB);
 
-	m_SLib.Load("assets/shaders/flatcolour.glsl");
-	m_SLib.Load("assets/shaders/texture.glsl");
+	m_SLib.Load("flatcolour", "assets/shaders/flatcolourvertex.glsl", "assets/shaders/flatcolourfragment.glsl");
+	m_SLib.Load("texture", "assets/shaders/texturevertex.glsl", "assets/shaders/texturefragment.glsl");
 
 	m_CheckerBoardTexture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
 }

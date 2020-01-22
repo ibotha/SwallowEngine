@@ -9,13 +9,11 @@ namespace Swallow {
 	OpenGLContext::OpenGLContext(GLFWwindow * windowHandle)
 		:m_WindowHandle(windowHandle)
 	{
-		SW_PROFILE_FUNCTION();
 		SW_CORE_ASSERT(windowHandle, "OpenGL WindowHandle does not exist!")
 	}
 
 	void OpenGLContext::Init()
 	{
-		SW_PROFILE_FUNCTION();
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		SW_CORE_ASSERT(status, "Could Not Initialize Glad");
@@ -37,7 +35,6 @@ namespace Swallow {
 
 	void OpenGLContext::SwapBuffers()
 	{
-		SW_PROFILE_FUNCTION();
 		glfwSwapBuffers(m_WindowHandle);
 	}
 }

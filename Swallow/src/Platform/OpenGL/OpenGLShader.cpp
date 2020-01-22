@@ -8,7 +8,6 @@ namespace Swallow {
 
 	static GLenum ShaderTypeFromString(const std::string &type)
 	{
-		SW_PROFILE_FUNCTION();
 		if (type == "vertex")
 		{
 			return GL_VERTEX_SHADER;
@@ -24,72 +23,22 @@ namespace Swallow {
 		return (0);
 	}
 
-	OpenGLShader::OpenGLShader(const std::string & name, const std::string & vertexSrc, const std::string & fragmentSrc)
+	OpenGLShader::OpenGLShader(const std::string & name, const std::string & vertexPath, const std::string & fragmentPath)
 	{
-		SW_PROFILE_FUNCTION();
 		m_Name = name;
 		std::unordered_map<GLenum, std::string> sources;
-		sources[GL_VERTEX_SHADER] = vertexSrc;
-		sources[GL_FRAGMENT_SHADER] = fragmentSrc;
-		Compile(sources);
-	}
-
-	OpenGLShader::OpenGLShader(const std::string & name, const std::string &filepath)
-	{
-		SW_PROFILE_FUNCTION();
-		m_Name = name;
-		std::string source = ReadFile(filepath);
-		auto sources = PreProcess(source);
-		Compile(sources);
-	}
-
-	OpenGLShader::OpenGLShader(const std::string &filepath)
-	{
-		SW_PROFILE_FUNCTION();
-		// extract last slash
-		auto lastSlash = filepath.find_last_of("/\\");
-		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
-		auto extdot = filepath.rfind(".");
-		extdot = extdot == std::string::npos ? filepath.length() : extdot;
-		m_Name = filepath.substr(lastSlash, extdot - lastSlash);
-		std::string source = ReadFile(filepath);
-		auto sources = PreProcess(source);
+		sources[GL_VERTEX_SHADER] = ReadFile(vertexPath);
+		sources[GL_FRAGMENT_SHADER] = ReadFile(fragmentPath);
 		Compile(sources);
 	}
 
 	OpenGLShader::~OpenGLShader()
 	{
-		SW_PROFILE_FUNCTION();
 		glDeleteProgram(m_RendererID);
-	}
-
-	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string& source)
-	{
-		SW_PROFILE_FUNCTION();
-		std::unordered_map<GLenum, std::string> sources;
-
-		const char* typeToken = "#type";
-		size_t typeTokenLength = strlen(typeToken);
-		size_t pos = source.find(typeToken, 0);
-		while (pos != std::string::npos)
-		{
-			size_t eol = source.find_first_of("\r\n", pos);
-			SW_CORE_ASSERT(eol != std::string::npos, "Shader has unclosed #type specifier");
-			size_t begin = source.find_first_not_of(" \t\v", pos + typeTokenLength);
-			size_t end = source.find_first_of(" \t\v\n\r", begin);
-			std::string type = source.substr(begin, end - begin);
-
-			size_t nextLinePos = source.find_first_not_of("\r\n", eol);
-			pos = source.find(typeToken, nextLinePos);
-			sources[ShaderTypeFromString(type)] = source.substr(nextLinePos,
-				pos - (nextLinePos == std::string::npos ? source.size() : nextLinePos));
-		}
-		return sources;
 	}
 
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string> &sources)
 	{
-		SW_PROFILE_FUNCTION();
 		GLuint program = glCreateProgram();
 		SW_CORE_ASSERT(sources.size() < 6, "Too many shaders!");
 		std::array<GLenum, 6> glShaderIDs;
@@ -165,7 +114,6 @@ namespace Swallow {
 
 	std::string OpenGLShader::ReadFile(const std::string & filepath)
 	{
-		SW_PROFILE_FUNCTION();
 		std::string result;
 		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 		if (in)
@@ -194,13 +142,11 @@ namespace Swallow {
 
 	void OpenGLShader::Bind() const
 	{
-		SW_PROFILE_FUNCTION();
 		glUseProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Unbind() const
 	{
-		SW_PROFILE_FUNCTION();
 		glUseProgram(0);
 	}
 
@@ -212,7 +158,6 @@ namespace Swallow {
 #pragma region Uploads
 	void OpenGLShader::UploadUniformFloat(std::string const &name, float v)
 	{
-	SW_PROFILE_FUNCTION();
 		int32_t loc = GetUniform(name);
 		if (loc != -1)
 			glUniform1f(loc, v);
@@ -220,7 +165,6 @@ namespace Swallow {
 
 	void OpenGLShader::UploadUniformFloat2(std::string const &name, glm::vec2 const &v)
 	{
-	SW_PROFILE_FUNCTION();
 		int32_t loc = GetUniform(name);
 		if (loc != -1)
 			glUniform2f(loc, v.x, v.y);
@@ -228,7 +172,6 @@ namespace Swallow {
 
 	void OpenGLShader::UploadUniformFloat3(std::string const &name, glm::vec3 const &v)
 	{
-	SW_PROFILE_FUNCTION();
 		int32_t loc = GetUniform(name);
 		if (loc != -1)
 			glUniform3f(loc, v.x, v.y, v.z);
@@ -236,7 +179,6 @@ namespace Swallow {
 
 	void OpenGLShader::UploadUniformFloat4(std::string const &name, glm::vec4 const &v)
 	{
-	SW_PROFILE_FUNCTION();
 		int32_t loc = GetUniform(name);
 		if (loc != -1)
 			glUniform4f(loc, v.x, v.y, v.z, v.w);
@@ -244,7 +186,6 @@ namespace Swallow {
 
 	void OpenGLShader::UploadUniformInt(std::string const &name, int v)
 	{
-	SW_PROFILE_FUNCTION();
 		int32_t loc = GetUniform(name);
 		if (loc != -1)
 			glUniform1i(loc, v);
@@ -252,7 +193,6 @@ namespace Swallow {
 
 	void OpenGLShader::UploadUniformInt2(std::string const &name, glm::ivec2 const &v)
 	{
-	SW_PROFILE_FUNCTION();
 		int32_t loc = GetUniform(name);
 		if (loc != -1)
 			glUniform2i(loc, v.x, v.y);
@@ -260,7 +200,6 @@ namespace Swallow {
 
 	void OpenGLShader::UploadUniformInt3(std::string const &name, glm::ivec3 const &v)
 	{
-	SW_PROFILE_FUNCTION();
 		int32_t loc = GetUniform(name);
 		if (loc != -1)
 			glUniform3i(loc, v.x, v.y, v.z);
@@ -268,7 +207,6 @@ namespace Swallow {
 
 	void OpenGLShader::UploadUniformInt4(std::string const &name, glm::ivec4 const &v)
 	{
-	SW_PROFILE_FUNCTION();
 		int32_t loc = GetUniform(name);
 		if (loc != -1)
 			glUniform4i(loc, v.x, v.y, v.z, v.w);
@@ -276,7 +214,6 @@ namespace Swallow {
 
 	void OpenGLShader::UploadUniformMat2(std::string const &name, glm::mat2 const &m)
 	{
-	SW_PROFILE_FUNCTION();
 		int32_t loc = GetUniform(name);
 		if (loc != -1)
 			glUniformMatrix2fv(loc, 1, false, &m[0][0]);
@@ -284,7 +221,6 @@ namespace Swallow {
 
 	void OpenGLShader::UploadUniformMat3(std::string const &name, glm::mat3 const &m)
 	{
-	SW_PROFILE_FUNCTION();
 		int32_t loc = GetUniform(name);
 		if (loc != -1)
 			glUniformMatrix3fv(loc, 1, false, &m[0][0]);
@@ -292,7 +228,6 @@ namespace Swallow {
 
 	void OpenGLShader::UploadUniformMat4(std::string const &name, glm::mat4 const &m)
 	{
-	SW_PROFILE_FUNCTION();
 		int32_t loc = GetUniform(name);
 		if (loc != -1)
 			glUniformMatrix4fv(loc, 1, false, &m[0][0]);
@@ -300,11 +235,9 @@ namespace Swallow {
 
 	int32_t OpenGLShader::GetUniform(const std::string & name)
 	{
-	SW_PROFILE_FUNCTION();
 		auto uni = m_Uniforms.find(name);
 		if (uni == m_Uniforms.end())
 		{
-	SW_PROFILE_FUNCTION();
 			int32_t location = glGetUniformLocation(m_RendererID, name.c_str());
 			m_Uniforms[name] = location;
 			return location;
@@ -317,67 +250,56 @@ namespace Swallow {
 
 	void OpenGLShader::SetFloat(std::string const& name, float v)
 	{
-	SW_PROFILE_FUNCTION();
 		UploadUniformFloat(name, v);
 	}
 
 	void OpenGLShader::SetFloat2(std::string const& name, glm::vec2 const& v)
 	{
-	SW_PROFILE_FUNCTION();
 		UploadUniformFloat2(name, v);
 	}
 
 	void OpenGLShader::SetFloat3(std::string const& name, glm::vec3 const& v)
 	{
-	SW_PROFILE_FUNCTION();
 		UploadUniformFloat3(name, v);
 	}
 
 	void OpenGLShader::SetFloat4(std::string const& name, glm::vec4 const& v)
 	{
-	SW_PROFILE_FUNCTION();
 		UploadUniformFloat4(name, v);
 	}
 
 	void OpenGLShader::SetInt(std::string const& name, int v)
 	{
-	SW_PROFILE_FUNCTION();
 		UploadUniformInt(name, v);
 	}
 
 	void OpenGLShader::SetInt2(std::string const& name, glm::ivec2 const& v)
 	{
-	SW_PROFILE_FUNCTION();
 		UploadUniformInt2(name, v);
 	}
 
 	void OpenGLShader::SetInt3(std::string const& name, glm::ivec3 const& v)
 	{
-	SW_PROFILE_FUNCTION();
 		UploadUniformInt3(name, v);
 	}
 
 	void OpenGLShader::SetInt4(std::string const& name, glm::ivec4 const& v)
 	{
-	SW_PROFILE_FUNCTION();
 		UploadUniformInt4(name, v);
 	}
 
 	void OpenGLShader::SetMat2(std::string const& name, glm::mat2 const& m)
 	{
-	SW_PROFILE_FUNCTION();
 		UploadUniformMat2(name, m);
 	}
 
 	void OpenGLShader::SetMat3(std::string const& name, glm::mat3 const& m)
 	{
-	SW_PROFILE_FUNCTION();
 		UploadUniformMat3(name, m);
 	}
 
 	void OpenGLShader::SetMat4(std::string const& name, glm::mat4 const& m)
 	{
-	SW_PROFILE_FUNCTION();
 		UploadUniformMat4(name, m);
 	}
 
