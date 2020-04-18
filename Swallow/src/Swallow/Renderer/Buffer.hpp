@@ -88,10 +88,15 @@ namespace Swallow {
 
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
+
+		virtual void SetData(const void* data, uint32_t size) = 0;
+
 		virtual void SetLayout(const BufferLayout &layout) = 0;
 		virtual BufferLayout const &GetLayout() const = 0;
 
-		static Ref<VertexBuffer> Create(void* vertices, uint32_t size);
+
+		static Ref<VertexBuffer> Create(uint32_t size, bool dynamic = true);
+		static Ref<VertexBuffer> Create(void* vertices, uint32_t size, bool dynamic = false);
 	};
 
 	class IndexBuffer

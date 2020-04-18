@@ -18,5 +18,5 @@ private:
 
 	glm::vec4 col = { 0.2f, 0.5f, 0.8f, 1.0f };
 	Swallow::Ref<Swallow::Texture2D> texture;
-	int limit = 10;
+	int limit = 3;
 };

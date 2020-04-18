@@ -27,14 +27,28 @@ namespace Swallow {
 		}
 	}
 
-	Ref<VertexBuffer> VertexBuffer::Create(void * vertices, uint32_t size)
+	Ref<VertexBuffer> VertexBuffer::Create(uint32_t size, bool dynamic)
 	{
 		switch (Renderer::GetAPI())
 		{
 		case RendererAPI::API::None:
 			return nullptr;
 		case RendererAPI::API::OpenGL:
-			return CreateRef<OpenGLVertexBuffer>(vertices, size);
+			return CreateRef<OpenGLVertexBuffer>(size, dynamic);
+		default:
+			break;
+		}
+		return nullptr;
+	}
+
+	Ref<VertexBuffer> VertexBuffer::Create(void * vertices, uint32_t size, bool dynamic)
+	{
+		switch (Renderer::GetAPI())
+		{
+		case RendererAPI::API::None:
+			return nullptr;
+		case RendererAPI::API::OpenGL:
+			return CreateRef<OpenGLVertexBuffer>(vertices, size, dynamic);
 		default:
 			break;
 		}

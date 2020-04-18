@@ -212,6 +212,13 @@ namespace Swallow {
 			glUniform4i(loc, v.x, v.y, v.z, v.w);
 	}
 
+	void OpenGLShader::UploadUniformIntArray(std::string const& name, int* v, uint32_t count)
+	{
+		int32_t loc = GetUniform(name);
+		if (loc != -1)
+			glUniform1iv(loc, count, v);
+	}
+
 	void OpenGLShader::UploadUniformMat2(std::string const &name, glm::mat2 const &m)
 	{
 		int32_t loc = GetUniform(name);
@@ -286,6 +293,11 @@ namespace Swallow {
 	void OpenGLShader::SetInt4(std::string const& name, glm::ivec4 const& v)
 	{
 		UploadUniformInt4(name, v);
+	}
+
+	void OpenGLShader::SetIntArray(std::string const& name, int* v, uint32_t count)
+	{
+		UploadUniformIntArray(name, v, count);
 	}
 
 	void OpenGLShader::SetMat2(std::string const& name, glm::mat2 const& m)

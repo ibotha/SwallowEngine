@@ -20,7 +20,7 @@ namespace Swallow {
 		virtual void ClearColour() = 0;
 		virtual void ClearDepth() = 0;
 
-		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray) = 0;
+		virtual void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t indexCount = 0) = 0;
 
 		inline static API GetAPI() { return s_API; }
 	private:

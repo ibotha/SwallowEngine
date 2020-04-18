@@ -121,8 +121,8 @@ namespace Swallow {
     };
 }
 
-#define SW_PROFILE 1
-#ifdef SW_PROFILE
+#define SW_PROFILE 0
+#if SW_PROFILE
 
 #define SW_PROFILE_BEGIN_SESSION(name, filepath) ::Swallow::Instrumentor::Get().BeginSession(name, filepath)
 #define SW_PROFILE_END_SESSION() ::Swallow::Instrumentor::Get().EndSession();

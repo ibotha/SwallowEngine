@@ -8,19 +8,26 @@ namespace Swallow {
 	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	public:
-		OpenGLVertexBuffer(void *vertices, uint32_t size);
+		OpenGLVertexBuffer(uint32_t size, bool dynamic = true);
+		OpenGLVertexBuffer(void* vertices, uint32_t size, bool dynamic = false);
+
 		OpenGLVertexBuffer(const OpenGLVertexBuffer &rhs) = default;
 		OpenGLVertexBuffer &operator=(const OpenGLVertexBuffer &rhs) = default;
 		virtual ~OpenGLVertexBuffer();
 
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
+
+		virtual void SetData(const void* data, uint32_t size) override;
+
 		virtual void SetLayout(const BufferLayout & layout) override;
 		virtual BufferLayout const &GetLayout() const override;
 
 	private:
 		uint32_t m_RendererID;
 		BufferLayout m_Layout;
+
+		// Inherited via VertexBuffer
 	};
 
 	#pragma endregion

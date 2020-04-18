@@ -14,7 +14,7 @@ namespace Swallow {
 		inline static void ClearDepth() { SW_PROFILE_FUNCTION();  s_RendererAPI->ClearDepth(); }
 		inline static void SetClearColor(const glm::vec4& color) { SW_PROFILE_FUNCTION();  s_RendererAPI->SetClearColor(color); }
 
-		inline static void DrawIndexed(const Ref<VertexArray>& vertexArray) { SW_PROFILE_FUNCTION();  s_RendererAPI->DrawIndexed(vertexArray); }
+		inline static void DrawIndexed(const Ref<VertexArray>& vertexArray, uint32_t indexCount = 0) { SW_PROFILE_FUNCTION();  s_RendererAPI->DrawIndexed(vertexArray, indexCount); }
 	private:
 		static RendererAPI* s_RendererAPI;
 	};
