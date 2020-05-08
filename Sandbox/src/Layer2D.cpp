@@ -44,6 +44,8 @@ void Layer2D::OnImGuiRender()
 void Layer2D::OnAttach()
 {
 	texture = Swallow::Texture2D::Create("assets/textures/CheckerBoard.png");
+	spriteSheet = Swallow::Texture2D::Create("assets/textures/sprite_sheet.png");
+	subtex = Swallow::SubTexture2D::CreateFromTilePallet(spriteSheet, { 1,3 }, { 1,1 }, { 16, 16 }, { 1,1 });
 }
 
 void Layer2D::OnDetach()
@@ -78,6 +80,7 @@ void Layer2D::OnUpdate(Swallow::Timestep ts)
 		Swallow::Renderer2D::DrawQuad({ 0.0f, 1.6f }, { 0.5f, 0.5f }, { 0.0f, 8.0f, 6.0f, 1.0f });
 		Swallow::Renderer2D::DrawQuad({ 0.5f, 0 }, { 1.0f, 2.0f }, col, rot += 0.1f * ts.GetSeconds());
 		Swallow::Renderer2D::DrawQuad({ -5.0f, -5.0f, -0.1f }, { 10.0f, 10.0f }, texture, 0.0f, 10.0f);
+		Swallow::Renderer2D::DrawQuad({ -5.0f, -10.0f, 0.1f }, { 10.0f, 10.0f }, subtex);
 
 		Swallow::Renderer2D::EndScene();
 	}

@@ -22,6 +22,7 @@
 #include <Swallow/Renderer/Buffer.hpp>
 #include <Swallow/Renderer/Shader.hpp>
 #include <Swallow/Renderer/Texture.hpp>
+#include <Swallow/Renderer/SubTexture.h>
 #include <Swallow/Renderer/VertexArray.hpp>
 // -------------------------------------------
 

@@ -2,6 +2,7 @@
 #include <gtc/matrix_transform.hpp>
 #include <Swallow/Renderer/Renderer2D.hpp>
 #include <Swallow/Renderer/RenderCommand.hpp>
+#include <Swallow/Renderer/Shader.hpp>
 #include <list>
 
 namespace Swallow {
@@ -133,26 +134,59 @@ namespace Swallow {
 
 	void Renderer2D::DrawQuad(const glm::vec3& pos, const glm::vec2& size, const glm::vec4& color, float rotation, float tillingFactor)
 	{
-		DrawQuad(pos, size, color, s_Data.BaseTexture, rotation, tillingFactor);
+		DrawQuad(pos, size, s_Data.BaseTexture, rotation, color, tillingFactor);
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& pos, const glm::vec2& size, Ref<Texture2D> texture, float rotation, float tillingFactor)
 	{
-		DrawQuad(glm::vec3(pos.x, pos.y, 0.0f), size, texture, rotation, tillingFactor);
+		DrawQuad(glm::vec3(pos.x, pos.y, 0.0f), size, texture, rotation, { 1.0f, 1.0f, 1.0f, 1.0f }, tillingFactor);
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec3& pos, const glm::vec2& size, Ref<Texture2D> texture, float rotation, float tillingFactor)
 	{
-		DrawQuad(pos, size, { 1, 1, 1, 1 }, texture, rotation, tillingFactor);
+		DrawQuad(pos, size, texture, rotation, { 1.0f, 1.0f, 1.0f, 1.0f }, tillingFactor);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec2& pos, const glm::vec2& size, const glm::vec4& color, Ref<Texture2D> texture, float rotation, float tillingFactor)
+	void Renderer2D::DrawQuad(const glm::vec2& pos, const glm::vec2& size, Ref<Texture2D> texture, float rotation, const glm::vec4& color, float tillingFactor)
 	{
-		DrawQuad(glm::vec3(pos.x, pos.y, 0.0f), size, color, texture, rotation, tillingFactor);
+		DrawQuad(glm::vec3(pos.x, pos.y, 0.0f), size, texture, rotation, color, tillingFactor);
 	}
 
-	void Renderer2D::DrawQuad(const glm::vec3& pos, const glm::vec2& size, const glm::vec4& color, Ref<Texture2D> texture, float rotation, float tillingFactor)
+	void Renderer2D::DrawQuad(const glm::vec3& pos, const glm::vec2& size, Ref<Texture2D> texture, float rotation, const glm::vec4& color, float tillingFactor)
 	{
+		float textureIndex = BindBatchedTexture(texture);
+
+		glm::vec4 verts[4];
+		FillQuadVerts(verts, pos, size, rotation);
+
+		glm::vec2 texCoords[4] = {
+			{0.0f, 0.0f},
+			{1.0f, 0.0f},
+			{1.0f, 1.0f},
+			{0.0f, 1.0f}
+		};
+
+		UploadVerts(textureIndex, tillingFactor, verts, color, texCoords);
+	}
+
+	void Renderer2D::DrawQuad(const glm::vec2& pos, const glm::vec2& size, Ref<SubTexture2D> texture, float rotation, const glm::vec4& color, float tillingFactor)
+	{
+		DrawQuad({ pos.x, pos.y, 0.0f }, size, texture, rotation, color, tillingFactor);
+	}
+
+	void Renderer2D::DrawQuad(const glm::vec3& pos, const glm::vec2& size, Ref<SubTexture2D> texture, float rotation, const glm::vec4& color, float tillingFactor)
+	{
+		float textureIndex = BindBatchedTexture(texture->GetTexture());
+
+		glm::vec4 verts[4];
+		FillQuadVerts(verts, pos, size, rotation);
+
+		UploadVerts(textureIndex, tillingFactor, verts, color, texture->GetCoords());
+	}
+
+#pragma region Helpers
+
+	float Renderer2D::BindBatchedTexture(Ref<Texture2D> texture) {
 		float textureIndex = -1;
 		for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
 		{
@@ -176,47 +210,38 @@ namespace Swallow {
 			textureIndex = (float)s_Data.TextureSlotIndex++;
 			s_Data.TextureSlots[textureIndex] = texture;
 		}
+		return textureIndex;
+	}
 
-		glm::vec2 nsize = size / 2.0f;
-		glm::vec4 verts[4] = {
-			{-nsize.x, -nsize.y, 0.0f, 1.0f},
-			{nsize.x, -nsize.y, 0.0f, 1.0f},
-			{nsize.x, nsize.y, 0.0f, 1.0f},
-			{-nsize.x, nsize.y, 0.0f, 1.0f}
-		};
-		if (rotation != 0.0f)
-		{
-			glm::mat4 t = glm::rotate(glm::identity<glm::mat4>(), rotation, { 0.0f, 0.0f, 1.0f });
-			for (int i = 0; i < 4; i++)
-				verts[i] = t * verts[i];
-		}
+	void Renderer2D::UploadVerts(float textureIndex, float tillingFactor, const glm::vec4* verts, const glm::vec4& color, const glm::vec2* texCoods)
+	{
 
-		s_Data.QuadVertexBufferPtr->Position = { pos.x + verts[0].x, pos.y + verts[0].y, pos.z };
+		s_Data.QuadVertexBufferPtr->Position = verts[0];
 		s_Data.QuadVertexBufferPtr->Color = color;
-		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 0.0f };
+		s_Data.QuadVertexBufferPtr->TexCoord = texCoods[0];
 		s_Data.QuadVertexBufferPtr->TextureIndexSlot = textureIndex;
 		s_Data.QuadVertexBufferPtr->TilingFactor = tillingFactor;
 		s_Data.QuadVertexBufferPtr++;
 
 		s_Data.QuadVertexBufferPtr->TextureIndexSlot = textureIndex;
 		s_Data.QuadVertexBufferPtr->TilingFactor = tillingFactor;
-		s_Data.QuadVertexBufferPtr->Position = { pos.x + verts[1].x, pos.y + verts[1].y, pos.z };
+		s_Data.QuadVertexBufferPtr->Position = verts[1];
 		s_Data.QuadVertexBufferPtr->Color = color;
-		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 0.0f };
+		s_Data.QuadVertexBufferPtr->TexCoord = texCoods[1];
 		s_Data.QuadVertexBufferPtr++;
 
 		s_Data.QuadVertexBufferPtr->TextureIndexSlot = textureIndex;
 		s_Data.QuadVertexBufferPtr->TilingFactor = tillingFactor;
-		s_Data.QuadVertexBufferPtr->Position = { pos.x + verts[2].x, pos.y + verts[2].y, pos.z };
+		s_Data.QuadVertexBufferPtr->Position = verts[2];
 		s_Data.QuadVertexBufferPtr->Color = color;
-		s_Data.QuadVertexBufferPtr->TexCoord = { 1.0f, 1.0f };
+		s_Data.QuadVertexBufferPtr->TexCoord = texCoods[2];
 		s_Data.QuadVertexBufferPtr++;
 
 		s_Data.QuadVertexBufferPtr->TextureIndexSlot = textureIndex;
 		s_Data.QuadVertexBufferPtr->TilingFactor = tillingFactor;
-		s_Data.QuadVertexBufferPtr->Position = { pos.x + verts[3].x, pos.y + verts[3].y, pos.z };
+		s_Data.QuadVertexBufferPtr->Position = verts[3];
 		s_Data.QuadVertexBufferPtr->Color = color;
-		s_Data.QuadVertexBufferPtr->TexCoord = { 0.0f, 1.0f };
+		s_Data.QuadVertexBufferPtr->TexCoord = texCoods[3];
 		s_Data.QuadVertexBufferPtr++;
 		s_Data.QuadIndexCount += 6;
 
@@ -228,6 +253,26 @@ namespace Swallow {
 			StartNewBatch();
 		}
 	}
+
+	void Renderer2D::FillQuadVerts(glm::vec4* verts, const glm::vec3& pos, const glm::vec2& size, float rotation) {
+		glm::vec2 nsize = size / 2.0f;
+		verts[0] = { -nsize.x, -nsize.y, 0.0f, 1.0f };
+		verts[1] = { nsize.x, -nsize.y, 0.0f, 1.0f };
+		verts[2] = { nsize.x, nsize.y, 0.0f, 1.0f };
+		verts[3] = { -nsize.x, nsize.y, 0.0f, 1.0f };
+
+		if (rotation != 0.0f)
+		{
+			glm::mat4 t = glm::rotate(glm::identity<glm::mat4>(), rotation, { 0.0f, 0.0f, 1.0f });
+			for (int i = 0; i < 4; i++)
+				verts[i] = t * verts[i];
+		}
+
+		for (int i = 0; i < 4; i++)
+			verts[i] += glm::vec4(pos.x, pos.y, pos.z, 0.0f);
+	}
+#pragma endregion
+
 
 	Renderer2D::Statistics Renderer2D::GetStatistics()
 	{

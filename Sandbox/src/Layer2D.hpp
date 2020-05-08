@@ -18,5 +18,7 @@ private:
 
 	glm::vec4 col = { 0.2f, 0.5f, 0.8f, 1.0f };
 	Swallow::Ref<Swallow::Texture2D> texture;
+	Swallow::Ref<Swallow::Texture2D> spriteSheet;
+	Swallow::Ref<Swallow::SubTexture2D> subtex;
 	int limit = 3;
 };
