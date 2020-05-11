@@ -26,4 +26,9 @@
 #include <Swallow/Renderer/VertexArray.hpp>
 // -------------------------------------------
 
+// ----------Entity Component System----------
+#include <Swallow/EntitySystem/Entity.h>
+#include <Swallow/EntitySystem/Component.h>
+// -------------------------------------------
+
 #include <Swallow/Renderer/CameraController.hpp>

@@ -19,8 +19,8 @@ namespace Swallow {
 		};
 
 		glm::vec2 max = {
-			min.x + tileSize.x + tileSize.x * (size.x - 1),
-			min.y + tileSize.y + tileSize.y * (size.y - 1)
+			min.x + tileSize.x + (tileSize.x + margin.x) * (size.x - 1),
+			min.y + tileSize.y + (tileSize.y + margin.y) * (size.y - 1)
 		};
 
 		glm::vec2 div = { (float)texture->GetWidth(), (float)texture->GetHeight() };

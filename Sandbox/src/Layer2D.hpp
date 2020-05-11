@@ -1,5 +1,6 @@
 #pragma once
 #include <Swallow.hpp>
+
 class Layer2D : public Swallow::Layer {
 public:
 	Layer2D();
@@ -20,5 +21,6 @@ private:
 	Swallow::Ref<Swallow::Texture2D> texture;
 	Swallow::Ref<Swallow::Texture2D> spriteSheet;
 	Swallow::Ref<Swallow::SubTexture2D> subtex;
+	Swallow::Ref<Swallow::Entity> e;
 	int limit = 3;
 };
