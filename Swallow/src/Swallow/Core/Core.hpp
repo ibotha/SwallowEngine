@@ -77,5 +77,7 @@ namespace Swallow {
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
 
+	using RendererID = uint32_t;
+
 }
 

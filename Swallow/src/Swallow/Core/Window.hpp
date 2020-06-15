@@ -8,10 +8,10 @@ namespace Swallow {
 
 	struct WindowProps {
 		std::string Title;
-		unsigned int Width, Height;
-		WindowProps(const std::string& title = "Swallow Engine",
-			unsigned int width = 1260,
-			unsigned int height = 640)
+		uint32_t Width, Height;
+		WindowProps(const std::string& title,
+			uint32_t width = 1260,
+			uint32_t height = 640)
 			:Title(title), Width(width), Height(height)
 		{
 		}
@@ -25,8 +25,8 @@ namespace Swallow {
 
 		virtual void OnUpdate() = 0;
 
-		virtual unsigned int GetWidth() const = 0;
-		virtual unsigned int GetHeight() const = 0;
+		virtual uint32_t GetWidth() const = 0;
+		virtual uint32_t GetHeight() const = 0;
 
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 
@@ -38,6 +38,6 @@ namespace Swallow {
 
 		virtual void* GetNativeWindow() const = 0;
 
-		static Window* Create(const WindowProps& props = WindowProps());
+		static Window* Create(const WindowProps& props);
 	};
 }

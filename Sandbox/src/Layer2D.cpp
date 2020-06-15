@@ -22,7 +22,7 @@ private:
 class PlayerMove : public Swallow::Component {
 public:
 	PlayerMove()
-		:Component("MoveRight")
+		:Component("Move")
 	{}
 
 	virtual void Update(const Swallow::Timestep& ts) override {
@@ -62,18 +62,6 @@ void Layer2D::OnEvent(Swallow::Event & e)
 
 void Layer2D::OnImGuiRender()
 {
-	ImGui::Begin("Props");
-
-	auto stats = Swallow::Renderer2D::GetStatistics();
-	ImGui::Text("Renderer2D Stats");
-	ImGui::Text("Draw Calls %d", stats.DrawCalls);
-	ImGui::Text("Quads %d", stats.QuadCount);
-	ImGui::Text("Vertices %d", stats.GetTotalVertexCount());
-	ImGui::Text("Indices %d", stats.GetTotalIndexCount());
-
-	ImGui::ColorEdit4("Colour", glm::value_ptr(col));
-	ImGui::SliderInt("Limit", &limit, 1, 1000);
-	ImGui::End();
 }
 
 void Layer2D::OnAttach()
@@ -84,6 +72,12 @@ void Layer2D::OnAttach()
 	e = Swallow::CreateRef<Swallow::Entity>();
 	e->AddComponent<SpriteRenderer>(subtex);
 	e->AddComponent<PlayerMove>();
+
+	Swallow::FramebufferSpecification spec;
+	spec.Width = Swallow::Application::Get().GetWindow().GetWidth();
+	spec.Height = Swallow::Application::Get().GetWindow().GetHeight();
+
+	framebuffer = Swallow::Framebuffer::Create(spec);
 }
 
 void Layer2D::OnDetach()

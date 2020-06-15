@@ -50,7 +50,7 @@ namespace Swallow {
 		void Compile(const std::unordered_map<GLenum, std::string> &sources);
 	private:
 		std::string m_Name;
-		uint32_t m_RendererID;
+		RendererID m_RendererID;
 		std::unordered_map<std::string, int32_t> m_Uniforms;
 	};
 }

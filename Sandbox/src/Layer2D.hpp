@@ -22,5 +22,6 @@ private:
 	Swallow::Ref<Swallow::Texture2D> spriteSheet;
 	Swallow::Ref<Swallow::SubTexture2D> subtex;
 	Swallow::Ref<Swallow::Entity> e;
+	Swallow::Ref<Swallow::Framebuffer> framebuffer;
 	int limit = 3;
 };

@@ -22,7 +22,7 @@ namespace Swallow {
 	class Application
 	{
 	public:
-		Application();
+		Application(const std::string& name = "Swallow App");
 		virtual ~Application();
 
 		void Run();

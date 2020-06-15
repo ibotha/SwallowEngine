@@ -24,7 +24,7 @@ namespace Swallow {
 		virtual BufferLayout const &GetLayout() const override;
 
 	private:
-		uint32_t m_RendererID;
+		RendererID m_RendererID;
 		BufferLayout m_Layout;
 
 		// Inherited via VertexBuffer
@@ -46,7 +46,7 @@ namespace Swallow {
 		virtual void Unbind() const override;
 		inline virtual uint32_t GetCount() const override { return m_Count; }
 	private:
-		uint32_t m_RendererID;
+		RendererID m_RendererID;
 		uint32_t m_Count;
 	};
 
